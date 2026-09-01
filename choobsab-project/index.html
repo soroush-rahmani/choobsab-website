@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>فروشگاه محصولات چوبی</title>
+    <!-- اضافه کردن فونت و آیکون‌ها -->
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- منوی کناری (سایدبار) دسته‌بندی‌ها -->
+    <!-- سایدبار ثابت عمودی سمت راست -->
+    <!-- سایدبار ثابت عمودی سمت راست -->
+    <!-- سایدبار ثابت عمودی سمت راست -->
+    <aside class="sidebar-fixed" id="sidebar">
+      <div class="sidebar-toggle-btn" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <!-- منوی سایدبار که به صورت خودکار توسط جاوااسکریپت پر می‌شود -->
+      <ul class="sidebar-menu" id="sidebarMenu">
+        <!-- محتوا توسط script.js تزریق می‌شود -->
+      </ul>
+    </aside>
+    <!-- هدر سایت -->
+    <header class="desktop-header">
+      <!-- بخش بالایی هدر -->
+      <div class="header-top">
+        <!-- سمت راست: لوگو -->
+        <div class="logo"><i class="fas fa-tree"></i> فروشگاه چوب</div>
+
+        <!-- وسط: جستجو -->
+        <div class="search-box">
+          <input type="text" placeholder="جستجوی محصولات..." />
+          <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <!-- سمت چپ: پشتیبانی و ارسال -->
+        <div class="top-left-actions">
+          <div class="support-info">
+            <i class="fas fa-headset icon-brown"></i>
+            <div class="info-text">
+              <span class="title">تماس با پشتیبانی</span>
+              <span class="number">۰۲۱-۱۲۳۴۵۶۷۸</span>
+            </div>
+          </div>
+
+          <div class="shipping-info">
+            <div class="icon-wrapper">
+              <i class="fas fa-truck icon-brown"></i>
+            </div>
+            <span class="title">ارسال به سراسر کشور</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- بخش پایینی هدر -->
+      <div class="header-bottom">
+        <!-- سمت راست: دکمه دسته‌بندی -->
+        <button class="category-btn" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i> دسته‌بندی محصولات
+        </button>
+
+        <!-- وسط: نویگیشن -->
+        <nav class="main-nav">
+          <a href="#">صفحه اصلی فروشگاه</a>
+          <a href="#">محصولات سفارشی</a>
+          <a href="#">درباره ما</a>
+          <a href="#">تماس با ما</a>
+        </nav>
+
+        <!-- سمت چپ: پروفایل و سبد خرید -->
+        <div class="user-actions">
+          <a href="#" class="action-icon"><i class="fas fa-user"></i></a>
+          <a href="#" class="action-icon cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">۰</span>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- =================== بدنه اصلی سایت (Main Content) =================== -->
+    <main class="shop-main-container">
+      <!-- ۱. سایدبار فیلترها (سمت راست) -->
+      <aside class="filters-sidebar">
+        <h3 class="filter-title">
+          <i class="fas fa-filter"></i> فیلتر محصولات
+        </h3>
+
+        <!-- فیلتر قیمت -->
+        <div class="filter-group">
+          <label for="priceRange"
+            >فیلتر قیمت (تا:
+            <span id="priceValue">۵,۰۰۰,۰۰۰</span> تومان)</label
+          >
+          <input
+            type="range"
+            id="priceRange"
+            min="100000"
+            max="5000000"
+            step="100000"
+            value="5000000"
+          />
+        </div>
+
+        <!-- فیلتر جنس چوب -->
+        <div class="filter-group dropdown-filter">
+          <div
+            class="filter-dropdown-toggle"
+            onclick="toggleFilterDropdown(this)"
+          >
+            <span>جنس چوب</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <ul class="filter-dropdown-list">
+            <li>
+              <label><input type="checkbox" value="بلوط" /> چوب بلوط</label>
+            </li>
+            <li>
+              <label><input type="checkbox" value="راش" /> چوب راش</label>
+            </li>
+            <li>
+              <label><input type="checkbox" value="گردو" /> چوب گردو</label>
+            </li>
+            <li>
+              <label><input type="checkbox" value="روس" /> چوب روس</label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- فیلتر نوع پوشش -->
+        <div class="filter-group dropdown-filter">
+          <div
+            class="filter-dropdown-toggle"
+            onclick="toggleFilterDropdown(this)"
+          >
+            <span>نوع پوشش</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <ul class="filter-dropdown-list">
+            <li>
+              <label><input type="checkbox" value="مات" /> مات</label>
+            </li>
+            <li>
+              <label><input type="checkbox" value="نیمه مات" /> نیمه مات</label>
+            </li>
+            <li>
+              <label
+                ><input type="checkbox" value="سوپر براق" /> سوپر براق</label
+              >
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- ۲. محتوای اصلی فروشگاه (سمت چپ فیلترها) -->
+      <section class="shop-content">
+        <!-- نوار مرتب‌سازی -->
+        <div class="sorting-bar">
+          <span>مرتب‌سازی بر اساس:</span>
+          <select id="sortSelect" class="sort-select">
+            <option value="default">پیش‌فرض</option>
+            <option value="popularity">محبوبیت</option>
+            <option value="rating">میانگین رتبه</option>
+            <option value="newest">جدیدترین</option>
+            <option value="price-low">قیمت کم به زیاد</option>
+            <option value="price-high">قیمت زیاد به کم</option>
+          </select>
+        </div>
+
+        <!-- گرید کارت محصولات -->
+        <div class="products-grid" id="productsGrid">
+          <!-- کارت‌های محصولات به صورت داینامیک اینجا رندر می‌شوند -->
+        </div>
+
+        <!-- نشانگر لودینگ (Infinite Scroll / Load More) -->
+        <div class="loading-indicator" id="loadingIndicator">
+          <div class="spinner"></div>
+          <span>در حال بارگذاری محصولات بیشتر...</span>
+        </div>
+      </section>
+    </main>
+    <!-- دکمه بازگشت به بالا -->
+    <button id="scrollToTopBtn" class="scroll-to-top" title="بازگشت به بالا">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- فوتر سایت -->
+    <footer class="site-footer">
+      <!-- بخش اول: ویژگی‌های بالا (۵ باکس) -->
+      <div class="footer-top">
+        <div class="feature-box">
+          <i class="fas fa-shipping-fast feature-icon"></i>
+          <span class="feature-text">ارسال سریع و ایمن</span>
+        </div>
+        <div class="feature-box">
+          <i class="fas fa-credit-card feature-icon"></i>
+          <span class="feature-text">روش‌های مختلف پرداخت</span>
+        </div>
+        <div class="feature-box">
+          <i class="fas fa-headset feature-icon"></i>
+          <span class="feature-text">پشتیبانی آنلاین</span>
+        </div>
+        <div class="feature-box">
+          <i class="fas fa-check-circle feature-icon"></i>
+          <span class="feature-text">تضمین کیفیت و اصالت</span>
+        </div>
+        <div class="feature-box">
+          <i class="fas fa-box-open feature-icon"></i>
+          <span class="feature-text">بسته‌بندی اختصاصی</span>
+        </div>
+      </div>
+
+      <!-- بخش دوم: ستون‌های محتوا (۵ قسمت) -->
+      <div class="footer-middle">
+        <!-- قسمت ۱: درباره و تماس -->
+        <div class="footer-col brand-col">
+          <div class="footer-logo"><i class="fas fa-tree"></i> چوب‌ساب</div>
+          <p class="brand-desc">
+            چوبساب تلفیقی از طراحی مدرن و طبیعت اصیل در قالب اکسسوری‌های چوبی
+            زیبا.
+          </p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-phone-alt"></i>
+              <span>ثبت سفارش: ۰۹۰۱۰۴۶۱۷۵۷</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>پشتیبانی سایت: ۰۹۰۱۰۴۶۱۷۵۸</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- قسمت ۲: دسترسی سریع -->
+        <div class="footer-col links-col">
+          <h4 class="col-title">دسترسی سریع</h4>
+          <ul>
+            <li><a href="#">فروشگاه</a></li>
+            <li><a href="#">محصولات سفارشی</a></li>
+            <li><a href="#">تماس با ما</a></li>
+            <li><a href="#">درباره ما</a></li>
+          </ul>
+        </div>
+
+        <!-- قسمت ۳: برای شما -->
+        <div class="footer-col links-col">
+          <h4 class="col-title">برای شما</h4>
+          <ul>
+            <li><a href="#">حریم خصوصی</a></li>
+            <li><a href="#">مرجوعی و عودت</a></li>
+            <li><a href="#">شرایط و ضوابط</a></li>
+            <li><a href="#">عضویت</a></li>
+          </ul>
+        </div>
+
+        <!-- قسمت ۴: اینستاگرام -->
+        <div class="footer-col social-col">
+          <div class="insta-header">
+            <i class="fab fa-instagram"></i>
+            <span>follow us on instagram</span>
+          </div>
+          <p class="social-desc">
+            برای دیدن جدیدترین محصولات، پشت صحنه تولید و تخفیف‌های ویژه ما را در
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              class="insta-link-text"
+              >اینستاگرام</a
+            >
+            دنبال کنید.
+          </p>
+          <a href="https://instagram.com" target="_blank" class="btn-follow"
+            >Follow Us</a
+          >
+        </div>
+
+        <!-- قسمت ۵: مجوزها -->
+        <div class="footer-col cert-col">
+          <div class="cert-box">
+            <div class="cert-item">
+              <span>جایگاه نماد اعتماد الکترونیک</span>
+            </div>
+            <div class="cert-item">
+              <span>جایگاه نشان ملی ثبت</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- بخش سوم: کپی‌رایت پایین فوتر -->
+      <div class="footer-bottom">
+        <p>تمامی حقوق برای چوبساب محفوظ است ©.</p>
+        <p>
+          طراحی شده توسط
+          <a
+            href="https://t.me/your_telegram_id"
+            target="_blank"
+            class="developer-link"
+            >سروش رحمانی</a
+          >
+        </p>
+      </div>
+    </footer>
+    <script src="products.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
