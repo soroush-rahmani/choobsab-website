@@ -180,6 +180,40 @@ window.UserAuth = (function () {
     `;
     document.body.appendChild(wrap);
     wireModalEvents();
+    wireDigitConverters();
+  }
+
+  // تبدیل ارقام فارسی/عربی به انگلیسی هنگام تایپ در فیلدهای عددی
+  function wireDigitConverters() {
+    const fa = "۰۱۲۳۴۵۶۷۸۹";
+    const ar = "٠١٢٣٤٥٦٧٨٩";
+    function convert(el) {
+      if (!el) return;
+      const val = el.value;
+      const converted = val.replace(/[۰-۹٠-٩]/g, function (ch) {
+        const i = fa.indexOf(ch);
+        if (i > -1) return String(i);
+        const j = ar.indexOf(ch);
+        return j > -1 ? String(j) : ch;
+      });
+      if (converted !== val) el.value = converted;
+    }
+    // شماره موبایل (مودال ورود)
+    const phoneEl = document.getElementById("uaPhone");
+    if (phoneEl) phoneEl.addEventListener("input", function () { convert(phoneEl); });
+    // کد یک‌بارمصرف (مودال ورود)
+    const otpEl = document.getElementById("uaOtpCode");
+    if (otpEl) otpEl.addEventListener("input", function () { convert(otpEl); });
+    // شماره موبایل و کد پستی (فرم آدرس پروفایل)
+    const addrPhone = document.getElementById("addrPhone");
+    if (addrPhone) addrPhone.addEventListener("input", function () { convert(addrPhone); });
+    const addrPostal = document.getElementById("addrPostalCode");
+    if (addrPostal) addrPostal.addEventListener("input", function () { convert(addrPostal); });
+    // شماره موبایل و کد پستی (فرم تسویه‌حساب)
+    const chkPhone = document.getElementById("phoneNumber");
+    if (chkPhone) chkPhone.addEventListener("input", function () { convert(chkPhone); });
+    const chkPostal = document.getElementById("postalCode");
+    if (chkPostal) chkPostal.addEventListener("input", function () { convert(chkPostal); });
   }
 
   function showStep(name) {

@@ -1401,11 +1401,12 @@ app.post("/api/admin/upload", requireAdmin, (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`✅ سرور چوبساب روی پورت ${PORT} با موفقیت اجرا شد.`);
+const HOST = "192.168.1.159";
+app.listen(PORT, HOST, () => {
+  console.log(`✅ سرور چوبساب روی http://${HOST}:${PORT} با موفقیت اجرا شد.`);
   console.log(`💳 درگاه پرداخت: ${ZARINPAL.sandbox ? "🧪 سندباکس (تستی)" : "💰 واقعی (زرین‌پال)"}`);
   if (!ZARINPAL.sandbox && ZARINPAL.merchant === ZARINPAL_PLACEHOLDER_MERCHANT) {
     console.error("⚠️ هشدار: حالت واقعی فعال است ولی ZARINPAL_MERCHANT در فایل .env تنظیم نشده!");
   }
-  console.log(`🔐 پنل مدیریت: http://localhost:${PORT}/admin/login.html`);
+  console.log(`🔐 پنل مدیریت: http://${HOST}:${PORT}/admin/login.html`);
 });
