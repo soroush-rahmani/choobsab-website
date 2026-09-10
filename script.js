@@ -432,10 +432,14 @@ document.addEventListener("DOMContentLoaded", () => {
     categoryBtn.addEventListener("click", toggleSidebar);
   }
 
-  // ۱۱. اتصال فیلترهای کشویی به تابع toggleFilterDropdown
-  document.querySelectorAll(".filter-dropdown-toggle").forEach((toggle) => {
-    toggle.addEventListener("click", () => toggleFilterDropdown(toggle));
-  });
+  // ۱۱. اتصال فیلترهای کشویی سایدبار به تابع toggleFilterDropdown
+  // نکته: فقط توی سایدبار (نه کشوی موبایل) — کشوی موبایل لیسنر خودش
+  // (wireDrawerFilters) دارد و دو لیسنر باعث باز/بسته هم‌زمان می‌شود.
+  document
+    .querySelectorAll(".filters-sidebar .filter-dropdown-toggle")
+    .forEach((toggle) => {
+      toggle.addEventListener("click", () => toggleFilterDropdown(toggle));
+    });
 
   // ۱۲. اتصال دکمه‌های پنل سبد خرید
   const checkoutBtn = document.getElementById("checkoutBtn");
