@@ -1418,6 +1418,11 @@
     display: block;
   }
 
+  /* هماهنگ با toggleFilterDropdown سایدبار که کلاس show را تاگل می‌کند */
+  .filter-drawer-body .filter-dropdown-list.show {
+    display: block;
+  }
+
   .filter-drawer-body .filter-dropdown-list li {
     margin-bottom: 10px;
   }

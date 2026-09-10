@@ -11,9 +11,11 @@
   display: none;
 }
 
-/* کشوی فیلتر موبایل — در دسکتاپ مخفی است */
-.filter-drawer-overlay {
-  display: none !important;
+/* کشوی فیلتر موبایل — فقط در دسکتاپ مخفی است (در موبایل mobile.css آن را نمایش می‌دهد) */
+@media (min-width: 1024px) {
+  .filter-drawer-overlay {
+    display: none;
+  }
 }
 
 body {
