@@ -187,10 +187,112 @@ function normalizePhone(input) {
 }
 
 // ارسال پیامک کد یک‌بارمصرف
-// ⚠️ تا زمان اتصال سرویس پیامک (کاوه‌نگار / ملی‌پیامک و ...) کد در کنسول سرور چاپ می‌شود
-//    و در حالت توسعه در پاسخ API هم برگردانده می‌شود تا بتوان تست کرد.
+// ─── سرویس پیامک: ملی پیامک (REST + وب‌سرویس خدماتی/الگو) ───
+// تنظیمات لازم در backend/.env  (مستند رسمی: https://docs.melipayamak.com)
+//   MELIPAYAMAK_USERNAME=نام کاربری پنل ملی‌پیامک
+//   MELIPAYAMAK_PASSWORD=کلید API (Web Service Key) — از پنل ملی‌پیامک
+//   MELIPAYAMAK_FROM=شماره خط ارسال (مثلاً ۵ رقمی 1000... یا 5000...) — فقط برای حالت ساده
+//   MELIPAYAMAK_BODY_ID_OTP=کد الگوی «کد ورود» (bodyId — عدد ۶ رقمی هر الگو)
+//   MELIPAYAMAK_BODY_ID_ORDER=کد الگوی «ثبت سفارش» (bodyId — عدد ۶ رقمی هر الگو)
+// اگر bodyId تنظیم نباشد از حالت «ارسال ساده» استفاده می‌شود
+// اگر username/password/from نباشند، سامانه در حالت تست می‌ماند (کد فقط در کنسول چاپ می‌شود)
+const MELIPAYAMAK_BASE_URL = "https://rest.payamak-panel.com";
+
+// ارسال اس‌ام‌اس از طریق ملی پیامک — تابع مشترک
+async function sendMeliPayamakSms(phone, text, opts) {
+  opts = opts || {};
+  const username = (process.env.MELIPAYAMAK_USERNAME || "").trim();
+  const password = (process.env.MELIPAYAMAK_PASSWORD || "").trim();
+  const from = (process.env.MELIPAYAMAK_FROM || "").trim();
+  const bodyId = String(opts.bodyId || "").trim();
+  const params = Array.isArray(opts.params) ? opts.params : null;
+
+  // بدون تنظیمات — فقط لاگ تست (برای توسعه محلی)
+  if (!username || !password) {
+    console.log(
+      `📱 [SMS-TEST] به ${phone}: ${text}\n   (تنظیمات ملی پیامک در backend/.env تنظیم نشده — پیامک واقعی فرستاده نشد)`
+    );
+    return { sent: false, test: true };
+  }
+
+  try {
+    // ─── حالت الگویی (وب‌سرویس خدماتی/Pattern) ───
+    if (bodyId) {
+      const body = { username, password, bodyId, to: phone };
+      if (params && params.length) body.parameters = params;
+      else if (text) body.text = text;
+
+      const res = await fetch(MELIPAYAMAK_BASE_URL + "/api/SendByTemplate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body: JSON.stringify(body),
+      });
+      const bodyText = await res.text();
+      let data = {};
+      try { data = JSON.parse(bodyText); } catch (e) { data = { raw: bodyText }; }
+      if (data.RetStatus === 1 || String(data.RetStatus_Single || data.Status || "").startsWith("5")) {
+        console.log(`📤 [MELIPAYAMAK-PATTERN ${bodyId}] پیامک به ${phone} ارسال شد.`);
+        return { sent: true };
+      }
+      console.error("⚠️ خطای ملی پیامک (الگو):", JSON.stringify(data).slice(0, 300));
+      return { sent: false, error: data };
+    }
+
+    // ─── حالت ساده (Send) — نیازمند from ───
+    if (!from) {
+      console.log(
+        `📱 [SMS-TEST] به ${phone}: ${text}\n   (MELIPAYAMAK_FROM تنظیم نشده — پیامک واقعی فرستاده نشد)`
+      );
+      return { sent: false, test: true };
+    }
+    const res = await fetch(MELIPAYAMAK_BASE_URL + "/api/Send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({ username, password, to: phone, from, text }),
+    });
+    const bodyText = await res.text();
+    let data = {};
+    try { data = JSON.parse(bodyText); } catch (e) { data = { raw: bodyText }; }
+
+    // RetStatus=1 و Status==5 به معنی ارسال موفق (طبق مستندات ملی پیامک)
+    if (data.RetStatus === 1 || String(data.Status || "").startsWith("5")) {
+      console.log(`📤 [MELIPAYAMAK] پیامک به ${phone} ارسال شد.`);
+      return { sent: true };
+    }
+    console.error("⚠️ خطای ملی پیامک:", JSON.stringify(data).slice(0, 300));
+    return { sent: false, error: data };
+  } catch (e) {
+    console.error("⚠️ خطا در اتصال به ملی پیامک:", e.message);
+    return { sent: false, error: e.message };
+  }
+}
+
+// ارسال کد یک‌بارمصرف ورود
+// در حالت الگویی: پارامتر اولِ الگو = کد ۵ رقمی
 function sendOtpSms(phone, code) {
-  console.log(`📱 [SMS] کد یک‌بارمصرف ورود برای ${phone}: ${code}`);
+  const bodyId = (process.env.MELIPAYAMAK_BODY_ID_OTP || "").trim();
+  if (bodyId) {
+    return sendMeliPayamakSms(phone, "", { bodyId, params: [code] });
+  }
+  return sendMeliPayamakSms(
+    phone,
+    `کد ورود به چوب‌ساب: ${code}\nاین کد تا ۲ دقیقه معتبر است.`
+  );
+}
+
+// ارسال پیامک تأیید سفارش (هنگام پرداخت موفق یا هنگام ثبت سفارش جدید)
+// در حالت الگویی سه پارامتر فرستاده می‌شود: [نام، شناسه سفارش، مبلغ به تومان]
+// → الگوی سفارش باید به همین ترتیب متغیرهایش را تعریف شده باشد.
+function sendOrderSms(phone, fullName, orderId, totalPrice) {
+  const totalToman = Number(totalPrice || 0).toLocaleString("fa-IR");
+  const bodyId = (process.env.MELIPAYAMAK_BODY_ID_ORDER || "").trim();
+  if (bodyId) {
+    return sendMeliPayamakSms(phone, "", { bodyId, params: [fullName, orderId, totalToman] });
+  }
+  return sendMeliPayamakSms(
+    phone,
+    `${fullName} گرامی،\nسفارش شما با شناسه ${orderId} در چوب‌ساب ثبت شد.\nمبلغ قابل پرداخت: ${totalToman} تومان.`
+  );
 }
 
 // تنظیم کوکی نشست کاربر: HttpOnly (ضد XSS) + SameSite=Strict (ضد CSRF)
@@ -561,6 +663,15 @@ app.post("/api/orders", requireUser, (req, res) => {
 
     console.log("📌 سفارش جدید ثبت شد:", newOrder);
 
+    // ─── ارسال پیامک تأیید سفارش (ملی پیامک) ───
+    // بدون await — ارسال پیامک نباید روند پاسخ‌دهی را کند کند (fire-and-forget)
+    sendOrderSms(
+      newOrder.customerInfo.phone,
+      newOrder.customerInfo.fullName,
+      newOrder.orderId,
+      newOrder.totalPrice
+    );
+
     // پاسخ به فرانتاند
     return res.status(201).json({
       success: true,
@@ -728,6 +839,18 @@ app.get("/api/payment/verify", async (req, res) => {
         oid
       );
       console.log("🧪 حالت تست: پرداخت تأیید شد برای سفارش", oid);
+
+      // ─── پیامک تأیید پرداخت (فقط وقتی تازه پرداخت شده باشد) ───
+      const customer = JSON.parse(order.customerInfo || "{}");
+      if (order.status !== "paid") {
+        sendOrderSms(
+          customer.phone,
+          customer.fullName,
+          oid,
+          order.totalPrice
+        );
+      }
+
       return res.json({
         success: true,
         message: "پرداخت با موفقیت انجام شد.",
@@ -767,6 +890,18 @@ app.get("/api/payment/verify", async (req, res) => {
         new Date().toISOString(),
         oid
       );
+
+      // ─── پیامک تأیید پرداخت (فقط وقتی تازه پرداخت شده باشد) ───
+      if (order.status !== "paid") {
+        const customer = JSON.parse(order.customerInfo || "{}");
+        sendOrderSms(
+          customer.phone,
+          customer.fullName,
+          oid,
+          order.totalPrice
+        );
+      }
+
       res.json({
         success: true,
         message: vdata.code === 100 ? "پرداخت با موفقیت انجام شد." : "این پرداخت قبلاً تأیید شده است.",
