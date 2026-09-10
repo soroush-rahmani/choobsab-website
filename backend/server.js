@@ -186,17 +186,49 @@ function normalizePhone(input) {
   return "";
 }
 
-// ارسال پیامک کد یک‌بارمصرف
-// ─── سرویس پیامک: ملی پیامک (REST + وب‌سرویس خدماتی/الگو) ───
-// تنظیمات لازم در backend/.env  (مستند رسمی: https://docs.melipayamak.com)
+// ─── سرویس پیامک: ملی پیامک (REST — اندپوینت‌های رسمی، تأییدشده با سورس SDK خودشان) ───
+// ارسال ساده:   POST https://rest.payamak-panel.com/api/SendSMS/SendSMS
+//               body: { username, password, to, from, text, isflash }
+// ارسال الگو:   POST https://rest.payamak-panel.com/api/SendSMS/BaseServiceNumber
+//               body: { username, password, to, text, bodyId }
+// تنظیمات در backend/.env:
 //   MELIPAYAMAK_USERNAME=نام کاربری پنل ملی‌پیامک
 //   MELIPAYAMAK_PASSWORD=کلید API (Web Service Key) — از پنل ملی‌پیامک
-//   MELIPAYAMAK_FROM=شماره خط ارسال (مثلاً ۵ رقمی 1000... یا 5000...) — فقط برای حالت ساده
-//   MELIPAYAMAK_BODY_ID_OTP=کد الگوی «کد ورود» (bodyId — عدد ۶ رقمی هر الگو)
-//   MELIPAYAMAK_BODY_ID_ORDER=کد الگوی «ثبت سفارش» (bodyId — عدد ۶ رقمی هر الگو)
+//   MELIPAYAMAK_FROM=شماره خط ارسال (مثلاً 50002710061761) — فقط برای ارسال ساده
+//   MELIPAYAMAK_BODY_ID_OTP=کد ۶ رقمی الگوی «کد ورود»
+//   MELIPAYAMAK_BODY_ID_ORDER=کد ۶ رقمی الگوی «ثبت سفارش»
+//   MELIPAYAMAK_TEMPLATE_SEPARATOR=جداکننده مقادیر متغیرهای الگو (پیش‌فرض ,)
+// متغیرهای الگو در پنل به صورت {1} {2} {3} تعریف می‌شوند؛ مقادیر به همان ترتیب join و ارسال می‌شوند.
 // اگر bodyId تنظیم نباشد از حالت «ارسال ساده» استفاده می‌شود
-// اگر username/password/from نباشند، سامانه در حالت تست می‌ماند (کد فقط در کنسول چاپ می‌شود)
-const MELIPAYAMAK_BASE_URL = "https://rest.payamak-panel.com";
+// اگر username/password نباشند، سامانه در حالت تست می‌ماند (کد فقط در کنسول چاپ می‌شود)
+const MELIPAYAMAK_BASE_URL = "https://rest.payamak-panel.com/api/SendSMS";
+
+// درخواست POST به ملی‌پیامک — اول JSON؛ اگر RetStatus!=1 داد، یک بار با فرم استاندارد SDK رسمی
+async function payamakRequest(method, payload) {
+  const url = `${MELIPAYAMAK_BASE_URL}/${method}`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    body: JSON.stringify(payload),
+  });
+  const bodyText = await res.text();
+  let data;
+  try { data = JSON.parse(bodyText); } catch (e) { data = { raw: bodyText }; }
+  if (data.RetStatus !== 1) {
+    try {
+      const res2 = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
+        body: new URLSearchParams(payload).toString(),
+      });
+      const text2 = await res2.text();
+      let data2;
+      try { data2 = JSON.parse(text2); } catch (e) { data2 = { raw: text2 }; }
+      if (data2.RetStatus === 1) return data2;
+    } catch (e) { /* خطای شبکه — پاسخ درخواست JSON اول گزارش می‌شود */ }
+  }
+  return data;
+}
 
 // ارسال اس‌ام‌اس از طریق ملی پیامک — تابع مشترک
 async function sendMeliPayamakSms(phone, text, opts) {
@@ -217,49 +249,35 @@ async function sendMeliPayamakSms(phone, text, opts) {
 
   try {
     // ─── حالت الگویی (وب‌سرویس خدماتی/Pattern) ───
+    // متغیرهای الگوی پنل ({1} {2} {3}…) به ترتیب با مقادیر params پر می‌شوند
     if (bodyId) {
-      const body = { username, password, bodyId, to: phone };
-      if (params && params.length) body.parameters = params;
-      else if (text) body.text = text;
-
-      const res = await fetch(MELIPAYAMAK_BASE_URL + "/api/SendByTemplate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json; charset=utf-8" },
-        body: JSON.stringify(body),
-      });
-      const bodyText = await res.text();
-      let data = {};
-      try { data = JSON.parse(bodyText); } catch (e) { data = { raw: bodyText }; }
-      if (data.RetStatus === 1 || String(data.RetStatus_Single || data.Status || "").startsWith("5")) {
-        console.log(`📤 [MELIPAYAMAK-PATTERN ${bodyId}] پیامک به ${phone} ارسال شد.`);
-        return { sent: true };
+      const separator = (process.env.MELIPAYAMAK_TEMPLATE_SEPARATOR || ",").trim();
+      const templateText =
+        params && params.length ? params.map(String).join(separator) : text;
+      const payload = { username, password, to: phone, text: templateText, bodyId };
+      const data = await payamakRequest("BaseServiceNumber", payload);
+      if (data.RetStatus === 1) {
+        console.log(`📤 [MELIPAYAMAK-الگو ${bodyId}] پیامک به ${phone} ارسال شد (recId: ${data.Value}).`);
+        return { sent: true, recId: data.Value };
       }
-      console.error("⚠️ خطای ملی پیامک (الگو):", JSON.stringify(data).slice(0, 300));
+      console.error("⚠️ خطای ملی پیامک (الگو):", JSON.stringify(data).slice(0, 400));
       return { sent: false, error: data };
     }
 
-    // ─── حالت ساده (Send) — نیازمند from ───
+    // ─── حالت ساده (SendSMS) — نیازمند from ───
     if (!from) {
       console.log(
         `📱 [SMS-TEST] به ${phone}: ${text}\n   (MELIPAYAMAK_FROM تنظیم نشده — پیامک واقعی فرستاده نشد)`
       );
       return { sent: false, test: true };
     }
-    const res = await fetch(MELIPAYAMAK_BASE_URL + "/api/Send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json; charset=utf-8" },
-      body: JSON.stringify({ username, password, to: phone, from, text }),
-    });
-    const bodyText = await res.text();
-    let data = {};
-    try { data = JSON.parse(bodyText); } catch (e) { data = { raw: bodyText }; }
-
-    // RetStatus=1 و Status==5 به معنی ارسال موفق (طبق مستندات ملی پیامک)
-    if (data.RetStatus === 1 || String(data.Status || "").startsWith("5")) {
-      console.log(`📤 [MELIPAYAMAK] پیامک به ${phone} ارسال شد.`);
-      return { sent: true };
+    const payload = { username, password, to: phone, from, text, isflash: false };
+    const data = await payamakRequest("SendSMS", payload);
+    if (data.RetStatus === 1) {
+      console.log(`📤 [MELIPAYAMAK] پیامک به ${phone} ارسال شد (recId: ${data.Value}).`);
+      return { sent: true, recId: data.Value };
     }
-    console.error("⚠️ خطای ملی پیامک:", JSON.stringify(data).slice(0, 300));
+    console.error("⚠️ خطای ملی پیامک:", JSON.stringify(data).slice(0, 400));
     return { sent: false, error: data };
   } catch (e) {
     console.error("⚠️ خطا در اتصال به ملی پیامک:", e.message);
