@@ -121,6 +121,100 @@ input,
     border-bottom: 2px solid #f2ece6;
   }
 
+  /* آدرس‌های ذخیره‌شده‌ی کاربر (از پروفایل) */
+  .saved-addresses {
+    background: #fdf9f6;
+    border: 1px dashed #d8c9bd;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 24px;
+  }
+
+  .saved-addresses-title {
+    margin: 0 0 12px;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #8b5a2b;
+  }
+
+  .saved-addresses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .saved-address-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid #e8e0d8;
+    border-radius: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .saved-address-item:hover {
+    border-color: #cbb9a8;
+  }
+
+  .saved-address-item:has(input:checked) {
+    border-color: #af6c54;
+    box-shadow: 0 0 0 2px rgba(175, 108, 84, 0.15);
+  }
+
+  .saved-address-item input[type="radio"] {
+    margin-top: 4px;
+    accent-color: #af6c54;
+  }
+
+  .saved-address-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  .saved-address-body strong {
+    font-size: 13.5px;
+    color: #333;
+  }
+
+  .saved-addresses-hint {
+    margin: 10px 0 0;
+    font-size: 12px;
+    color: #998a7c;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* چک‌باکس ذخیره‌ی آدرس برای خریدهای بعد */
+  .save-marker-group {
+    margin-bottom: 0;
+  }
+
+  .save-marker-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .save-marker-row input {
+    width: 17px;
+    height: 17px;
+    accent-color: #af6c54;
+    cursor: pointer;
+  }
+
   .form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

@@ -617,24 +617,19 @@ window.UserAuth = (function () {
   }
 
   // ─── صفحهٔ پروفایل کاربری مستقل (profile.html) ───
-  // اطلاعات کاربر، لیست کامل سفارش‌ها و وضعیت آن‌ها را رندر می‌کند.
-  // اگر کاربر لاگین نباشد، مودال لاگین باز می‌شود؛ پس از ورود موفق،
-  // از طریق onChange دوباره فراخوانی می‌شود و محتوا نمایش داده می‌شود.
+  // اطلاعات کاربر، لیست کامل سفارش‌ها و آدرس‌های ذخیره‌شده را رندر می‌کند.
+  // اگر کاربر لاگین نباشد، صرفاً بدون تغییر می‌ماند (هیچ پیامی نمایش نمی‌یابد).
+  // پس از ورود موفق، از طریق onChange دوباره فراخوانی می‌شود و محتوا نمایش داده می‌شود.
   function renderProfilePage() {
     const head = document.getElementById("profileHead");
     if (!head) return; // فقط روی صفحهٔ پروفایل اجرا می‌شود
     const wrap = document.getElementById("profilePageWrap");
-    const locked = document.getElementById("profileLocked");
 
     if (!loaded) return; // تا وقتی وضعیت لاگین از سرور خوانده نشود، صبر می‌کنیم
 
     if (!currentUser) {
-      if (wrap) wrap.hidden = true;
-      if (locked) locked.hidden = false;
-      openLogin();
       return;
     }
-
     // نمایش اطلاعات کاربر
     const avatarInitial = (currentUser.firstName || "؟").charAt(0);
     head.innerHTML =
@@ -659,7 +654,6 @@ window.UserAuth = (function () {
       "</button>";
 
     if (wrap) wrap.hidden = false;
-    if (locked) locked.hidden = true;
 
     // خروج از حساب روی صفحهٔ پروفایل
     const logoutBtn = document.getElementById("profileLogoutBtn");
@@ -672,6 +666,153 @@ window.UserAuth = (function () {
 
     // بارگذاری تمام سوارش‌های کاربر
     loadOrders("profileOrders", null);
+    // بارگذاری آدرس‌های ذخیره‌شده‌ی کاربر
+    loadAddresses();
+  }
+
+  // ─── آدرس‌های ذخیره‌شده کاربر (پروفایل → چک‌اوت) ───
+  let addresses = [];
+
+  async function loadAddresses() {
+    const listEl = document.getElementById("profileAddresses");
+    if (!listEl) return;
+    try {
+      const res = await fetch("/api/user/addresses");
+      const data = await res.json();
+      addresses = (data && data.addresses) || [];
+    } catch (e) {
+      addresses = [];
+    }
+    renderAddresses();
+  }
+
+  function renderAddresses() {
+    const listEl = document.getElementById("profileAddresses");
+    if (!listEl) return;
+    if (!addresses.length) {
+      listEl.innerHTML =
+        '<div class="empty"><i class="fas fa-map-marker-alt"></i>' +
+        "هنوز آدرسی ذخیره نکرده‌اید. با دکمه «افزودن آدرس جدید» اولین آدرس را ذخیره کنید.</div>";
+      return;
+    }
+    listEl.innerHTML = addresses
+      .map(function (a) {
+        const title = [a.fullName, a.phone].filter(Boolean).join(" — ");
+        return (
+          '<div class="address-card">' +
+          '<div class="address-card-body">' +
+          '<h4 class="address-card-title">' +
+          (title ? escapeHtml(title) : "آدرس شماره " + a.id) +
+          "</h4>" +
+          '<p class="address-card-text">' +
+          escapeHtml(a.address) +
+          "</p>" +
+          '<div class="address-card-meta">' +
+          (a.postalCode
+            ? '<span><i class="fas fa-mailbox"></i>' + escapeHtml(a.postalCode) + "</span>"
+            : "") +
+          (a.note
+            ? '<span><i class="fas fa-sticky-note"></i>' + escapeHtml(a.note) + "</span>"
+            : "") +
+          "</div>" +
+          "</div>" +
+          '<button type="button" class="address-delete-btn" data-address-id="' +
+          a.id +
+          '"><i class="fas fa-trash-alt"></i> حذف</button>' +
+          "</div>"
+        );
+      })
+      .join("");
+
+    // حذف آدرس
+    listEl.querySelectorAll(".address-delete-btn").forEach(function (btn) {
+      btn.addEventListener("click", async function () {
+        const id = btn.getAttribute("data-address-id");
+        if (!confirm("این آدرس حذف شود؟")) return;
+        try {
+          await fetch("/api/user/addresses/" + id, { method: "DELETE" });
+        } catch (e) {
+          /* خطای شبکه — نادیده گرفته می‌شود */
+        }
+        loadAddresses();
+      });
+    });
+  }
+
+  function openAddressModal() {
+    const overlay = document.getElementById("addressOverlay");
+    if (!overlay) return;
+    overlay.classList.add("open");
+    document.body.classList.add("ua-lock-scroll");
+    const err = document.getElementById("addressError");
+    if (err) err.hidden = true;
+    const nameInput = document.getElementById("addrFullName");
+    if (nameInput) nameInput.focus();
+  }
+
+  function closeAddressModal() {
+    const overlay = document.getElementById("addressOverlay");
+    if (overlay) overlay.classList.remove("open");
+    document.body.classList.remove("ua-lock-scroll");
+  }
+
+  // اتصال رویدادهای مودال آدرس + دکمه‌ی ورود پیام پروفایل
+  function wireAddressFeatures() {
+    const addBtn = document.getElementById("addressAddBtn");
+    if (addBtn) {
+      addBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        openAddressModal();
+      });
+    }
+
+    const closeBtn = document.getElementById("addressCloseBtn");
+    if (closeBtn) closeBtn.addEventListener("click", closeAddressModal);
+    const overlay = document.getElementById("addressOverlay");
+    if (overlay) {
+      overlay.addEventListener("click", function (e) {
+        if (e.target === overlay) closeAddressModal();
+      });
+    }
+
+    const form = document.getElementById("addressForm");
+    if (!form) return;
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const errEl = document.getElementById("addressError");
+      const address = document.getElementById("addrText").value.trim();
+      if (!address) {
+        errEl.textContent = "لطفاً آدرس را وارد کنید.";
+        errEl.hidden = false;
+        return;
+      }
+      const payload = {
+        fullName: document.getElementById("addrFullName").value.trim(),
+        phone: document.getElementById("addrPhone").value.trim(),
+        postalCode: document.getElementById("addrPostalCode").value.trim(),
+        address: address,
+        note: document.getElementById("addrNote").value.trim(),
+      };
+      try {
+        const res = await fetch("/api/user/addresses", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (data.success) {
+          closeAddressModal();
+          form.reset();
+          loadAddresses();
+        } else {
+          errEl.textContent = data.message || "خطا در ذخیره آدرس.";
+          errEl.hidden = false;
+        }
+      } catch (err) {
+        errEl.textContent = "ارتباط با سرور برقرار نشد.";
+        errEl.hidden = false;
+      }
+    });
   }
 
   // ─── راه‌اندازی ───
@@ -679,6 +820,7 @@ window.UserAuth = (function () {
     injectHeaderIcon();
     injectMobileProfileBtn();
     initCheckoutGate();
+    wireAddressFeatures();
     fetchMe();
     onChange(renderProfilePage);
   }

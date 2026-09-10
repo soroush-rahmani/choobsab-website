@@ -1,4 +1,4 @@
-/* ===================================================
+﻿/* ===================================================
    استایل حساب کاربری و پروفایل — چوب‌ساب
    (مودال ورود با کد یک‌بارمصرف + پروفایل و سفارش‌ها)
    طراحی هماهنگ با رنگ و لعاب سایت: سفید با لهجه قهوه‌ای
@@ -714,6 +714,136 @@ body.ua-lock-scroll {
   margin: 0;
   font-size: 13px;
   color: var(--ua-muted);
+}
+
+/* -------------------------------------------------------
+   ردیف عنوان بخش‌ها (عنوان + دکمه اکشن کنار هم)
+   ------------------------------------------------------- */
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.section-title-row .section-title {
+  margin: 0;
+}
+
+.address-add-btn {
+  padding: 8px 18px;
+}
+
+/* -------------------------------------------------------
+   لیست آدرس‌های ذخیره‌شده کاربر
+   ------------------------------------------------------- */
+.addresses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.address-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid var(--ua-border);
+  border-radius: var(--ua-radius);
+  padding: 14px 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.address-card:hover {
+  border-color: #ddcfc6;
+  box-shadow: 0 4px 16px rgba(80, 50, 35, 0.07);
+}
+
+.address-card-body {
+  flex: 1;
+  min-width: 220px;
+}
+
+.address-card-title {
+  margin: 0 0 6px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ua-text);
+}
+
+.address-card-text {
+  margin: 0;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.9;
+}
+
+.address-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--ua-muted);
+}
+
+.address-card-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.address-card-meta i {
+  color: var(--ua-brown);
+}
+
+.address-delete-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--ua-border);
+  background: var(--ua-white);
+  color: var(--ua-red);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.address-delete-btn:hover {
+  border-color: var(--ua-red);
+  background: var(--ua-red-bg);
+}
+
+/* -------------------------------------------------------
+   فیلد textarea در مودال آدرس
+   ------------------------------------------------------- */
+.ua-field textarea.ua-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ua-text);
+  background: #fdfcfb;
+  border: 1px solid var(--ua-border);
+  border-radius: 10px;
+  outline: none;
+  resize: vertical;
+  min-height: 84px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ua-field textarea.ua-textarea:focus {
+  border-color: var(--ua-brown);
+  box-shadow: 0 0 0 3px rgba(175, 108, 84, 0.12);
+  background: var(--ua-white);
 }
 
 /* -------------------------------------------------------

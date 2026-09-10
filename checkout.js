@@ -92,6 +92,20 @@ window.handleCheckoutSubmit = async function (event) {
   };
 
   try {
+    // اگر کاربر تیک «ذخیره آدرس» را زده بود، آدرس را برای دفعات بعد ذخیره کن
+    const saveChk = document.getElementById("saveAddressChk");
+    if (saveChk && saveChk.checked) {
+      try {
+        await fetch("/api/user/addresses", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(orderData.customerInfo),
+        });
+      } catch (e) {
+        // ذخیره آدرس اختیاری است — خطای آن مانع سفارش نمی‌شود
+      }
+    }
+
     // ارسال درخواست POST به سرور
         // آدرس نسبی — چون سرور هم فرانت‌اند و هم API را سرو می‌کند
     const response = await fetch("/api/orders", {
@@ -153,6 +167,48 @@ window.handleCheckoutSubmit = async function (event) {
   }
 };
 
+// ۳. آدرس‌های ذخیره‌شده در پروفایل — برای پر شدن خودکار فرم
+function renderSavedAddresses(addresses) {
+  const wrap = document.getElementById("savedAddressesWrap");
+  const list = document.getElementById("savedAddressesList");
+  if (!wrap || !list) return;
+  if (!addresses || !addresses.length) {
+    wrap.hidden = true;
+    return;
+  }
+  list.innerHTML = "";
+  addresses.forEach((a) => {
+    // انتخاب آدرس → پر کردن فرم
+    const card = document.createElement("label");
+    card.className = "saved-address-item";
+    card.innerHTML = `
+      <input type="radio" name="savedAddress" value="${a.id}" />
+      <span class="saved-address-body">
+        <strong>${escapeHtml(a.fullName || "آدرس ذخیره‌شده")}</strong>
+        <span>${escapeHtml(a.address)}</span>
+      </span>
+    `;
+    card.addEventListener("change", () => fillFormFromAddress(a));
+    list.appendChild(card);
+  });
+  wrap.hidden = false;
+}
+
+function fillFormFromAddress(a) {
+  const fields = {
+    fullName: a.fullName,
+    phoneNumber: a.phone,
+    postalCode: a.postalCode,
+    shippingAddress: a.address,
+    orderNotes: a.note,
+  };
+  for (const id in fields) {
+    const el = document.getElementById(id);
+    const val = fields[id];
+    if (el && val) el.value = val;
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   renderCheckoutSummary();
 
@@ -168,6 +224,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (e) {
     // اگر سرور در دسترس نباشد، ثبت سفارش در سمت سرور هم رد خواهد شد
     console.error("بررسی وضعیت ورود ناموفق بود:", e);
+  }
+
+  // بارگذاری آدرس‌های ذخیره‌شده‌ی کاربر برای پر کردن خودکار فرم
+  try {
+    const addrRes = await fetch("/api/user/addresses");
+    const addrData = await addrRes.json();
+    renderSavedAddresses((addrData && addrData.addresses) || []);
+  } catch (e) {
+    console.error("بارگذاری آدرس‌های ذخیره‌شده ناموفق بود:", e);
   }
 
   // اتصال فرم تسویه حساب به تابع handleCheckoutSubmit

@@ -390,6 +390,74 @@ app.get("/api/auth/me", (req, res) => {
   res.json({ success: true, user: user || null });
 });
 
+// ─────────────────────────────────────────
+//  آدرس‌های ذخیره‌شده کاربر (پروفایل → چک‌اوت)
+//  کاربر می‌تواند آدرس را یک بار در پروفایل ذخیره کند و بعداً
+//  در فرم checkout بدون تایپ مجدد، همان را انتخاب کند.
+// ─────────────────────────────────────────
+
+// لیست آدرس‌های کاربر جاری
+app.get("/api/user/addresses", requireUser, (req, res) => {
+  try {
+    const rows = db
+      .prepare(
+        "SELECT id, fullName, phone, postalCode, address, note, createdAt FROM user_addresses WHERE userId = ? ORDER BY id DESC"
+      )
+      .all(req.user.id);
+    res.json({ success: true, addresses: rows });
+  } catch (e) {
+    console.error("خطا در خواندن آدرس‌ها:", e);
+    res.status(500).json({ success: false, message: "خطا در خواندن آدرس‌ها." });
+  }
+});
+
+// افزودن آدرس جدید
+app.post("/api/user/addresses", requireUser, (req, res) => {
+  try {
+    const b = req.body || {};
+    const address = String(b.address || "").trim();
+    if (!address) {
+      return res.status(400).json({ success: false, message: "آدرس الزامی است." });
+    }
+    const info = db
+      .prepare(
+        "INSERT INTO user_addresses (userId, fullName, phone, postalCode, address, note, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?)"
+      )
+      .run(
+        req.user.id,
+        String(b.fullName || "").trim().slice(0, 200),
+        String(b.phone || "").trim().slice(0, 20),
+        String(b.postalCode || "").trim().slice(0, 20),
+        address.slice(0, 800),
+        String(b.note || "").trim().slice(0, 500),
+        new Date().toISOString()
+      );
+    const row = db
+      .prepare(
+        "SELECT id, fullName, phone, postalCode, address, note, createdAt FROM user_addresses WHERE id = ?"
+      )
+      .get(info.lastInsertRowid);
+    res.status(201).json({ success: true, message: "آدرس ذخیره شد.", address: row });
+  } catch (e) {
+    console.error("خطا در ذخیره‌سازی آدرس:", e);
+    res.status(500).json({ success: false, message: "خطا در ذخیره‌سازی آدرس." });
+  }
+});
+
+// حذف آدرس
+app.delete("/api/user/addresses/:id", requireUser, (req, res) => {
+  try {
+    db.prepare("DELETE FROM user_addresses WHERE id = ? AND userId = ?").run(
+      req.params.id,
+      req.user.id
+    );
+    res.json({ success: true, message: "آدرس حذف شد." });
+  } catch (e) {
+    console.error("خطا در حذف آدرس:", e);
+    res.status(500).json({ success: false, message: "خطا در حذف آدرس." });
+  }
+});
+
 // API: خروج از حساب کاربری
 app.post("/api/auth/logout", (req, res) => {
   const token = parseCookies(req)[USER_SESSION_COOKIE];

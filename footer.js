@@ -123,7 +123,7 @@
       <div class="footer-bottom">
         <p>تمامی حقوق برای چوبساب دکور محفوظ است ©.</p>
         <p>
-          طراحی شده توسط
+          توسعه یافته توسط
           <a
             href="https://t.me/sushikhan83"
             target="_blank"

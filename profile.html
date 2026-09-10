@@ -112,20 +112,6 @@
         <p>اطلاعات حساب و سفارش‌های شما</p>
       </div>
 
-      <!-- ─── پیام قفل‌شده (نمایش داده می‌شود تا زمانی که لاگین نشده) ─── -->
-      <section id="profileLocked" class="profile-locked" hidden>
-        <div class="locked-card">
-          <div class="locked-icon">
-            <i class="fas fa-lock"></i>
-          </div>
-          <h2>این صفحه فقط برای کاربران ثبت‌نام‌شده قابل دسترسی است</h2>
-          <p>برای دیدن اطلاعات و سفارش‌های خود، ابتدا وارد حساب شوید.</p>
-          <button type="button" class="btn-u user-auth-btn" id="profileLoginBtn">
-            <i class="fas fa-right-to-bracket"></i> ورود به حساب
-          </button>
-        </div>
-      </section>
-
       <!-- ─── قاب اصلی (فقط وقتی لاگین هست نشان داده می‌شود) ─── -->
       <section id="profilePageWrap" class="profile-wrap" hidden>
         <!-- سربرگ: نام، تلفن، تاریخ عضویت، دکمه خروج -->
@@ -148,8 +134,56 @@
           </h2>
           <div class="info-grid" id="profileInfoGrid"></div>
         </div>
+
+        <!-- آدرس‌های ذخیره‌شده (برای پر شدن خودکار فرم checkout) -->
+        <div class="profile-section" id="profileAddressesSection">
+          <div class="section-title-row">
+            <h2 class="section-title">
+              <i class="fas fa-map-marker-alt"></i> آدرس‌های من
+            </h2>
+            <button type="button" class="btn-u user-auth-btn address-add-btn" id="addressAddBtn">
+              <i class="fas fa-plus"></i> افزودن آدرس جدید
+            </button>
+          </div>
+          <div id="profileAddresses" class="addresses-list">
+            <div class="empty">در حال بارگذاری...</div>
+          </div>
+        </div>
       </section>
     </main>
+
+    <!-- مودال افزودن آدرس -->
+    <div class="ua-overlay" id="addressOverlay">
+      <div class="ua-modal" role="dialog" aria-modal="true" aria-label="افزودن آدرس">
+        <button type="button" class="ua-close" id="addressCloseBtn" aria-label="بستن">&times;</button>
+        <div class="ua-modal-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <h3 class="ua-title">افزودن آدرس جدید</h3>
+        <form id="addressForm" novalidate>
+          <div class="ua-field">
+            <label for="addrFullName">نام گیرنده</label>
+            <input type="text" id="addrFullName" placeholder="نام و نام خانوادگی" />
+          </div>
+          <div class="ua-field">
+            <label for="addrPhone">شماره موبایل</label>
+            <input type="tel" id="addrPhone" placeholder="09xxxxxxxxx" inputmode="tel" dir="ltr" />
+          </div>
+          <div class="ua-field">
+            <label for="addrPostalCode">کد پستی</label>
+            <input type="text" id="addrPostalCode" placeholder="۱۰ رقمی" maxlength="10" inputmode="numeric" dir="ltr" />
+          </div>
+          <div class="ua-field">
+            <label for="addrText">آدرس دقیق پستی <span class="required">*</span></label>
+            <textarea id="addrText" class="ua-textarea" rows="3" placeholder="استان، شهر، خیابان، کوچه، پلاک، واحد" required></textarea>
+          </div>
+          <div class="ua-field">
+            <label for="addrNote">توضیحات (اختیاری)</label>
+            <input type="text" id="addrNote" placeholder="مثلاً: تحویل فقط در ساعات عصر" />
+          </div>
+          <p class="ua-error" id="addressError" hidden></p>
+          <button type="submit" class="ua-btn-primary" id="addressSaveBtn">ذخیره آدرس</button>
+        </form>
+      </div>
+    </div>
 
     <!-- فوتر سایت (مشترک در تمام صفحات — محتوا توسط footer.js تزریق می‌شود) -->
     <div id="siteFooterContainer"></div>
@@ -196,25 +230,5 @@
     <script src="mobile-nav.js"></script>
     <!-- فوتر مشترک سایت -->
     <script src="footer.js"></script>
-    <script>
-      // اتصال دکمه «ورود به حساب» در حالت قفل صفحهٔ پروفایل به سرویس ورود.
-      // صفحه به‌صورت خودکار توسط user-auth.js قفل می‌شود؛ این دکمه
-      // مودال ورود را باز می‌کند.
-      (function () {
-        function wireProfileLoginBtn() {
-          var btn = document.getElementById("profileLoginBtn");
-          if (!btn) return;
-          if (!window.UserAuth || typeof window.UserAuth.openLogin !== "function") {
-            setTimeout(wireProfileLoginBtn, 200);
-            return;
-          }
-          btn.addEventListener("click", function (e) {
-            e.preventDefault();
-            window.UserAuth.openLogin();
-          });
-        }
-        wireProfileLoginBtn();
-      })();
-    </script>
   </body>
 </html>

@@ -114,6 +114,18 @@ db.exec(`
     ip          TEXT
   );
 
+  -- جدول آدرس‌های ذخیره‌شده کاربران (برای پر شدن خودکار فرم checkout)
+  CREATE TABLE IF NOT EXISTS user_addresses (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    userId        INTEGER NOT NULL,
+    fullName      TEXT DEFAULT '',
+    phone         TEXT DEFAULT '',
+    postalCode    TEXT DEFAULT '',
+    address       TEXT NOT NULL,
+    note          TEXT DEFAULT '',
+    createdAt     TEXT
+  );
+
   -- شاخص‌گذاری برای سرعت جستجو
   CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
   CREATE INDEX IF NOT EXISTS idx_custom_status ON custom_orders(status);
@@ -125,6 +137,7 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_otp_phone ON otp_codes(phone);
   CREATE INDEX IF NOT EXISTS idx_user_sessions_userId ON user_sessions(userId);
   CREATE INDEX IF NOT EXISTS idx_user_sessions_expires ON user_sessions(expiresAt);
+  CREATE INDEX IF NOT EXISTS idx_user_addresses_userId ON user_addresses(userId);
 `);
 
 // ─── سید اولیه محصولات و دسته‌بندی‌ها (فاز ۴) ───
