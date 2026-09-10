@@ -1401,7 +1401,7 @@ app.post("/api/admin/upload", requireAdmin, (req, res) => {
   }
 });
 
-const HOST = "192.168.1.159";
+const HOST = "0.0.0.0";
 app.listen(PORT, HOST, () => {
   console.log(`✅ سرور چوبساب روی http://${HOST}:${PORT} با موفقیت اجرا شد.`);
   console.log(`💳 درگاه پرداخت: ${ZARINPAL.sandbox ? "🧪 سندباکس (تستی)" : "💰 واقعی (زرین‌پال)"}`);
