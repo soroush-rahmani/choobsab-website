@@ -6,6 +6,16 @@
   --text-color: #333333;
 }
 
+/* دکمه فیلتر موبایل — در دسکتاپ مخفی است */
+.mobile-filter-btn {
+  display: none;
+}
+
+/* کشوی فیلتر موبایل — در دسکتاپ مخفی است */
+.filter-drawer-overlay {
+  display: none !important;
+}
+
 body {
   font-family: "Vazirmatn", sans-serif;
   direction: rtl;

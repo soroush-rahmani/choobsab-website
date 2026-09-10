@@ -233,6 +233,11 @@
             <option value="price-low">قیمت کم به زیاد</option>
             <option value="price-high">قیمت زیاد به کم</option>
           </select>
+          <!-- دکمه فیلتر (فقط موبایل) -->
+          <button type="button" class="mobile-filter-btn" id="mobileFilterBtn" aria-label="فیلتر محصولات">
+            <i class="fas fa-filter"></i>
+            <span>فیلتر</span>
+          </button>
         </div>
 
         <!-- گرید کارت محصولات -->
@@ -247,6 +252,26 @@
         </div>
       </section>
     </main>
+
+    <!-- کشوی فیلتر موبایل (فقط در موبایل نمایش داده می‌شود) -->
+    <div class="filter-drawer-overlay" id="filterDrawerOverlay">
+      <div class="filter-drawer" role="dialog" aria-modal="true" aria-label="فیلتر محصولات">
+        <div class="filter-drawer-header">
+          <h3><i class="fas fa-filter"></i> فیلتر محصولات</h3>
+          <button type="button" class="filter-drawer-close" id="filterDrawerClose" aria-label="بستن">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="filter-drawer-body" id="filterDrawerBody">
+          <!-- محتوای فیلترها به صورت داینامیک اینجا قرار می‌گیرد -->
+        </div>
+        <div class="filter-drawer-footer">
+          <button type="button" class="btn-apply-filter" id="applyFilterBtn">اعمال فیلتر</button>
+          <button type="button" class="btn-reset-filter" id="resetFilterBtn">پاک کردن</button>
+        </div>
+      </div>
+    </div>
+
     <!-- دکمه بازگشت به بالا -->
     <button id="scrollToTopBtn" class="scroll-to-top" title="بازگشت به بالا">
       <i class="fas fa-chevron-up"></i>

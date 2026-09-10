@@ -400,6 +400,11 @@ document.addEventListener("DOMContentLoaded", () => {
     initFilters();
   }
 
+  // ۷.۵. فعال‌سازی کشوی فیلتر موبایل
+  if (typeof initMobileFilterDrawer === "function") {
+    initMobileFilterDrawer();
+  }
+
   // ۸. فعال‌سازی مرتب‌سازی
   if (typeof initSorting === "function") {
     initSorting();
@@ -813,6 +818,150 @@ function initFilters() {
 
   woodCheckboxes.forEach((cb) => cb.addEventListener("change", applyFilters));
   finishCheckboxes.forEach((cb) => cb.addEventListener("change", applyFilters));
+}
+
+// =================== کشوی فیلتر موبایل ===================
+function initMobileFilterDrawer() {
+  const filterBtn = document.getElementById("mobileFilterBtn");
+  const overlay = document.getElementById("filterDrawerOverlay");
+  const closeBtn = document.getElementById("filterDrawerClose");
+  const body = document.getElementById("filterDrawerBody");
+  const applyBtn = document.getElementById("applyFilterBtn");
+  const resetBtn = document.getElementById("resetFilterBtn");
+
+  // فقط در موبایل (دکمه فیلتر وجود دارد)
+  if (!filterBtn || !overlay || !body) return;
+
+  // کلون کردن فیلترها از سایدبار به کشو
+  const filtersSidebar = document.querySelector(".filters-sidebar");
+  if (filtersSidebar) {
+    body.innerHTML = "";
+    const filterGroups = filtersSidebar.querySelectorAll(".filter-group");
+    filterGroups.forEach((group) => {
+      body.appendChild(group.cloneNode(true));
+    });
+  }
+
+  // باز کردن کشو
+  function openDrawer() {
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  // بستن کشو
+  function closeDrawer() {
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  // اتصال رویدادهای فیلترهای داخل کشو
+  function wireDrawerFilters() {
+    const minPriceRange = document.getElementById("minPriceRange");
+    const maxPriceRange = document.getElementById("maxPriceRange");
+    const minPriceValue = document.getElementById("minPriceValue");
+    const maxPriceValue = document.getElementById("maxPriceValue");
+
+    // اسلایدر قیمت
+    if (minPriceRange && maxPriceRange) {
+      minPriceRange.addEventListener("input", () => {
+        let minPrice = parseInt(minPriceRange.value);
+        let maxPrice = parseInt(maxPriceRange.value);
+        if (minPrice > maxPrice) {
+          minPriceRange.value = maxPrice;
+          minPrice = maxPrice;
+        }
+        if (minPriceValue) minPriceValue.textContent = minPrice.toLocaleString();
+      });
+      maxPriceRange.addEventListener("input", () => {
+        let minPrice = parseInt(minPriceRange.value);
+        let maxPrice = parseInt(maxPriceRange.value);
+        if (maxPrice < minPrice) {
+          maxPriceRange.value = minPrice;
+          maxPrice = minPrice;
+        }
+        if (maxPriceValue) maxPriceValue.textContent = maxPrice.toLocaleString();
+      });
+    }
+
+    // دراپ‌داون‌های فیلتر
+    const toggles = body.querySelectorAll(".filter-dropdown-toggle");
+    toggles.forEach((toggle) => {
+      toggle.addEventListener("click", function () {
+        this.classList.toggle("open");
+        const list = this.nextElementSibling;
+        if (list) list.classList.toggle("open");
+      });
+    });
+  }
+
+  // اعمال فیلترها
+  function applyDrawerFilters() {
+    const minPriceRange = document.getElementById("minPriceRange");
+    const maxPriceRange = document.getElementById("maxPriceRange");
+    const woodCheckboxes = body.querySelectorAll(".wood-filter");
+    const finishCheckboxes = body.querySelectorAll(".finish-filter");
+
+    const minPrice = minPriceRange ? parseInt(minPriceRange.value) : 0;
+    const maxPrice = maxPriceRange ? parseInt(maxPriceRange.value) : 50000000;
+
+    const selectedWood = [];
+    woodCheckboxes.forEach((cb) => {
+      if (cb.checked) selectedWood.push(cb.value);
+    });
+
+    const selectedFinish = [];
+    finishCheckboxes.forEach((cb) => {
+      if (cb.checked) selectedFinish.push(cb.value);
+    });
+
+    // فیلتر محصولات
+    let products = [];
+    if (typeof storeData !== "undefined") {
+      storeData.categories.forEach((cat) => {
+        products = products.concat(cat.subcategories);
+      });
+    }
+
+    let filtered = products.filter((prod) => {
+      const price = prod.price || 0;
+      const woodMatch = selectedWood.length === 0 || selectedWood.includes(prod.woodType);
+      const finishMatch = selectedFinish.length === 0 || selectedFinish.includes(prod.finishType);
+      const priceMatch = price >= minPrice && price <= maxPrice;
+      return woodMatch && finishMatch && priceMatch;
+    });
+
+    // رندر محصولات فیلترشده
+    renderProducts(filtered);
+    closeDrawer();
+  }
+
+  // پاک کردن فیلترها
+  function resetDrawerFilters() {
+    const minPriceRange = document.getElementById("minPriceRange");
+    const maxPriceRange = document.getElementById("maxPriceRange");
+    const woodCheckboxes = body.querySelectorAll(".wood-filter");
+    const finishCheckboxes = body.querySelectorAll(".finish-filter");
+
+    if (minPriceRange) minPriceRange.value = 100000;
+    if (maxPriceRange) maxPriceRange.value = 5000000;
+    woodCheckboxes.forEach((cb) => (cb.checked = false));
+    finishCheckboxes.forEach((cb) => (cb.checked = false));
+
+    // بازنشانی رندر
+    renderProducts(null);
+    closeDrawer();
+  }
+
+  // اتصال رویدادها
+  filterBtn.addEventListener("click", openDrawer);
+  if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeDrawer();
+  });
+  if (applyBtn) applyBtn.addEventListener("click", applyDrawerFilters);
+  if (resetBtn) resetBtn.addEventListener("click", resetDrawerFilters);
+
+  wireDrawerFilters();
 }
 
 // =================== منطق مرتب‌سازی محصولات (Sorting) ===================
