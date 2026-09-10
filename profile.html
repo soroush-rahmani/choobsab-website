@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="پروفایل کاربری چوب‌ساب — اطلاعات شخصی، سفارش‌های日前に، وضعیتPedido" />
+    <meta
+      name="description"
+      content="پروفایل کاربری چوب‌ساب — اطلاعات شخصی، سفارش‌های شما و وضعیت آن‌ها"
+    />
     <title>پروفایل من — چوب‌ساب</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
@@ -16,14 +19,29 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <!-- استایل اصلی سایت (هدر، سایدبار و سبد خرید) -->
     <link rel="stylesheet" href="style/style.css" />
+    <!-- استایل‌های حساب کاربری و پروفایل (مودال ورود + بخش پروفایل) -->
     <link rel="stylesheet" href="style/profile.css" />
+    <!-- استایل‌های فوتر مشترک (منبع واحد استایل فوتر در کل سایت) -->
     <link rel="stylesheet" href="style/footer.css" />
+    <!-- استایل‌های ریسپانسیو موبایل (مشترک در تمام صفحات) -->
+    <link rel="stylesheet" href="style/mobile.css" />
   </head>
   <body>
+    <!-- منوی کناری (سایدبار) دسته‌بندی‌ها -->
+    <aside class="sidebar-fixed" id="sidebar">
+      <div class="sidebar-toggle-btn" id="sidebarToggleBtn">
+        <i class="fas fa-bars"></i>
+      </div>
 
-    <!-- هدر ساده برای صفحه پروفایل -->
-    <header class="desktop-header">
+      <!-- منوی سایدبار که به صورت خودکار توسط جاوااسکریپت پر می‌شود -->
+      <ul class="sidebar-menu" id="sidebarMenu"></ul>
+    </aside>
+
+    <!-- هدر اصلی سایت (هماهنگ با تمام صفحات) -->
+    <header class="desktop-header" id="site-header">
+      <!-- بخش بالایی هدر -->
       <div class="header-top">
         <div class="logo">
           <a href="index.html">
@@ -35,13 +53,52 @@
             />
           </a>
         </div>
-        <nav class="header-nav">
-          <a href="index.html">صفحه اصلی</a>
-          <a href="cart.html">سبد خرید</a>
+
+        <!-- جستجو -->
+        <div class="search-wrapper">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="جستجوی محصولات..." />
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <div id="searchResultsPanel" class="search-results-panel"></div>
+        </div>
+
+        <!-- پشتیبانی و ارسال -->
+        <div class="top-left-actions">
+          <div class="support-info">
+            <i class="fas fa-headset icon-brown"></i>
+            <div class="info-text">
+              <span class="title">تماس با پشتیبانی</span>
+              <span class="number">۰۲۱-۱۲۳۴۵۶۷۸</span>
+            </div>
+          </div>
+
+          <div class="shipping-info">
+            <div class="icon-wrapper">
+              <i class="fas fa-truck icon-brown"></i>
+            </div>
+            <span class="title">ارسال به سراسر کشور</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- بخش پایینی هدر -->
+      <div class="header-bottom">
+        <button class="category-btn" id="categoryBtn">
+          <i class="fas fa-bars"></i> دسته‌بندی محصولات
+        </button>
+
+        <nav class="main-nav">
+          <a href="index.html">صفحه اصلی فروشگاه</a>
+          <a href="custom.html">محصولات سفارشی</a>
+          <a href="about.html">درباره ما</a>
+          <a href="contact.html">تماس با ما</a>
         </nav>
+
         <div class="user-actions">
-          <a href="index.html" class="action-icon back-icon" title="بازگشت به فروشگاه">
-            <i class="fas fa-arrow-left"></i>
+          <a href="#" class="action-icon cart-icon" id="cartIconLink">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">۰</span>
           </a>
         </div>
       </div>
@@ -49,14 +106,19 @@
 
     <!-- ============ صفحهٔ پروفایل کاربری ============ -->
     <main class="profile-page">
+      <!-- عنوان بالای صفحه -->
+      <div class="profile-page-title">
+        <h1><i class="fas fa-user-circle"></i> پروفایل کاربری</h1>
+        <p>اطلاعات حساب و سفارش‌های شما</p>
+      </div>
 
-      <!-- ─── پیام قفل‌شده (م示す نشانه می‌شود تا زمانی که لاگین نشده) ─── -->
+      <!-- ─── پیام قفل‌شده (نمایش داده می‌شود تا زمانی که لاگین نشده) ─── -->
       <section id="profileLocked" class="profile-locked" hidden>
         <div class="locked-card">
           <div class="locked-icon">
             <i class="fas fa-lock"></i>
           </div>
-          <h2>این صفحه فقط برای کاربران ثبت‌نام‌شده 접근‌پذیر است</h2>
+          <h2>این صفحه فقط برای کاربران ثبت‌نام‌شده قابل دسترسی است</h2>
           <p>برای دیدن اطلاعات و سفارش‌های خود، ابتدا وارد حساب شوید.</p>
           <button type="button" class="btn-u user-auth-btn" id="profileLoginBtn">
             <i class="fas fa-right-to-bracket"></i> ورود به حساب
@@ -66,7 +128,6 @@
 
       <!-- ─── قاب اصلی (فقط وقتی لاگین هست نشان داده می‌شود) ─── -->
       <section id="profilePageWrap" class="profile-wrap" hidden>
-
         <!-- سربرگ: نام، تلفن، تاریخ عضویت، دکمه خروج -->
         <div id="profileHead" class="profile-header"></div>
 
@@ -80,48 +141,80 @@
           </div>
         </div>
 
-        <!-- بخش اطلاعات containers برای مستندات آینده -->
+        <!-- بخش اطلاعات حساب -->
         <div class="profile-section" id="profileExtraSection">
           <h2 class="section-title">
             <i class="fas fa-circle-info"></i> اطلاعات حساب
           </h2>
           <div class="info-grid" id="profileInfoGrid"></div>
         </div>
-
       </section>
     </main>
 
-    <!-- فوتر -->
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <img
-            loading="lazy"
-            src="./assets/images/choobsab_logo_final.png"
-            alt="چوب‌ساب"
-            class="footer-logo"
-          />
-          <p>فروشگاه چوبی دست‌ساز چوب‌ساب دکور</p>
-        </div>
-        <div class="footer-links">
-          <a href="index.html">صفحه اصلی</a>
-          <a href="about.html">درباره ما</a>
-          <a href="contact.html">تماس با ما</a>
-        </div>
-        <p class="footer-copy">© ۱۴۰۳ چوب‌ساب — تمامی حقوق محفوظ است.</p>
-      </div>
-    </footer>
+    <!-- فوتر سایت (مشترک در تمام صفحات — محتوا توسط footer.js تزریق می‌شود) -->
+    <div id="siteFooterContainer"></div>
 
-    <!-- ===== اسکریپت‌های مشترک و計畫 کاربری ===== -->
-    <script src="script.js" defer></script>
-    <script src="cart-data.js" defer></script>
-    <script src="user-auth.js" defer></script>
-    <script src="mobile-nav.js" defer></script>
-    <script src="footer.js" defer></script>
+    <!-- دکمه بازگشت به بالا -->
+    <button id="scrollToTopBtn" class="scroll-to-top" title="بازگشت به بالا">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- پنل سبد خرید -->
+    <div id="cartDrawer" class="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3>سبد خرید</h3>
+        <button id="closeCartBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div id="cartItemsContainer" class="cart-items-container">
+        <!-- اقلام سبد خرید اینجا لود می‌شوند -->
+      </div>
+
+      <div class="cart-drawer-footer">
+        <div class="cart-total-section">
+          <span>جمع کل:</span>
+          <span id="cartDrawerTotalPrice">۰ تومان</span>
+        </div>
+        <div class="cart-drawer-buttons">
+          <button id="checkoutBtn" class="btn-primary">ثبت سفارش</button>
+          <button type="button" id="viewFullCartBtn" class="btn-secondary">
+            مشاهده کامل
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cartOverlay" class="cart-overlay"></div>
+
+    <!-- اسکریپت‌های مشترک سایت -->
+    <script src="products.js"></script>
+    <script src="cartManager.js"></script>
+    <!-- حساب کاربری (آیکون آدمک + مودال ورود با کد یک‌بارمصرف + مسدودسازی خرید بدون ورود) -->
+    <script src="user-auth.js"></script>
+    <script src="script.js"></script>
+    <!-- نوار ناوبری پایینی موبایل (مشترک در تمام صفحات) -->
+    <script src="mobile-nav.js"></script>
+    <!-- فوتر مشترک سایت -->
+    <script src="footer.js"></script>
     <script>
-      // پس ازِ بارگذاری user-auth.js، وقتی turun تصلیح شد،
-      // if صفحه پروفایل خاص بود، محتوا رنر می‌شد — اکنون
-      // onChange از user-auth خودکار فراخوانی می‌شود.
+      // اتصال دکمه «ورود به حساب» در حالت قفل صفحهٔ پروفایل به سرویس ورود.
+      // صفحه به‌صورت خودکار توسط user-auth.js قفل می‌شود؛ این دکمه
+      // مودال ورود را باز می‌کند.
+      (function () {
+        function wireProfileLoginBtn() {
+          var btn = document.getElementById("profileLoginBtn");
+          if (!btn) return;
+          if (!window.UserAuth || typeof window.UserAuth.openLogin !== "function") {
+            setTimeout(wireProfileLoginBtn, 200);
+            return;
+          }
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.UserAuth.openLogin();
+          });
+        }
+        wireProfileLoginBtn();
+      })();
     </script>
   </body>
 </html>

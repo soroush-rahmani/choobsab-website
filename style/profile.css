@@ -666,11 +666,58 @@ body.ua-lock-scroll {
   }
 }
 /* ============================================================
-   ?????? ???? ??????? ????? (profile.html)
+   استایل‌های صفحهٔ پروفایل مستقل (profile.html)
    ============================================================ */
 
 /* -------------------------------------------------------
-   ???? ?????? (????? ???? ????)
+   قاب اصلی صفحه (حتماً هم‌بندی با .profile-wrap و .profile-locked)
+   ------------------------------------------------------- */
+.profile-page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+  box-sizing: border-box;
+}
+
+/* عنوان بالای صفحه */
+.profile-page-title {
+  max-width: 1000px;
+  margin: 0 auto 24px;
+  padding: 18px 22px;
+  background: linear-gradient(90deg, var(--ua-brown-soft), #fff);
+  border: 1px solid var(--ua-border);
+  border-radius: var(--ua-radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(80, 50, 35, 0.05);
+}
+
+.profile-page-title h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ua-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-page-title h1 i {
+  color: var(--ua-brown);
+  font-size: 22px;
+}
+
+.profile-page-title p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ua-muted);
+}
+
+/* -------------------------------------------------------
+   حالت قفل‌شده (صفحه فقط برای کاربران واردشده)
    ------------------------------------------------------- */
 .profile-locked {
   min-height: calc(100vh - 80px);
@@ -719,7 +766,7 @@ body.ua-lock-scroll {
 }
 
 /* -------------------------------------------------------
-   ??? ???? ???????
+   قاب اصلی محتوای پروفایل
    ------------------------------------------------------- */
 .profile-wrap {
   max-width: 1000px;
@@ -727,7 +774,7 @@ body.ua-lock-scroll {
   padding: 32px 20px 60px;
 }
 
-/* ????? ???????: ?????? + ??? + ???? + ???? */
+/* سربرگ پروفایل: آواتار + نام + تلفن + تاریخ عضویت + خروج */
 .profile-header {
   display: flex;
   align-items: center;
@@ -804,7 +851,7 @@ body.ua-lock-scroll {
 }
 
 /* -------------------------------------------------------
-   ?????? ????? ???????
+   بخش‌های محتوای پروفایل
    ------------------------------------------------------- */
 .profile-section {
   margin-bottom: 32px;
@@ -825,7 +872,7 @@ body.ua-lock-scroll {
 }
 
 /* -------------------------------------------------------
-   ???? ???????
+   لیست سفارش‌ها
    ------------------------------------------------------- */
 .orders-list {
   display: flex;
@@ -929,7 +976,7 @@ body.ua-lock-scroll {
 }
 
 /* -------------------------------------------------------
-   Information grid (??????? ?????)
+   شبکهٔ اطلاعات حساب کاربری
    ------------------------------------------------------- */
 .info-grid {
   display: grid;
@@ -964,7 +1011,7 @@ body.ua-lock-scroll {
 }
 
 /* -------------------------------------------------------
-   ????? ???? ???? (?? ???? ??????)
+   دکمهٔ ورود داخل کارت قفل‌شده
    ------------------------------------------------------- */
 .btn-u.user-auth-btn {
   display: inline-flex;
@@ -987,7 +1034,7 @@ body.ua-lock-scroll {
 }
 
 /* -------------------------------------------------------
-   ????????? ??????
+   ریسپانسیو موبایل
    ------------------------------------------------------- */
 @media (max-width: 767px) {
   .profile-wrap {
