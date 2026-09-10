@@ -1,0 +1,1093 @@
+:root {
+  --bg-white: #ffffff;
+  --bg-darker: #f7f4f0; /* پس زمینه کمی تیره‌تر برای هدر پایین */
+  --wood-brown: #af6c54; /* رنگ قهوه‌ای اصلی */
+  --wood-brown-light: #a67c52;
+  --text-color: #333333;
+}
+
+body {
+  font-family: "Vazirmatn", sans-serif;
+  direction: rtl;
+  text-align: right;
+  background-color: var(--bg-darker);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+
+  /* ویژگی‌های حیاتی برای بهینه‌سازی نمایش فونت و جلوگیری از پرش صفحه */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+button,
+.product-title,
+.filter-title {
+  font-family:
+    "Vazirmatn", sans-serif; /* یا 'Lalezar' اگر خواستید تیترها سنتی‌تر باشند */
+  font-weight: 700; /* استفاده از وزن ضخیم‌تر برای تیترها */
+}
+
+/* فقط برای دسکتاپ اعمال شود */
+@media (min-width: 1024px) {
+  /* ---------------- هدر ---------------- */
+  .desktop-header {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  /* هدر بالا */
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: var(--bg-white);
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--wood-brown);
+    display: flex;
+    align-items: center;
+    /* width: 50px; */
+  }
+
+  .logo-image {
+    /* max-height: 60px;   */
+    width: 250px;
+    object-fit: contain;
+    display: block;
+    mix-blend-mode: multiply;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    width: 700px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .search-box input {
+    flex: 1;
+    border: none;
+    padding: 10px 15px;
+    outline: none;
+    font-family: inherit;
+  }
+
+  .search-btn {
+    background-color: var(--wood-brown);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+  }
+
+  .top-left-actions {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .support-info,
+  .shipping-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .icon-brown {
+    color: var(--wood-brown);
+    font-size: 24px;
+  }
+
+  .info-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+  }
+
+  .info-text .number {
+    font-weight: bold;
+    color: var(--wood-brown);
+  }
+
+  .icon-wrapper {
+    position: relative;
+  }
+
+  .badge-free {
+    position: absolute;
+    top: -8px;
+    right: -15px;
+    background-color: #e74c3c;
+    color: white;
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 10px;
+    font-weight: bold;
+  }
+
+  /* هدر پایین */
+  /* به‌روزرسانی استایل بخش پایینی هدر */
+  /* استایل پایه هدر پایینی (بدون تغییرات قبلی) */
+  .header-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    background-color: var(--bg-darker);
+    /* دقت کن که transition رو اینجا میذاریم تا حرکتش نرم باشه */
+    /* transform برای انیمیشن نرم ورود/خروج nav-hidden اضافه شد */
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  /* کلاسی که با جاوااسکریپت اضافه میشه تا هدر رو در کل صفحه ثابت نگه داره */
+  .header-bottom.fixed-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* به جای width هاردکد 88.6%، از right استفاده می‌کنیم تا دقیقاً
+       هم‌عرض ناحیه محتوا (کنار سایدبار ۷۰ پیکسلی) قرار بگیره
+       و پرش افقی هنگام fixed شدن حذف بشه */
+    right: 70px;
+    width: auto;
+    z-index: 990;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  /* جای‌نگهدار هدر: وقتی هدر fixed میشه، این المان ارتفاعش رو پر می‌کنه
+     تا محتوای زیرین نپره (پرش عمودی حذف میشه) */
+  .header-spacer {
+    height: 0;
+    width: 100%;
+  }
+
+  /* کلاسی که هدر ثابت رو مخفی میکنه */
+  .header-bottom.fixed-nav.nav-hidden {
+    transform: translateY(-100%);
+  }
+
+  .category-btn {
+    background-color: var(--wood-brown);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 35px; /* فاصله بین المان‌ها */
+  }
+
+  .main-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .main-nav a:hover {
+    color: var(--wood-brown);
+    scale: 1.05;
+    transition: 0.5s;
+  }
+
+  .user-actions {
+    display: flex;
+    gap: 15px;
+  }
+
+  .action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-white);
+    color: var(--wood-brown);
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--wood-brown);
+    color: white;
+    font-size: 11px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  /* ---------------- سایدبار دسته‌بندی ---------------- */
+  /* ---------------- سایدبار ثابت عمودی سمت راست ---------------- */
+  .sidebar-fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70px; /* عرض سایدبار در حالت بسته (فقط آیکون) */
+    height: 100vh;
+    background-color: var(--bg-white);
+    border-left: 1px solid #e0e0e0;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
+    z-index: 999;
+    overflow: visible;
+    /* انیمیشن نرم برای تغییر عرض */
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ۱. حالت هاور: با رفتن موس روی سایدبار باز می‌شود */
+  /* ۲. حالت کلیک: با اضافه شدن کلاس open باز می‌ماند */
+  .sidebar-fixed:hover,
+  .sidebar-fixed.open {
+    width: 250px; /* عرض سایدبار در حالت باز */
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .sidebar-toggle-btn {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--wood-brown);
+    font-size: 20px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    height: 55px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+    white-space: nowrap; /* جلوگیری از شکستن متن هنگام باز شدن */
+    overflow: hidden;
+  }
+
+  .sidebar-menu li a:hover {
+    background-color: var(--bg-darker);
+    color: var(--wood-brown);
+  }
+  /* تنظیم موقعیت والد برای زیردسته‌ها */
+  .sidebar-menu li {
+    position: relative;
+  }
+
+  /* فلش کوچکی که نشان‌دهنده وجود زیردسته‌هاست */
+  .submenu-arrow {
+    margin-right: auto;
+    margin-left: 15px;
+    font-size: 11px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    color: #888;
+  }
+
+  .sidebar-fixed:hover .submenu-arrow,
+  .sidebar-fixed.open .submenu-arrow {
+    opacity: 1;
+  }
+
+  /* --- استایل منوی کشویی دوم (Submenu) --- */
+  .submenu {
+    position: absolute;
+    top: 0;
+    right: 100%; /* دقیقاً به سمت چپ سایدبار باز می‌شود */
+    width: 220px;
+    background-color: var(--bg-white);
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 0 0 0 8px;
+    border-right: 2px solid var(--wood-brown);
+
+    /* تنظیمات انیمیشن ظاهر شدن کشویی */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none; /* جلوگیری از تداخل کلیک در حالت مخفی */
+  }
+
+  /* آیتم‌های داخل کشوی دوم */
+  .submenu li a {
+    height: 42px;
+    padding: 0 20px;
+    font-size: 13px;
+    color: #555;
+  }
+
+  .submenu li a:hover {
+    background-color: var(--bg-darker);
+    color: var(--wood-brown);
+  }
+
+  /* --- نمایش کشو با هاور روی هر دسته‌بندی --- */
+  /* نکته: کشو فقط زمانی باز می‌شود که خود سایدبار باز شده باشد */
+  .sidebar-fixed:hover .has-submenu:hover > .submenu,
+  .sidebar-fixed.open .has-submenu:hover > .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  /* استایل آیکون‌ها (همیشه ثابت و وسط در حالت بسته) */
+  .menu-icon {
+    min-width: 70px; /* دقیقا هم‌عرض سایدبار در حالت بسته */
+    text-align: center;
+    font-size: 18px;
+    color: var(--wood-brown);
+  }
+
+  /* استایل متن‌ها (محو و ظاهر شدن نرم) */
+  .menu-text {
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .sidebar-fixed:hover .menu-text,
+  .sidebar-fixed.open .menu-text {
+    opacity: 1; /* متن‌ها موقع باز شدن ظاهر می‌شوند */
+  }
+
+  /* تنظیم مارجین هدر و بدنه سایت برای اینکه زیر سایدبار نروند */
+  @media (min-width: 1024px) {
+    body {
+      padding-right: 70px; /* فاصله از راست به اندازه عرض سایدبار بسته */
+    }
+  }
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-color);
+  }
+
+  .category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .category-list li {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .category-list a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: background 0.3s;
+  }
+
+  .category-list a:hover {
+    background-color: var(--bg-darker);
+    color: var(--wood-brown);
+  }
+
+  /* =================== فوتر سایت =================== */
+  /* استایل‌های فوتر به style/footer.css منتقل شدند (منبع واحد فوتر).
+     محتوای فوتر توسط footer.js در تمام صفحات تزریق می‌شود. */
+  /* =================== دکمه بازگشت به بالا =================== */
+  .scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; /* قرارگیری در گوشه سمت چپ */
+    width: 45px;
+    height: 45px;
+    background-color: var(--wood-brown);
+    color: white;
+    border: none;
+    border-radius: 50%; /* ظاهر کاملا دایره‌ای */
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* قرارگیری روی همه المان‌ها */
+
+    /* تنظیمات مخفی بودن پیش‌فرض و انیمیشن ظاهر شدن */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+  }
+
+  /* کلاسی که با جاوااسکریپت اضافه می‌شود تا دکمه را نشان دهد */
+  .scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .scroll-to-top:hover {
+    background-color: #7b1113; /* رنگ زرشکی تیره برای هاور */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+  /* =================== استایل‌های بخش Main =================== */
+  .shop-main-container {
+    display: flex;
+    gap: 30px;
+    padding: 40px 50px;
+    background-color: var(--bg-darker);
+    min-height: 80vh;
+  }
+
+  /* سایدبار فیلترها */
+  .filters-sidebar {
+    width: 260px;
+    background: var(--bg-white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    height: fit-content;
+  }
+
+  .filter-title {
+    font-size: 16px;
+    color: var(--wood-brown);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .filter-group {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+  }
+
+  .filter-group label {
+    font-size: 13px;
+    color: #555;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .filter-group input[type="range"] {
+    width: 100%;
+    accent-color: var(--wood-brown);
+  }
+
+  /* منوهای کشویی فیلتر */
+  .filter-dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    padding: 5px 0;
+  }
+
+  .filter-dropdown-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: none; /* در حالت عادی مخفی */
+  }
+
+  .filter-dropdown-list.show {
+    display: block;
+  }
+
+  .filter-dropdown-list li {
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #666;
+  }
+
+  .filter-dropdown-list input {
+    margin-left: 8px;
+    accent-color: var(--wood-brown);
+  }
+
+  /* بخش محتوای فروشگاه */
+  .shop-content {
+    flex: 1;
+  }
+
+  .sorting-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-white);
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    font-size: 13px;
+    color: #555;
+  }
+
+  .sort-select {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    font-family: inherit;
+    cursor: pointer;
+    color: #333;
+  }
+
+  /* گرید محصولات (۴ تایی در هر ردیف با احتساب گپ) */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  /* =================== کارت محصول =================== */
+  .product-card {
+    background: var(--bg-white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  /* بخش عکس و افکت هاور عکس دوم */
+  .product-image-container {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+    height: 60%;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.6s ease;
+  }
+
+  /* عکس دوم که در حالت عادی مخفی است */
+  .product-image-container img.secondary-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+
+  /* با هاور روی کانتینر عکس، عکس دوم ظاهر و عکس اول محو می‌شود */
+  .product-image-container:hover img.primary-img {
+    opacity: 0;
+  }
+
+  .product-image-container:hover img.secondary-img {
+    opacity: 1;
+  }
+
+  /* اطلاعات متنی کارت */
+  .product-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: center;
+  }
+
+  .product-title {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+    height: 40px; /* حداکثر دو خط */
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-bottom: 10px;
+  }
+
+  .product-price {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--wood-brown);
+    margin-bottom: 15px;
+  }
+
+  /* دکمه افزودن به سبد خرید (۷۵ درصد عرض کارت) */
+  .add-to-cart-btn {
+    width: 75%;
+    margin: 0 auto;
+    background-color: var(--wood-brown);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 0;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    overflow: hidden; /* برای اینکه متن موقع جمع شدن بیرون نزند */
+  }
+  .add-to-cart-btn span {
+    opacity: 1;
+    max-width: 150px;
+    transition: all 0.4s ease;
+    white-space: nowrap;
+    display: inline-block;
+  }
+  .add-to-cart-btn:hover span {
+    opacity: 0;
+    max-width: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* آیکون سبد خرید در حالت عادی مخفی یا با هاور ظاهر می‌شود */
+  .add-to-cart-btn i {
+    opacity: 0;
+    width: 0;
+    transition: all 0.3s ease;
+  }
+
+  .add-to-cart-btn:hover {
+    background-color: #7b1113; /* رنگ زرشکی تیره‌تر */
+  }
+
+  .add-to-cart-btn:hover i {
+    opacity: 1;
+    width: auto;
+  }
+
+  .add-to-cart-btn.is-success span {
+    opacity: 1 !important;
+    max-width: 150px !important;
+    margin: auto !important;
+    padding: 0 !important;
+  }
+  /* لودینگ پایین صفحه */
+  .loading-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 30px;
+    color: #777;
+    font-size: 13px;
+    /* مخفی در حالت عادی (همچنان در DOM و قابل observe) */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* فقط در حالت لودینگ فعال می‌شود */
+  .loading-indicator.loading {
+    opacity: 1;
+  }
+
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-top-color: var(--wood-brown);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* استایل پیام پایان لیست محصولات */
+  .end-of-products-msg {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: #7f8c8d;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .dual-range-container {
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* پنهان کردن ظاهر پیش‌فرض نوار و روی هم انداختن آن‌ها */
+  .dual-range-container input[type="range"] {
+    position: absolute;
+    width: 100%;
+    height: 6px; /* ارتفاع باریک نوار */
+    background: #e0e0e0; /* نوار خاکستری اصلی */
+    border-radius: 3px;
+    pointer-events: none; /* رد شدن کلیک‌ها برای دسترسی به دستگیره */
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+  }
+
+  /* رنگ نوار زیرین یا تنظیمات اختصاصی دستگیره‌ها */
+  .dual-range-container input[type="range"]::-webkit-slider-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #5c2c16;
+    pointer-events: auto; /* اجازه کشیدن به دستگیره */
+    -webkit-appearance: none;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .dual-range-container input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+  }
+
+  /* برای مرورگر فایرفاکس */
+  .dual-range-container input[type="range"]::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #5c2c16;
+    pointer-events: auto;
+    cursor: pointer;
+    border: none;
+  }
+
+  /* #minPriceRange {
+    z-index: 25555;
+  } */
+
+  #maxPriceRange {
+    background: transparent !important;
+  }
+
+  #maxPriceRange::-webkit-slider-thumb {
+    background: #5c2c16;
+  }
+  #maxPriceRange::-moz-range-thumb {
+    background: #5c2c16;
+  }
+  /* پس‌زمینه نامرئی برای بستن با کلیک بیرون */
+  .cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 999;
+  }
+  .cart-overlay.active {
+    display: block;
+  }
+
+  /* پنل آبشاری سبد خرید زیر هدر */
+  .cart-drawer {
+    position: fixed; /* یا absolute بسته به ساختار هدر */
+    top: 70px; /* فاصله از بالای صفحه، پایین هدر */
+    left: 20px; /* یا right بر اساس جایگاه ایکون در هدر */
+    width: 340px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid #eee;
+    z-index: 1000;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
+    transition: all 0.4s ease;
+  }
+  .cart-drawer.active {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  /* هدر پنل */
+  .cart-drawer-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cart-drawer-header h3 {
+    font-size: 1rem;
+    color: #2c3e50;
+    margin: 0;
+  }
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #7f8c8d;
+  }
+
+  /* کانتینر اقلام */
+  .cart-items-container {
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 15px 20px;
+  }
+
+  /* کارت هر محصول داخل پنل */
+  .cart-item-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f8f9fa;
+  }
+  .cart-item-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #f9f9f9;
+  }
+  .cart-item-details {
+    flex: 1;
+  }
+  .cart-item-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 3px;
+  }
+  .cart-item-price {
+    font-size: 0.8rem;
+    color: #e67e22;
+    margin-bottom: 6px;
+  }
+  .cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .qty-btn {
+    background: #f1f2f6;
+    border: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+  .qty-display {
+    font-size: 0.85rem;
+    min-width: 18px;
+    text-align: center;
+  }
+  .trash-btn {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: auto;
+  }
+
+  /* فوتر پنل */
+  .cart-drawer-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #f1f1f1;
+    background: #faf8f5;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+  .cart-total-section {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 12px;
+  }
+  .cart-drawer-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  .cart-drawer-buttons button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  .btn-primary {
+    background: #2c3e50;
+    color: white;
+    border: none;
+  }
+  .btn-secondary {
+    background: transparent;
+    color: #2c3e50;
+    border: 1px solid #2c3e50;
+  }
+}
+
+/* =================== جستجوی پیشنهادی (پنل کشویی نتایج جستجو) =================== */
+.search-wrapper {
+  position: relative;
+}
+
+.search-results-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  left:0;
+  width:100%;
+  z-index:1300;
+  background-color:#ffffff;
+  border:1px solid #e0e0e0;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  display: none;
+}
+
+.search-results-panel.show {
+  display: block;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap:12px;
+  padding:10px 14px;
+  text-decoration: none;
+	  color:var(--text-color);
+	  border-bottom:1px solid #f1f1f1;
+	  transition: background-color 0.2s ease;
+}
+
+.search-result-item:hover {
+	  background-color: #fdf8f3;
+}
+
+.search-result-item img {
+	  width:46px;
+	  height:46px;
+	  object-fit: cover;
+	  border-radius:8px;
+	  flex-shrink:0;
+}
+
+.search-result-info {
+	  display: flex;
+	  flex-direction: column;
+	  gap:2px;
+}
+
+.search-result-name {
+	  font-size:13px;
+	  font-weight:600;
+	  color: #333;
+	  line-height:1.6;
+}
+
+.search-result-price {
+	  font-size:12px;
+	  color:var(--wood-brown);
+	  font-weight:700;
+}
+
+.search-no-results {
+	  padding:20px;
+	  text-align:center;
+	  color: #888;
+	  font-size:13px;
+}
+
+.search-view-all {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  gap:8px;
+	  padding:12px;
+	  background-color: #fdfaf7;
+	  color:var(--wood-brown);
+	  text-decoration: none;
+	  font-size:13px;
+	  font-weight:700;
+	  transition: background-color 0.2s;
+}
+
+.search-view-all:hover {
+	  background-color: #f7f1ea;
+}
+
+/* لینک کارت محصول به صفحه جزئیات (product.html) */
+.product-card-link {
+  display: contents;
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-card-link:hover .product-title {
+  color: #8b5a2b;
+}

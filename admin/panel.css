@@ -1,0 +1,232 @@
+/* ─── پنل مدیریت چوب‌ساب — استایل موبایل ─── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+  background: #eae2d9; color: #3e2723; min-height: 100vh;
+}
+
+/* همه‌چیز در عرض گوشی — مرکز صفحه */
+.topbar, .tabs, .content { max-width: 480px; margin: 0 auto; width: 100%; }
+
+/* نوار بالا */
+.topbar {
+  background: linear-gradient(135deg, #4e342e, #3e2723);
+  color: #fff; padding: 12px 16px;
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  position: sticky; top: 0; z-index: 50;
+}
+.brand { font-size: 16px; font-weight: 800; white-space: nowrap; }
+.divider, .panel-title { display: none; }
+.topbar-left { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.admin-name { font-size: 12px; opacity: .9; width: 100%; text-align: left; }
+
+/* دکمه‌ها — بزرگ برای لمس */
+.btn {
+  border: none; border-radius: 10px; padding: 10px 14px; min-height: 42px;
+  font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity .2s;
+}
+.btn-primary { background: #6d4c41; color: #fff; }
+.btn-ghost { background: rgba(255,255,255,.15); color: #fff; }
+.btn-danger { background: #b71c1c; color: #fff; }
+.btn:active { opacity: .75; }
+.btn.full { width: 100%; margin-top: 18px; padding: 14px; font-size: 15px; }
+
+/* تب‌ها — مثل نوار پایین اپلیکیشن موبایل */
+.tabs {
+  background: #fff; display: flex; box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  position: sticky; top: 60px; z-index: 40;
+}
+.tab {
+  flex: 1; border: none; background: none; padding: 14px 4px;
+  font-family: inherit; font-size: 12.5px; font-weight: 700; color: #a1887f;
+  cursor: pointer; border-bottom: 3px solid transparent; transition: all .2s;
+}
+.tab.active { color: #4e342e; border-bottom-color: #6d4c41; background: #faf6f2; }
+
+.content { padding: 14px 12px 90px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* کارت‌های آمار — دو ستونه در موبایل */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stat-card {
+  background: #fff; border-radius: 14px; padding: 18px 12px; text-align: center;
+  box-shadow: 0 3px 10px rgba(62,39,35,.08); border-top: 4px solid #8d6e63;
+}
+.stat-card.warn { border-top-color: #f9a825; }
+.stat-card.success { border-top-color: #2e7d32; }
+.stat-icon { font-size: 26px; }
+.stat-num { font-size: 22px; font-weight: 800; margin: 6px 0 2px; }
+.stat-label { font-size: 11.5px; color: #8d6e63; }
+.security-note {
+  margin-top: 16px; background: #fff8e1; border: 1px solid #ffe082; border-radius: 12px;
+  padding: 14px 16px; font-size: 13px; line-height: 1.9;
+}
+.security-note code { background: #ffe082; padding: 2px 8px; border-radius: 6px; font-size: 12px; }
+
+/* فیلتر */
+.toolbar { display: flex; gap: 8px; margin-bottom: 12px; }
+.toolbar select {
+  flex: 1; padding: 12px; min-height: 44px; border: 2px solid #d7ccc8; border-radius: 12px;
+  font-family: inherit; font-size: 14px; background: #fff; color: #4e342e; cursor: pointer;
+}
+.toolbar .btn-ghost { background: #6d4c41; }
+
+/* کارت سفارش — جایگزین جدول در موبایل */
+.card {
+  background: #fff; border-radius: 14px; padding: 14px; margin-bottom: 12px;
+  box-shadow: 0 3px 10px rgba(62,39,35,.08);
+}
+.card-head {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+  padding-bottom: 10px; border-bottom: 1px dashed #e0d5cd;
+}
+.card-code { font-weight: 800; font-size: 15px; color: #4e342e; }
+.card-row {
+  display: flex; justify-content: space-between; gap: 8px;
+  font-size: 13px; padding: 4px 0; color: #5d4037; flex-wrap: wrap;
+}
+.card-actions { display: flex; gap: 8px; margin-top: 12px; }
+.card-actions select {
+  flex: 1; padding: 10px; min-height: 42px; border: 2px solid #d7ccc8; border-radius: 10px;
+  font-family: inherit; font-size: 13px; background: #fafafa; color: #4e342e; cursor: pointer;
+}
+.card-actions .detail-btn {
+  border: none; background: #efebe9; border-radius: 10px; padding: 10px 16px; min-height: 42px;
+  font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer; color: #5d4037;
+}
+.card-actions .detail-btn:active { background: #d7ccc8; }
+.empty { text-align: center; color: #a1887f; padding: 40px 16px; font-size: 14px; }
+
+/* نشان وضعیت */
+.status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11.5px; font-weight: 700; }
+.st-pending, .st-new { background: #fff8e1; color: #f57f17; }
+.st-confirmed { background: #e3f2fd; color: #1565c0; }
+.st-shipped, .st-in-progress { background: #ede7f6; color: #4527a0; }
+.st-delivered, .st-done { background: #e8f5e9; color: #2e7d32; }
+.st-cancelled { background: #ffebee; color: #c62828; }
+
+/* مودال — تمام‌صفحه در موبایل */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(40,26,20,.65);
+  z-index: 100; align-items: flex-end; justify-content: center;
+}
+.modal-overlay.show { display: flex; }
+.modal {
+  background: #fff; border-radius: 20px 20px 0 0; width: 100%; max-width: 480px;
+  max-height: 88vh; display: flex; flex-direction: column; animation: slideup .22s ease;
+}
+@keyframes slideup { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; border-bottom: 1px solid #efebe9;
+}
+.modal-header h3 { font-size: 15px; }
+.modal-close {
+  border: none; background: #efebe9; width: 36px; height: 36px; border-radius: 50%;
+  font-size: 15px; cursor: pointer; color: #5d4037;
+}
+.modal-body { padding: 18px 20px 30px; overflow-y: auto; }
+.detail-row { display: flex; padding: 9px 0; border-bottom: 1px dashed #efebe7; font-size: 13.5px; }
+.detail-row:last-child { border-bottom: none; }
+.detail-row .k { width: 105px; min-width: 105px; color: #8d6e63; font-weight: 700; }
+.detail-row .v { flex: 1; word-break: break-word; }
+.section-title { font-size: 14px; margin: 16px 0 4px; color: #4e342e; }
+.modal-body img.preview {
+  max-width: 100%; border-radius: 12px; margin-top: 12px; border: 1px solid #e0d5cd;
+}
+.modal-body label { display: block; font-size: 13px; font-weight: 700; color: #5d4037; margin: 14px 0 6px; }
+.modal-body input {
+  width: 100%; padding: 13px; min-height: 46px; border: 2px solid #d7ccc8; border-radius: 12px;
+  font-family: inherit; font-size: 15px; background: #fafafa;
+}
+.modal-body input:focus { outline: none; border-color: #8d6e63; }
+.form-error { color: #c62828; font-size: 13px; margin-top: 12px; min-height: 18px; }
+
+/* ─── کد رهگیری پست ─── */
+.post-tracking-box { margin-top: 18px; padding: 14px; background: #faf8f5; border: 1px solid #e0d5cd; border-radius: 12px; }
+.post-tracking-label { display: block; font-size: 13px; font-weight: 700; color: #5d4037; margin-bottom: 8px; }
+.post-tracking-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.post-tracking-input { flex: 1; min-width: 160px; padding: 10px 12px; border: 2px solid #d7ccc8; border-radius: 10px; font-family: inherit; font-size: 14px; direction: ltr; text-align: left; }
+.post-tracking-input:focus { outline: none; border-color: #af6c54; }
+.btn-save-tracking { background: #27ae60; color: #fff; border: none; border-radius: 10px; padding: 10px 16px; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.btn-save-tracking:hover { background: #219653; }
+.tracking-saved { display: block; margin-top: 8px; font-size: 12px; color: #27ae60; font-weight: 600; }
+
+/* ─── دکمه چاپ فاکتور ─── */
+.btn-print-receipt { width: 100%; margin-top: 16px; padding: 12px; background: #af6c54; color: #fff; border: none; border-radius: 10px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-print-receipt:hover { background: #8b5a2b; }
+
+/* ─── وضعیت پرداخت ─── */
+.payment-badge { display: inline-block; padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; margin: 12px 0 4px; }
+.payment-badge.paid { background: #e8f5e9; color: #27ae60; border: 1px solid #a5d6a7; }
+.payment-badge.pending { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+.payment-ref { font-size: 12px; color: #8d6e63; margin-top: 4px; direction: ltr; text-align: left; }
+
+/* مودال‌های بلند فرم و کوچک دسته‌بندی */
+.modal-tall { max-height: 94vh; }
+.modal-small { max-height: 88vh; }
+.modal-body select,
+.modal-body textarea {
+  width: 100%; padding: 12px 14px; border: 2px solid #d7ccc8; border-radius: 12px;
+  font-family: inherit; font-size: 14px; background: #fafafa; color: #4e342e;
+}
+.modal-body select:focus,
+.modal-body textarea:focus { outline: none; border-color: #8d6e63; background: #fff; }
+
+/* فرم دو ستونه در دسکتاپ */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.check-row { display: flex !important; align-items: center; gap: 8px; flex-direction: row !important; }
+.check-row input { width: auto; min-height: 0; accent-color: #6d4c41; }
+.hint { font-size: 11.5px; color: #a1887f; margin-top: 6px; line-height: 1.7; }
+
+/* تصاویر محصول در فرم */
+.thumb-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.thumb-item { position: relative; width: 72px; height: 72px; border-radius: 10px; overflow: hidden; border: 2px solid #d7ccc8; background: #fff; }
+.thumb-item img { width: 100%; height: 100%; object-fit: cover; }
+.thumb-remove {
+  position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border: none;
+  border-radius: 50%; background: rgba(198,40,40,.9); color: #fff; font-size: 11px;
+  line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.thumb-btn-add {
+  width: 72px; height: 72px; border: 2px dashed #d7ccc8; border-radius: 10px; background: none;
+  font-size: 22px; color: #8d6e63; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+
+/* کارت محصول در پنل */
+.product-card .card-head { align-items: center; }
+.p-row { display: flex; gap: 12px; align-items: flex-start; margin: 10px 0; }
+.p-thumb { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; border: 1px solid #e0d5cd; flex-shrink: 0; }
+.p-thumb-empty { display: flex; align-items: center; justify-content: center; background: #f5efe9; font-size: 26px; }
+.p-info { flex: 1; font-size: 12.5px; color: #5d4037; display: flex; flex-direction: column; gap: 4px; }
+.p-info .k { color: #8d6e63; font-weight: 700; }
+.p-slug { direction: ltr; text-align: left; font-size: 11px; color: #a1887f; font-family: Consolas, monospace; }
+.delete-product { background: #ffebee !important; color: #c62828 !important; }
+
+/* لیست دسته‌بندی‌ها */
+.cat-list { margin-bottom: 14px; }
+.cat-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  padding: 10px 4px; border-bottom: 1px dashed #efebe7; font-size: 13.5px;
+}
+.cat-row em { color: #a1887f; font-size: 12px; font-style: normal; }
+.btn-del-cat {
+  border: none; background: #ffebee; color: #c62828; width: 36px; height: 36px;
+  border-radius: 10px; cursor: pointer; font-size: 15px; flex-shrink: 0;
+}
+.cat-add { border-top: 2px dashed #e0d5cd; padding-top: 14px; }
+.cat-add .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.btn-del-cat:active { background: #f8d7d7; }
+
+/* توست */
+.toast {
+  position: fixed; bottom: 24px; right: 50%; transform: translateX(50%) translateY(80px);
+  background: #2e7d32; color: #fff; padding: 13px 24px; border-radius: 14px;
+  font-size: 13.5px; font-weight: 700; opacity: 0; transition: all .3s; z-index: 200;
+  pointer-events: none; max-width: 90vw; text-align: center;
+}
+.toast.show { opacity: 1; transform: translateX(50%) translateY(0); }
+.toast.error { background: #c62828; }

@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>چوب‌ساب | سفارش محصول سفارشی</title>
+    <meta
+      name="description"
+      content="سفارش ساخت محصولات چوبی سفارشی در چوبساب دکور — ایده خود را بفرستید تا هنرمندان ما آن را بسازند."
+    />
+    <!-- فونت و آیکون‌ها -->
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- استایل اصلی سایت (هدر، سایدبار و سبد خرید) -->
+    <link rel="stylesheet" href="style/style.css" />
+    <!-- استایل صفحه سفارش و فوتر مشترک -->
+    <link rel="stylesheet" href="style/custom.css" />
+    <link rel="stylesheet" href="style/footer.css" />
+    <!-- استایل‌های ریسپانسیو موبایل (مشترک در تمام صفحات) -->
+    <link rel="stylesheet" href="style/mobile.css" />
+    <!-- استایل‌های حساب کاربری و پروفایل (مودال ورود + بخش پروفایل) -->
+    <link rel="stylesheet" href="style/profile.css" />
+  </head>
+  <body>
+    <!-- منوی کناری (سایدبار) دسته‌بندی‌ها -->
+    <aside class="sidebar-fixed" id="sidebar">
+      <div class="sidebar-toggle-btn" id="sidebarToggleBtn">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <ul class="sidebar-menu" id="sidebarMenu"></ul>
+    </aside>
+
+    <!-- هدر اصلی سایت -->
+    <header class="desktop-header" id="site-header">
+      <div class="header-top">
+        <div class="logo">
+          <img
+            loading="lazy"
+            src="./assets/images/choobsab_logo_final.png"
+            alt=""
+            class="logo-image"
+          />
+        </div>
+
+        <div class="search-wrapper">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="جستجوی محصولات..." />
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <div id="searchResultsPanel" class="search-results-panel"></div>
+        </div>
+
+        <div class="top-left-actions">
+          <div class="support-info">
+            <i class="fas fa-headset icon-brown"></i>
+            <div class="info-text">
+              <span class="title">تماس با پشتیبانی</span>
+              <span class="number">۰۲۱-۱۲۳۴۵۶۷۸</span>
+            </div>
+          </div>
+
+          <div class="shipping-info">
+            <div class="icon-wrapper">
+              <i class="fas fa-truck icon-brown"></i>
+            </div>
+            <span class="title">ارسال به سراسر کشور</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-bottom">
+        <button class="category-btn" id="categoryBtn">
+          <i class="fas fa-bars"></i> دسته‌بندی محصولات
+        </button>
+
+        <nav class="main-nav">
+          <a href="index.html">صفحه اصلی فروشگاه</a>
+          <a href="custom.html">محصولات سفارشی</a>
+          <a href="about.html">درباره ما</a>
+          <a href="contact.html">تماس با ما</a>
+        </nav>
+
+        <div class="user-actions">
+          <a href="#" class="action-icon cart-icon" id="cartIconLink">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">۰</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="custom-page-main">
+      <div class="custom-container">
+        <!-- ستون راست: فرم سفارش -->
+        <div class="custom-form-column">
+          <div class="form-card">
+            <div class="form-card-header">
+              <h2><i class="fas fa-pen-ruler"></i> فرم سفارش ساخت محصول</h2>
+              <p>
+                ایده‌ات را برای ما بفرست؛ هنرمندان چوبساب دکور آن را با دست، از چوب
+                می‌سازند.
+              </p>
+            </div>
+
+            <form id="customOrderForm" novalidate>
+              <div class="form-grid">
+                <!-- نام و نام خانوادگی -->
+                <div class="form-group">
+                  <label for="fullName"
+                    >نام و نام خانوادگی <span class="required">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    class="form-control"
+                    placeholder="مثال: علی محمدی"
+                    required
+                  />
+                  <small class="error-msg">لطفاً نام خود را وارد کنید.</small>
+                </div>
+
+                <!-- شماره موبایل -->
+                <div class="form-group">
+                  <label for="phoneNumber"
+                    >شماره موبایل <span class="required">*</span></label
+                  >
+                  <input
+                    type="tel"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    class="form-control"
+                    placeholder="09123456789"
+                    pattern="09[0-9]{9}"
+                    required
+                  />
+                  <small class="error-msg"
+                    >شماره موبایل معتبر وارد کنید (مثل 09123456789).</small
+                  >
+                </div>
+
+                <!-- ایمیل -->
+                <div class="form-group">
+                  <label for="email"
+                    >ایمیل <span class="required">*</span></label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="example@email.com"
+                    required
+                  />
+                  <small class="error-msg"
+                    >لطفاً یک ایمیل معتبر وارد کنید.</small
+                  >
+                </div>
+
+                <!-- وبسایت / نمونه مرجع -->
+                <div class="form-group">
+                  <label for="website"
+                    >وبسایت یا لینک نمونه مرجع
+                    <span class="optional">(اختیاری)</span></label
+                  >
+                  <input
+                    type="url"
+                    id="website"
+                    name="website"
+                    class="form-control"
+                    placeholder="https://..."
+                  />
+                  <small class="error-msg"
+                    >لینک را با https:// وارد کنید.</small
+                  >
+                </div>
+
+                <!-- موضوع سفارش -->
+                <div class="form-group full-width">
+                  <label for="subject"
+                    >موضوع سفارش <span class="required">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    class="form-control"
+                    placeholder="مثال: گلدان خراطی چوب گردو با پایه مسی"
+                    required
+                  />
+                  <small class="error-msg"
+                    >موضوع سفارش را بنویسید.</small
+                  >
+                </div>
+
+                <!-- جنس چوب -->
+                <div class="form-group">
+                  <label for="woodType">جنس چوب موردنظر</label>
+                  <select id="woodType" name="woodType" class="form-control">
+                    <option value="فرقی ندارد">فرقی ندارد</option>
+                    <option value="بلوط">چوب بلوط</option>
+                    <option value="گردو">چوب گردو</option>
+                    <option value="راش">چوب راش</option>
+                    <option value="روس">چوب روس</option>
+                  </select>
+                </div>
+
+                <!-- بودجه تقریبی -->
+                <div class="form-group">
+                  <label for="budget">بودجه تقریبی</label>
+                  <select id="budget" name="budget" class="form-control">
+                    <option value="کمتر از ۵۰۰ هزار تومان">
+                      کمتر از ۵۰۰ هزار تومان
+                    </option>
+                    <option value="۵۰۰ هزار تا ۱ میلیون تومان">
+                      ۵۰۰ هزار تا ۱ میلیون تومان
+                    </option>
+                    <option value="۱ تا ۳ میلیون تومان">
+                      ۱ تا ۳ میلیون تومان
+                    </option>
+                    <option value="بیش از ۳ میلیون تومان">
+                      بیش از ۳ میلیون تومان
+                    </option>
+                  </select>
+                </div>
+
+                <!-- توضیحات -->
+                <div class="form-group full-width">
+                  <label for="description"
+                    >توضیحات سفارش <span class="required">*</span></label
+                  >
+                  <textarea
+                    id="description"
+                    name="description"
+                    class="form-control"
+                    rows="4"
+                    placeholder="جزئیات طرح، ابعاد، رنگ و هر نکته‌ای که کمک می‌کند ایده‌ات را بهتر بفهمیم..."
+                    required
+                  ></textarea>
+                  <small class="error-msg"
+                    >لطفاً توضیحات کوتاهی از سفارش بنویسید.</small
+                  >
+                </div>
+
+                <!-- آپلود عکس -->
+                <div class="form-group full-width">
+                  <label>عکس نمونه یا طرح (اختیاری)</label>
+                  <div id="uploadDropzone" class="upload-dropzone">
+                    <i class="fas fa-cloud-arrow-up upload-icon"></i>
+                    <p class="upload-text">
+                      عکس را اینجا رها کنید یا
+                      <span class="upload-browse">انتخاب کنید</span>
+                    </p>
+                    <p class="upload-hint">
+                      فرمت‌های JPG ،PNG — حداکثر ۵ مگابایت
+                    </p>
+                    <input
+                      type="file"
+                      id="orderImage"
+                      name="orderImage"
+                      accept="image/*"
+                      hidden
+                    />
+                    <!-- پیش‌نمایش عکس انتخاب‌شده -->
+                    <div id="imagePreview" class="image-preview hidden">
+                      <img id="previewImg" src="" alt="پیش‌نمایش طرح" />
+                      <button
+                        type="button"
+                        id="removeImageBtn"
+                        class="remove-image-btn"
+                        title="حذف عکس"
+                      >
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-submit-custom">
+                <i class="fas fa-paper-plane"></i>
+                <span>ارسال درخواست سفارش</span>
+              </button>
+            </form>
+
+            <!-- پیام موفقیت (بعد از ارسال نمایش داده می‌شود) -->
+            <div id="successMessage" class="success-box hidden">
+              <i class="fas fa-circle-check success-icon"></i>
+              <h3>درخواست شما با موفقیت ثبت شد!</h3>
+              <p>
+                کارشناسان چوبساب دکور حداکثر تا ۲۴ ساعت آینده از طریق ایمیل یا تماس
+                با شما در ارتباط خواهند بود.
+              </p>
+              <a href="index.html" class="btn-back-shop">
+                <i class="fas fa-store"></i> بازگشت به فروشگاه
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ستون چپ: اطلاعات راهنما -->
+        <aside class="custom-info-column">
+          <!-- مراحل سفارش -->
+          <div class="info-card steps-card">
+            <h3><i class="fas fa-list-check"></i> سفارش سفارشی چطور کار می‌کند؟</h3>
+            <ol class="steps-list">
+              <li>
+                <span class="step-num">۱</span>
+                <div>
+                  <strong>فرم را پر کنید</strong>
+                  <p>ایده و جزئیات سفارش را با عکس نمونه بفرستید.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">۲</span>
+                <div>
+                  <strong>مشاوره و قیمت‌گذاری</strong>
+                  <p>تا ۲۴ ساعت بعد، کارشناس ما با شما تماس می‌گیرد.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">۳</span>
+                <div>
+                  <strong>ساخت دستی محصول</strong>
+                  <p>هنرمندان چوبساب دکور محصول را با دقت می‌سازند.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">۴</span>
+                <div>
+                  <strong>ارسال به درب منزل</strong>
+                  <p>با بسته‌بندی اختصاصی به سراسر کشور ارسال می‌شود.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <!-- تماس مستقیم -->
+          <div class="info-card contact-card">
+            <h3><i class="fas fa-headset"></i> ترجیح می‌دهید مستقیم حرف بزنید؟</h3>
+            <p class="contact-desc">
+              تیم پشتیبانی چوبساب دکور آماده پاسخ‌گویی به سوالات سفارش‌های خاص شماست.
+            </p>
+            <div class="contact-lines">
+              <a href="tel:09010461757" class="contact-line">
+                <i class="fas fa-phone-alt"></i>
+                <span>۰۹۰۱۰۴۶۱۷۵۷</span>
+              </a>
+              <a href="mailto:info@choobsab.ir" class="contact-line">
+                <i class="fas fa-envelope"></i>
+                <span>info@choobsab.ir</span>
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- فوتر سایت (مشترک در تمام صفحات — محتوا توسط footer.js تزریق می‌شود) -->
+    <div id="siteFooterContainer"></div>
+
+    <!-- دکمه بازگشت به بالا -->
+    <button id="scrollToTopBtn" class="scroll-to-top" title="بازگشت به بالا">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- پنل سبد خرید -->
+    <div id="cartDrawer" class="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3>سبد خرید</h3>
+        <button id="closeCartBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div id="cartItemsContainer" class="cart-items-container"></div>
+
+      <div class="cart-drawer-footer">
+        <div class="cart-total-section">
+          <span>جمع کل:</span>
+          <span id="cartDrawerTotalPrice">۰ تومان</span>
+        </div>
+        <div class="cart-drawer-buttons">
+          <button id="checkoutBtn" class="btn-primary">ثبت سفارش</button>
+          <button type="button" id="viewFullCartBtn" class="btn-secondary">
+            مشاهده کامل
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cartOverlay" class="cart-overlay"></div>
+
+    <script src="products.js"></script>
+    <script src="cartManager.js"></script>
+    <!-- حساب کاربری (آیکون آدمک + مودال ورود با کد یک‌بارمصرف + مسدودسازی خرید بدون ورود) -->
+    <script src="user-auth.js"></script>
+    <script src="script.js"></script>
+    <!-- نوار ناوبری پایینی موبایل (مشترک در تمام صفحات) -->
+    <script src="mobile-nav.js"></script>
+    <!-- فوتر مشترک سایت -->
+    <script src="footer.js"></script>
+    <script src="custom.js"></script>
+  </body>
+</html>

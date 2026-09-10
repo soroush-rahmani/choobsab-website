@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>چوب‌ساب | تماس با ما</title>
+    <meta
+      name="description"
+      content="راه‌های ارتباط با چوب‌ساب — اینستاگرام، تلگرام، واتس‌اپ، شماره تماس و ایمیل."
+    />
+    <!-- فونت و آیکون‌ها -->
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- استایل اصلی سایت (هدر، سایدبار و سبد خرید) -->
+    <link rel="stylesheet" href="style/style.css" />
+    <!-- استایل صفحه تماس و فوتر مشترک -->
+    <link rel="stylesheet" href="style/contact.css" />
+    <link rel="stylesheet" href="style/footer.css" />
+    <!-- استایل‌های ریسپانسیو موبایل (مشترک در تمام صفحات) -->
+    <link rel="stylesheet" href="style/mobile.css" />
+    <!-- استایل‌های حساب کاربری و پروفایل (مودال ورود + بخش پروفایل) -->
+    <link rel="stylesheet" href="style/profile.css" />
+  </head>
+  <body>
+    <!-- منوی کناری (سایدبار) دسته‌بندی‌ها -->
+    <aside class="sidebar-fixed" id="sidebar">
+      <div class="sidebar-toggle-btn" id="sidebarToggleBtn">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <ul class="sidebar-menu" id="sidebarMenu"></ul>
+    </aside>
+
+    <!-- هدر اصلی سایت -->
+    <header class="desktop-header" id="site-header">
+      <div class="header-top">
+        <div class="logo">
+          <img
+            loading="lazy"
+            src="./assets/images/choobsab_logo_final.png"
+            alt=""
+            class="logo-image"
+          />
+        </div>
+
+        <div class="search-wrapper">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="جستجوی محصولات..." />
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <div id="searchResultsPanel" class="search-results-panel"></div>
+        </div>
+
+        <div class="top-left-actions">
+          <div class="support-info">
+            <i class="fas fa-headset icon-brown"></i>
+            <div class="info-text">
+              <span class="title">تماس با پشتیبانی</span>
+              <span class="number">۰۲۱-۱۲۳۴۵۶۷۸</span>
+            </div>
+          </div>
+
+          <div class="shipping-info">
+            <div class="icon-wrapper">
+              <i class="fas fa-truck icon-brown"></i>
+            </div>
+            <span class="title">ارسال به سراسر کشور</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-bottom">
+        <button class="category-btn" id="categoryBtn">
+          <i class="fas fa-bars"></i> دسته‌بندی محصولات
+        </button>
+
+        <nav class="main-nav">
+          <a href="index.html">صفحه اصلی فروشگاه</a>
+          <a href="custom.html">محصولات سفارشی</a>
+          <a href="about.html">درباره ما</a>
+          <a href="contact.html">تماس با ما</a>
+        </nav>
+
+        <div class="user-actions">
+          <a href="#" class="action-icon cart-icon" id="cartIconLink">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">۰</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="contact-page-main">
+      <!-- بخش معرفی -->
+      <section class="contact-hero">
+        <div class="container">
+          <div class="hero-box">
+            <span class="hero-badge">
+              <i class="fas fa-comments"></i> پاسخ‌گویی سریع
+            </span>
+            <h1 class="hero-title">در ارتباط با ما باشید</h1>
+            <p class="hero-desc">
+              برای سوال، مشاوره یا ثبت سفارش، از هر راهی که راحت‌ترید با ما در
+              تماس باشید.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- راه‌های ارتباطی -->
+      <section class="contact-section">
+        <div class="container">
+          <div class="contact-card">
+            <div class="contact-head">
+              <i class="fas fa-share-nodes contact-head-icon"></i>
+              <h2>راه‌های ارتباط با ما</h2>
+              <p>از شبکه‌های اجتماعی یا تماس مستقیم استفاده کنید.</p>
+            </div>
+
+            <div class="contact-lines">
+              <!-- اینستاگرام -->
+              <a
+                href="https://instagram.com/choobsab.decor"
+                target="_blank"
+                class="contact-line"
+              >
+                <i class="fab fa-instagram"></i>
+                <div>
+                  <span class="contact-label">اینستاگرام</span>
+                  <span class="contact-value" dir="ltr">choobsab.decor</span>
+                </div>
+                <i class="fas fa-arrow-left contact-arrow"></i>
+              </a>
+
+              <!-- تلگرام -->
+              <a
+                href="https://t.me/choobsab"
+                target="_blank"
+                class="contact-line"
+              >
+                <i class="fab fa-telegram"></i>
+                <div>
+                  <span class="contact-label">تلگرام</span>
+                  <span class="contact-value" dir="ltr">@choobsab</span>
+                </div>
+                <i class="fas fa-arrow-left contact-arrow"></i>
+              </a>
+
+              <!-- واتس‌اپ -->
+              <a
+                href="https://wa.me/989010461757"
+                target="_blank"
+                class="contact-line"
+              >
+                <i class="fab fa-whatsapp"></i>
+                <div>
+                  <span class="contact-label">واتس‌اپ</span>
+                  <span class="contact-value" dir="ltr">۰۹۰۱۰۴۶۱۷۵۷</span>
+                </div>
+                <i class="fas fa-arrow-left contact-arrow"></i>
+              </a>
+
+              <!-- شماره تماس -->
+              <a href="tel:09010461757" class="contact-line">
+                <i class="fas fa-phone-alt"></i>
+                <div>
+                  <span class="contact-label">تماس مستقیم</span>
+                  <span class="contact-value" dir="ltr">۰۹۰۱۰۴۶۱۷۵۷</span>
+                </div>
+              </a>
+
+              <!-- ایمیل -->
+              <a href="mailto:info@choobsab.ir" class="contact-line">
+                <i class="fas fa-envelope"></i>
+                <div>
+                  <span class="contact-label">ایمیل</span>
+                  <span class="contact-value" dir="ltr">info@choobsab.ir</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- فوتر سایت (مشترک در تمام صفحات — محتوا توسط footer.js تزریق می‌شود) -->
+    <div id="siteFooterContainer"></div>
+
+    <!-- دکمه بازگشت به بالا -->
+    <button id="scrollToTopBtn" class="scroll-to-top" title="بازگشت به بالا">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- پنل سبد خرید -->
+    <div id="cartDrawer" class="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3>سبد خرید</h3>
+        <button id="closeCartBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div id="cartItemsContainer" class="cart-items-container"></div>
+
+      <div class="cart-drawer-footer">
+        <div class="cart-total-section">
+          <span>جمع کل:</span>
+          <span id="cartDrawerTotalPrice">۰ تومان</span>
+        </div>
+        <div class="cart-drawer-buttons">
+          <button id="checkoutBtn" class="btn-primary">ثبت سفارش</button>
+          <button type="button" id="viewFullCartBtn" class="btn-secondary">
+            مشاهده کامل
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cartOverlay" class="cart-overlay"></div>
+
+    <script src="products.js"></script>
+    <script src="cartManager.js"></script>
+    <!-- حساب کاربری (آیکون آدمک + مودال ورود با کد یک‌بارمصرف + مسدودسازی خرید بدون ورود) -->
+    <script src="user-auth.js"></script>
+    <script src="script.js"></script>
+    <!-- نوار ناوبری پایینی موبایل (مشترک در تمام صفحات) -->
+    <script src="mobile-nav.js"></script>
+    <!-- فوتر مشترک سایت -->
+    <script src="footer.js"></script>
+  </body>
+</html>

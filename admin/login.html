@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>ورود مدیر — چوب‌ساب</title>
+  <!-- فونت وزیرمتن -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link
+    href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Vazirmatn", Tahoma, sans-serif;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #3e2723 0%, #5d4037 50%, #3e2723 100%);
+      padding: 20px;
+    }
+    .login-card {
+      background: #fff; border-radius: 16px; padding: 40px 36px;
+      width: 100%; max-width: 400px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+    .logo { text-align: center; margin-bottom: 28px; }
+    .logo .icon { font-size: 44px; }
+    .logo h1 { font-size: 22px; color: #3e2723; margin-top: 8px; }
+    .logo p { font-size: 13px; color: #8d6e63; margin-top: 4px; }
+    label { display: block; font-size: 14px; color: #5d4037; margin: 16px 0 6px; font-weight: 600; }
+    input {
+      width: 100%; padding: 12px 14px; border: 2px solid #d7ccc8; border-radius: 10px;
+      font-size: 15px; font-family: inherit; transition: border-color .2s; background: #fafafa;
+    }
+    input:focus { outline: none; border-color: #8d6e63; background: #fff; }
+    button {
+      width: 100%; margin-top: 24px; padding: 13px; border: none; border-radius: 10px;
+      background: linear-gradient(135deg, #6d4c41, #5d4037); color: #fff;
+      font-size: 16px; font-weight: 700; font-family: inherit; cursor: pointer; transition: opacity .2s;
+    }
+    button:hover { opacity: .92; }
+    button:disabled { opacity: .6; cursor: not-allowed; }
+    .error {
+      display: none; margin-top: 16px; padding: 12px; border-radius: 10px;
+      background: #ffebee; color: #c62828; font-size: 14px; text-align: center;
+    }
+    .back-link {
+      display: block; text-align: center; margin-top: 20px;
+      color: #8d6e63; font-size: 13px; text-decoration: none;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="logo">
+      <div class="icon">🪵</div>
+      <h1>پنل مدیریت چوب‌ساب</h1>
+      <p>برای ورود، اطلاعات حساب مدیر را وارد کنید</p>
+    </div>
+    <form id="loginForm" novalidate>
+      <label for="username">نام کاربری</label>
+      <input type="text" id="username" name="username" autocomplete="username" required />
+
+      <label for="password">رمز عبور</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required />
+
+      <button type="submit" id="submitBtn">ورود به پنل</button>
+      <div class="error" id="errorBox"></div>
+    </form>
+    <a class="back-link" href="/">← بازگشت به فروشگاه</a>
+  </div>
+
+  <script>
+    var form = document.getElementById("loginForm");
+    var errorBox = document.getElementById("errorBox");
+    var submitBtn = document.getElementById("submitBtn");
+
+    function showError(msg) {
+      errorBox.textContent = msg;
+      errorBox.style.display = "block";
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      errorBox.style.display = "none";
+
+      var username = document.getElementById("username").value.trim();
+      var password = document.getElementById("password").value;
+      if (!username || !password) {
+        showError("نام کاربری و رمز عبور را وارد کنید.");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "در حال بررسی...";
+
+      // هدر X-Requested-With = دفاع CSRF (سرور بدون آن درخواست را رد می‌کند)
+      fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest" },
+        body: JSON.stringify({ username: username, password: password }),
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data.success) {
+            window.location.href = "panel.html";
+          } else {
+            showError(data.message || "ورود ناموفق بود.");
+            submitBtn.disabled = false;
+            submitBtn.textContent = "ورود به پنل";
+          }
+        })
+        .catch(function () {
+          showError("ارتباط با سرور برقرار نشد. آیا سرور روشن است؟");
+          submitBtn.disabled = false;
+          submitBtn.textContent = "ورود به پنل";
+        });
+    });
+  </script>
+</body>
+</html>

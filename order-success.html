@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>چوب‌ساب | سفارش ثبت شد</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="style/footer.css" />
+    <link rel="stylesheet" href="style/mobile.css" />
+    <style>
+      @import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css");
+      * { font-family: "Vazirmatn", sans-serif; box-sizing: border-box; }
+      body { direction: rtl; background: #f7f4f0; margin: 0; min-height: 100vh; color: #333; }
+      .success-header { background: #fff; border-bottom: 1px solid #e2d8ce; padding: 18px 0; }
+      .success-header .inner { max-width: 800px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
+      .success-header a { color: #af6c54; text-decoration: none; font-weight: 700; }
+      .success-main { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+      .success-card { background: #fff; border-radius: 16px; padding: 48px 32px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.04); margin-bottom: 24px; }
+      .checkmark-circle { width: 88px; height: 88px; border-radius: 50%; background: #27ae60; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; animation: popIn 0.5s ease; }
+      .checkmark-circle i { color: #fff; font-size: 40px; }
+      @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 70% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+      .success-title { font-size: 22px; font-weight: 700; color: #27ae60; margin: 0 0 8px; }
+      .success-sub { color: #666; font-size: 14px; margin: 0; }
+      .tracking-box { background: #faf8f5; border: 2px dashed #af6c54; border-radius: 12px; padding: 24px; margin-top: 24px; }
+      .tracking-label { font-size: 13px; color: #888; margin-bottom: 8px; }
+      .tracking-code { font-size: 28px; font-weight: 700; color: #af6c54; letter-spacing: 2px; direction: ltr; display: inline-block; }
+      .btn-copy { background: #af6c54; color: #fff; border: none; border-radius: 8px; padding: 8px 18px; font-size: 14px; font-weight: 600; cursor: pointer; margin-right: 12px; }
+      .btn-copy:hover { background: #8b5a2b; }
+      .details-card { background: #fff; border-radius: 16px; padding: 28px; box-shadow: 0 4px 24px rgba(0,0,0,0.04); }
+      .details-card h3 { font-size: 16px; font-weight: 700; color: #2c3e50; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 2px solid #f2ece6; }
+      .detail-row { display: flex; justify-content: space-between; padding: 10px 0; font-size: 14px; color: #555; border-bottom: 1px solid #f5f5f5; }
+      .detail-row:last-child { border-bottom: none; }
+      .detail-row .label { color: #888; }
+      .detail-row .value { font-weight: 600; color: #333; }
+      .detail-row.total { border-top: 2px solid #af6c54; margin-top: 8px; padding-top: 14px; font-size: 16px; }
+      .detail-row.total .value { color: #27ae60; font-weight: 700; }
+      .item-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+      .item-row:last-child { border-bottom: none; }
+      .item-qty { color: #999; font-size: 12px; }
+      .item-price { font-weight: 600; color: #555; }
+      .actions-row { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+      .btn { flex: 1; min-width: 160px; height: 48px; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+      .btn-primary { background: #27ae60; color: #fff; }
+      .btn-ghost { background: #f2ece6; color: #af6c54; }
+      .note { text-align: center; color: #999; font-size: 12px; margin-top: 20px; }
+
+      /* ─── پرینت: فقط فاکتور چاپ شود ─── */
+      @media print {
+        body { background: #fff; }
+        .success-header, .actions-row, .note, #siteFooterContainer, .btn { display: none !important; }
+        .success-main { margin: 0; padding: 0; max-width: 100%; }
+        .success-card { box-shadow: none; border: none; padding: 0; text-align: right; }
+        .checkmark-circle { width: 50px; height: 50px; }
+        .checkmark-circle i { font-size: 22px; }
+        .success-title { font-size: 18px; }
+        .tracking-box { border-style: solid; padding: 12px; }
+        .tracking-code { font-size: 20px; }
+        .btn-copy { display: none; }
+        .details-card { box-shadow: none; border: 1px solid #ddd; padding: 16px; }
+        .detail-row { padding: 6px 0; font-size: 13px; }
+        .item-row { padding: 8px 0; font-size: 13px; }
+        @page { margin: 15mm; size: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="success-header">
+      <div class="inner">
+        <span>🪵 چوب‌ساب</span>
+        <a href="index.html"><i class="fas fa-home"></i> صفحه اصلی</a>
+      </div>
+    </header>
+    <main class="success-main">
+      <div class="success-card">
+        <div class="checkmark-circle"><i class="fas fa-check"></i></div>
+        <h1 class="success-title">سفارش شما با موفقیت ثبت شد!</h1>
+        <p class="success-sub">به زودی کارمان با شما تماس می‌گیرند تا سفارش را تایید و ارسال کنیم.</p>
+        <div class="tracking-box">
+          <div class="tracking-label">کد پیگیری سفارش شما</div>
+          <span class="tracking-code" id="trackingCode">—</span>
+          <button class="btn-copy" id="copyBtn"><i class="fas fa-copy"></i> کپی</button>
+        </div>
+      </div>
+      <div class="details-card">
+        <h3><i class="fas fa-receipt"></i> خلاصه سفارش</h3>
+        <div class="detail-row"><span class="label">نام گیرنده</span><span class="value" id="dName">—</span></div>
+        <div class="detail-row"><span class="label">شماره تماس</span><span class="value" id="dPhone">—</span></div>
+        <div class="detail-row"><span class="label">آدرس</span><span class="value" id="dAddress">—</span></div>
+        <div class="detail-row total"><span class="label">مبلغ کل</span><span class="value" id="dTotal">—</span></div>
+        <div id="itemsList"></div>
+      </div>
+      <div class="actions-row">
+        <a href="index.html" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> ادامه خرید</a>
+        <button class="btn btn-ghost" onclick="window.print()"><i class="fas fa-receipt"></i> چاپ فاکتور</button>
+      </div>
+      <p class="note">این صفحه را برای پیگیری آینده نگه دارید یا کد پیگیری را یادداشت کنید.</p>
+    </main>
+    <div id="siteFooterContainer"></div>
+    <script src="footer.js"></script>
+    <script src="order-success.js"></script>
+  </body>
+</html>

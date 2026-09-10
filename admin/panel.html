@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>پنل مدیریت — چوب‌ساب</title>
+  <!-- فونت وزیرمتن -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link
+    href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link rel="stylesheet" href="panel.css" />
+</head>
+<body>
+  <!-- نوار بالای پنل -->
+  <header class="topbar">
+    <div class="topbar-right">
+      <span class="brand">🪵 چوب‌ساب</span>
+      <span class="divider">|</span>
+      <span class="panel-title">پنل مدیریت</span>
+    </div>
+    <div class="topbar-left">
+      <span class="admin-name" id="adminName">...</span>
+      <button class="btn btn-ghost" id="changePassBtn">🔑 تغییر رمز</button>
+      <button class="btn btn-danger" id="logoutBtn">خروج</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="dashboard">📊 داشبورد</button>
+    <button class="tab" data-tab="orders">🛒 سفارشات فروشگاه</button>
+    <button class="tab" data-tab="custom">🎨 سفارشات سفارشی</button>
+        <button class="tab" data-tab="products">📦 محصولات</button>
+    <button class="tab" data-tab="users">👥 کاربران</button>
+  </nav>
+
+  <main class="content">
+    <!-- ─── بخش داشبورد ─── -->
+    <section id="tab-dashboard" class="tab-panel active">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🛒</div>
+          <div class="stat-num" id="statTotalOrders">—</div>
+          <div class="stat-label">کل سفارشات فروشگاه</div>
+        </div>
+        <div class="stat-card warn">
+          <div class="stat-icon">⏳</div>
+          <div class="stat-num" id="statPendingOrders">—</div>
+          <div class="stat-label">در انتظار بررسی</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-icon">💳</div>
+          <div class="stat-num" id="statPaidOrders">—</div>
+          <div class="stat-label">پرداخت شده</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎨</div>
+          <div class="stat-num" id="statTotalCustom">—</div>
+          <div class="stat-label">کل سفارشات سفارشی</div>
+        </div>
+        <div class="stat-card warn">
+          <div class="stat-icon">✨</div>
+          <div class="stat-num" id="statNewCustom">—</div>
+          <div class="stat-label">سفارش سفارشی جدید</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-icon">💰</div>
+          <div class="stat-num" id="statRevenue">—</div>
+          <div class="stat-label">مجموع فروش (تومان)</div>
+                </div>
+        <div class="stat-card warn">
+          <div class="stat-icon">👥</div>
+          <div class="stat-num" id="statTotalUsers">—</div>
+          <div class="stat-label">کل کاربران ثبت‌نامی</div>
+        </div>
+      </div>
+      <div class="security-note">
+        🔐 <strong>نکته امنیتی:</strong> اگر هنوز از رمز پیش‌فرض <code>admin123</code> استفاده
+        می‌کنید، همین حالا با دکمه «تغییر رمز» یک رمز قوی (حداقل ۸ کاراکتر) انتخاب کنید.
+      </div>
+    </section>
+
+    <!-- ─── بخش سفارشات فروشگاه ─── -->
+    <section id="tab-orders" class="tab-panel">
+      <div class="toolbar">
+        <select id="ordersFilter">
+          <option value="">همه وضعیت‌ها</option>
+          <option value="pending">در انتظار بررسی</option>
+          <option value="paid">پرداخت شده</option>
+          <option value="confirmed">تایید شده</option>
+          <option value="shipped">ارسال شده</option>
+          <option value="delivered">تحویل شده</option>
+          <option value="cancelled">لغو شده</option>
+        </select>
+        <button class="btn btn-ghost" id="ordersRefresh">↺</button>
+      </div>
+      <div id="ordersBody" class="cards">
+        <div class="empty">در حال بارگذاری...</div>
+      </div>
+    </section>
+
+    <!-- ─── بخش سفارشات سفارشی ─── -->
+    <section id="tab-custom" class="tab-panel">
+      <div class="toolbar">
+        <select id="customFilter">
+          <option value="">همه وضعیت‌ها</option>
+          <option value="new">جدید</option>
+          <option value="in-progress">در حال ساخت</option>
+          <option value="done">تکمیل شده</option>
+          <option value="cancelled">لغو شده</option>
+        </select>
+        <button class="btn btn-ghost" id="customRefresh">↺</button>
+      </div>
+      <div id="customBody" class="cards">
+        <div class="empty">در حال بارگذاری...</div>
+      </div>
+    </section>
+
+    <!-- ─── بخش محصولات ─── -->
+    <section id="tab-products" class="tab-panel">
+      <div class="toolbar">
+        <select id="productsFilter">
+          <option value="">همه دسته‌ها</option>
+        </select>
+        <button class="btn btn-ghost" id="addProductBtn">➕ محصول جدید</button>
+        <button class="btn btn-ghost" id="manageCatBtn">🗂 دسته‌ها</button>
+        <button class="btn btn-ghost" id="productsRefresh">↺</button>
+      </div>
+            <div id="productsBody" class="cards">
+        <div class="empty">در حال بارگذاری...</div>
+      </div>
+    </section>
+
+    <!-- ─── بخش کاربران ثبت‌نامی ─── -->
+    <section id="tab-users" class="tab-panel">
+      <div class="toolbar">
+        <input type="text" id="usersSearch" class="search-input" placeholder="جستجو در شماره موبایل یا نام کاربر..." />
+        <button class="btn btn-ghost" id="usersRefresh">↺</button>
+      </div>
+      <div id="usersBody" class="cards">
+        <div class="empty">در حال بارگذاری...</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─── مودال جزئیات سفارش ─── -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">جزئیات</h3>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ─── مودال تغییر رمز ─── -->
+  <div class="modal-overlay" id="passOverlay">
+    <div class="modal modal-small">
+      <div class="modal-header">
+        <h3>🔑 تغییر رمز عبور</h3>
+        <button class="modal-close" id="passClose">✕</button>
+      </div>
+      <div class="modal-body">
+        <label>رمز فعلی</label>
+        <input type="password" id="currentPass" autocomplete="current-password" />
+        <label>رمز جدید (حداقل ۸ کاراکتر)</label>
+        <input type="password" id="newPass" autocomplete="new-password" />
+        <label>تکرار رمز جدید</label>
+        <input type="password" id="newPass2" autocomplete="new-password" />
+        <div class="form-error" id="passError"></div>
+        <button class="btn btn-primary full" id="passSaveBtn">ثبت رمز جدید</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── مودال افزودن/ویرایش محصول ─── -->
+  <div class="modal-overlay" id="productOverlay">
+    <div class="modal modal-tall">
+      <div class="modal-header">
+        <h3 id="pfTitle">افزودن محصول جدید</h3>
+        <button class="modal-close" id="pfClose">✕</button>
+      </div>
+      <div class="modal-body">
+        <label>نام محصول *</label>
+        <input type="text" id="pfName" placeholder="مثلا: کاسه چوبی بلوط" />
+
+        <label>شناسه کوتاه (Slug) — خالی بگذارید تا خودکار ساخته شود</label>
+        <input type="text" id="pfSlug" placeholder="bowl-4" />
+
+        <label>دسته‌بندی *</label>
+        <select id="pfCategory"></select>
+
+        <div class="form-grid">
+          <div>
+            <label>قیمت (تومان)</label>
+            <input type="number" id="pfPrice" placeholder="0" min="0" />
+          </div>
+          <div>
+            <label>موجودی</label>
+            <input type="number" id="pfStock" placeholder="0" min="0" />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div>
+            <label>جنس چوب</label>
+            <input type="text" id="pfWood" placeholder="بلوط / راش / گردو..." />
+          </div>
+          <div>
+            <label>نوع پرداخت</label>
+            <input type="text" id="pfFinish" placeholder="مات / نیمه مات / سوپر براق" />
+          </div>
+        </div>
+
+        <label>تصاویر محصول</label>
+        <input type="file" id="pfImages" accept="image/*" multiple />
+        <div class="thumb-list" id="pfThumbs"></div>
+        <p class="hint">عکس‌ها پس از انتخاب خودکار روی سرور ذخیره می‌شوند. می‌توانید چند عکس انتخاب کنید.</p>
+
+        <label>توضیحات محصول</label>
+        <textarea id="pfDesc" rows="3" placeholder="توضیحات کوتاه برای صفحه محصول..."></textarea>
+
+        <label class="check-row">
+          <input type="checkbox" id="pfActive" checked />
+          <span>محصول فعال است (در فروشگاه نمایش داده شود)</span>
+        </label>
+
+        <div class="form-error" id="pfError"></div>
+        <button class="btn btn-primary full" id="pfSaveBtn">💾 ذخیره محصول</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── مودال مدیریت دسته‌بندی‌ها ─── -->
+  <div class="modal-overlay" id="catOverlay">
+    <div class="modal modal-small">
+      <div class="modal-header">
+        <h3>🗂 دسته‌بندی‌ها</h3>
+        <button class="modal-close" id="catClose">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="catList" class="cat-list"></div>
+        <div class="cat-add">
+          <label>نام دسته‌بندی جدید</label>
+          <div class="row">
+            <input type="text" id="catName" placeholder="مثلا: لوازم تحریر چوبی" />
+            <input type="text" id="catIcon" placeholder="آیکون FontAwesome (اختیاری)" />
+          </div>
+          <button class="btn btn-primary full" id="catAddBtn">➕ افزودن دسته‌بندی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="panel.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>چوب‌ساب | ثبت اطلاعات و پرداخت</title>
+    <link rel="stylesheet" href="style/checkout.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- استایل‌های فوتر مشترک (منبع واحد استایل فوتر در کل سایت) -->
+    <link rel="stylesheet" href="style/footer.css" />
+    <!-- استایل‌های ریسپانسیو موبایل (مشترک در تمام صفحات) -->
+    <link rel="stylesheet" href="style/mobile.css" />
+    <!-- استایل‌های حساب کاربری و پروفایل (مودال ورود + بخش پروفایل) -->
+    <link rel="stylesheet" href="style/profile.css" />
+  </head>
+  <body>
+    <!-- هدر ساده صفحه تسویه‌حساب -->
+    <header class="checkout-header">
+      <div class="container">
+        <a href="index.html" class="checkout-logo">بازگشت به صفحه اصلی</a>
+        <div class="checkout-steps">
+          <a class="step completed" href="cart.html">سبد خرید</a>
+          <i class="fas fa-chevron-left"></i>
+          <span class="step active">اطلاعات ارسال و پرداخت</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="checkout-page-main">
+      <div class="checkout-container">
+        <!-- ستون سمت راست: فرم اطلاعات مشتری -->
+        <div class="checkout-form-column">
+          <h2>اطلاعات تحویل‌گیرنده</h2>
+
+          <form id="checkoutForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="fullName"
+                  >نام و نام خانوادگی <span class="required">*</span></label
+                >
+                <input
+                  type="text"
+                  id="fullName"
+                  class="form-control"
+                  placeholder="مثال: علی محمدی"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="phoneNumber"
+                  >شماره موبایل <span class="required">*</span></label
+                >
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  class="form-control"
+                  placeholder="09123456789"
+                  pattern="09[0-9]{9}"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="postalCode">کد پستی (۱۰ رقمی)</label>
+                <input
+                  type="text"
+                  id="postalCode"
+                  class="form-control"
+                  placeholder="1234567890"
+                  maxlength="10"
+                />
+              </div>
+
+              <div class="form-group full-width">
+                <label for="shippingAddress"
+                  >آدرس دقیق پستی <span class="required">*</span></label
+                >
+                <textarea
+                  id="shippingAddress"
+                  class="form-control"
+                  rows="3"
+                  placeholder="استان، شهر، خیابان اصلی، کوچه، پلاک، واحد"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="orderNotes">توضیحات سفارش (اختیاری)</label>
+                <textarea
+                  id="orderNotes"
+                  class="form-control"
+                  rows="2"
+                  placeholder="نکات مربوط به زمان تحویل یا ترجیحات شما..."
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- شیوه پرداخت -->
+            <div class="payment-method-box">
+              <h3>شیوه پرداخت</h3>
+              <label class="payment-option">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="online"
+                  checked
+                />
+                <span class="payment-text">
+                  <strong>پرداخت آنلاین از طریق درگاه بانکی</strong>
+                  <small>اتصال به درگاه امن شتاب با تمامی کارت‌های بانکی</small>
+                </span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-submit-order">
+              <i class="fas fa-lock"></i> انتقال به درگاه پرداخت و تکمیل خرید
+            </button>
+          </form>
+        </div>
+
+        <!-- ستون سمت چپ: خلاصه‌ی فاکتور نهایی -->
+        <div class="checkout-summary-column">
+          <div class="summary-card">
+            <h3>خلاصه سفارش</h3>
+
+            <!-- لیست کوتاه اقلام -->
+            <div id="checkoutItemsPreview" class="checkout-items-preview"></div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-row">
+              <span>مجموع قیمت محصولات:</span>
+              <span id="checkoutSubtotal">۰ تومان</span>
+            </div>
+
+            <div class="summary-row">
+              <span>هزینه ارسال ثابت:</span>
+              <span id="checkoutShippingCost">۲۰۰,۰۰۰ تومان</span>
+            </div>
+
+            <div class="summary-row total-row">
+              <span>مبلغ قابل پرداخت:</span>
+              <span id="checkoutGrandTotal">۰ تومان</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- فوتر سایت (مشترک در تمام صفحات — محتوا توسط footer.js تزریق می‌شود) -->
+    <div id="siteFooterContainer"></div>
+
+    <script src="products.js"></script>
+    <script src="cartManager.js"></script>
+    <!-- حساب کاربری (مودال ورود با کد یک‌بارمصرف — ثبت سفارش فقط برای کاربران واردشده) -->
+    <script src="user-auth.js"></script>
+    <script src="checkout.js"></script>
+    <!-- نوار ناوبری پایینی موبایل (مشترک در تمام صفحات) -->
+    <script src="mobile-nav.js"></script>
+    <!-- فوتر مشترک سایت -->
+    <script src="footer.js"></script>
+  </body>
+</html>

@@ -1,0 +1,532 @@
+/* ===================================================
+   استایل صفحه سفارش محصول سفارشی (Custom Order Page)
+   طراحی چوبی — هماهنگ با هویت بصری چوبساب
+=================================================== */
+
+:root {
+  --bg-white: #ffffff;
+  --bg-darker: #f7f4f0;
+  --wood-brown: #af6c54;
+  --wood-brown-light: #a67c52;
+  --wood-brown-dark: #8b5a2b;
+  --text-color: #333333;
+  --text-muted: #777777;
+  --border-color: #e0d2c2;
+  --error-red: #e74c3c;
+  --success-green: #27ae60;
+}
+
+/* =================== هدر صفحه سفارش =================== */
+.custom-header {
+  background: linear-gradient(135deg, #5c2c16 0%, #8b5a2b 100%);
+  color: #ffffff;
+  padding: 18px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.custom-header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.25s ease;
+}
+
+.back-link:hover {
+  color: #ffffff;
+}
+
+.back-link i {
+  transition: transform 0.25s ease;
+}
+
+.back-link:hover i {
+  transform: translateX(4px);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.brand-icon {
+  font-size: 22px;
+  color: #f0d9b5;
+}
+
+/* =================== بدنه اصلی =================== */
+.custom-page-main {
+  flex: 1;
+  padding: 50px 30px;
+}
+
+.custom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 35px;
+  align-items: flex-start;
+}
+
+/* =================== ستون فرم =================== */
+.custom-form-column {
+  flex: 1;
+}
+
+.form-card {
+  background: var(--bg-white);
+  border-radius: 14px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.form-card-header {
+  background: linear-gradient(135deg, #fdf8f3 0%, #f7f4f0 100%);
+  padding: 28px 32px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.form-card-header h2 {
+  font-size: 20px;
+  color: var(--wood-brown-dark);
+  margin: 0 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-card-header h2 i {
+  color: var(--wood-brown);
+}
+
+.form-card-header p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =================== گرید فرم =================== */
+.form-grid {
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 7px;
+}
+
+.required {
+  color: var(--error-red);
+  font-weight: bold;
+}
+
+.optional {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 11px;
+}
+
+/* =================== اینپوت‌ها و سلکت‌ها =================== */
+.form-control {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-color);
+  background: #fdfaf7;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+  box-sizing: border-box;
+}
+
+.form-control::placeholder {
+  color: #bba88a;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--wood-brown);
+  box-shadow: 0 0 0 3px rgba(175, 108, 84, 0.12);
+  background: #ffffff;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+select.form-control {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b5a2b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 14px center;
+  padding-left: 36px;
+}
+
+/* حالت خطا */
+.form-group.has-error .form-control {
+  border-color: var(--error-red);
+  background-color: #fff5f5;
+}
+
+.form-group.has-error .form-control:focus {
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12);
+}
+
+.error-msg {
+  color: var(--error-red);
+  font-size: 11.5px;
+  margin-top: 5px;
+  display: none;
+}
+
+.form-group.has-error .error-msg {
+  display: block;
+}
+
+/* =================== دراپ‌زون آپلود عکس =================== */
+.upload-dropzone {
+  border: 2px dashed var(--border-color);
+  border-radius: 10px;
+  padding: 32px 20px;
+  text-align: center;
+  cursor: pointer;
+  background: #fdfaf7;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+  position: relative;
+}
+
+.upload-dropzone:hover,
+.upload-dropzone.drag-over {
+  border-color: var(--wood-brown);
+  background-color: #fef9f3;
+}
+
+.upload-icon {
+  font-size: 36px;
+  color: var(--wood-brown-light);
+  margin-bottom: 10px;
+}
+
+.upload-text {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.upload-browse {
+  color: var(--wood-brown);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.upload-hint {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* پیش‌نمایش عکس */
+.image-preview {
+  position: relative;
+  margin-top: 16px;
+  display: inline-block;
+}
+
+.image-preview img {
+  max-width: 220px;
+  max-height: 180px;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  object-fit: cover;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: var(--error-red);
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease;
+}
+
+.remove-image-btn:hover {
+  background: #c0392b;
+}
+
+/* =================== دکمه ارسال =================== */
+.btn-submit-custom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0 32px 32px 32px;
+  width: calc(100% - 64px);
+  padding: 14px 0;
+  background: linear-gradient(135deg, var(--wood-brown) 0%, var(--wood-brown-dark) 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+  box-shadow: 0 4px 15px rgba(139, 90, 43, 0.3);
+}
+
+.btn-submit-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 90, 43, 0.4);
+}
+
+.btn-submit-custom:active {
+  transform: translateY(0);
+}
+
+.btn-submit-custom i {
+  font-size: 15px;
+}
+
+/* =================== پیام موفقیت =================== */
+.success-box {
+  text-align: center;
+  padding: 50px 32px;
+}
+
+.success-icon {
+  font-size: 56px;
+  color: var(--success-green);
+  margin-bottom: 18px;
+}
+
+.success-box h3 {
+  font-size: 22px;
+  color: var(--wood-brown-dark);
+  margin: 0 0 12px 0;
+}
+
+.success-box p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0 0 24px 0;
+}
+
+.btn-back-shop {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  background-color: var(--wood-brown);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.25s ease;
+}
+
+.btn-back-shop:hover {
+  background-color: var(--wood-brown-dark);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =================== ستون اطلاعات راهنما =================== */
+.custom-info-column {
+  width: 340px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.info-card {
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+
+.info-card h3 {
+  font-size: 15px;
+  color: var(--wood-brown-dark);
+  margin: 0 0 18px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-card h3 i {
+  color: var(--wood-brown);
+}
+
+/* لیست مراحل */
+.steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.steps-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.step-num {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--wood-brown) 0%, var(--wood-brown-dark) 100%);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.steps-list li strong {
+  display: block;
+  font-size: 13px;
+  color: var(--text-color);
+  margin-bottom: 3px;
+}
+
+.steps-list li p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* کارت تماس */
+.contact-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 16px 0;
+}
+
+.contact-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #fdfaf7;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 13px;
+  font-weight: 500;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.contact-line:hover {
+  border-color: var(--wood-brown);
+  background: #fef9f3;
+}
+
+.contact-line i {
+  color: var(--wood-brown);
+  font-size: 14px;
+}
+
+/* =================== ریسپونسیو =================== */
+@media (max-width: 900px) {
+  .custom-container {
+    flex-direction: column;
+  }
+
+  .custom-info-column {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .custom-header .container {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .btn-submit-custom {
+    margin: 0 24px 24px 24px;
+    width: calc(100% - 48px);
+  }
+
+  .custom-page-main {
+    padding: 30px 16px;
+  }
+}

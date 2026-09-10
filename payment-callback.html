@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>در حال تأیید پرداخت — چوب‌ساب</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Vazirmatn", Tahoma, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f5f0eb 0%, #e8ddd4 100%);
+      padding: 20px;
+    }
+    .callback-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 50px 36px;
+      text-align: center;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,.15);
+    }
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid #e0d5cd;
+      border-top-color: #af6c54;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 24px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-title { font-size: 18px; color: #3e2723; font-weight: 700; margin-bottom: 8px; }
+    .loading-text { font-size: 14px; color: #8d6e63; }
+    .result-icon { font-size: 50px; margin-bottom: 16px; }
+    .result-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .result-text { font-size: 14px; color: #666; margin-bottom: 20px; }
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      margin: 4px;
+    }
+    .btn-primary { background: #af6c54; color: #fff; }
+    .btn-ghost { background: #f2ece6; color: #af6c54; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="callback-card">
+    <!-- حالت لودینگ -->
+    <div id="loadingState">
+      <div class="spinner"></div>
+      <div class="loading-title">در حال تأیید پرداخت...</div>
+      <div class="loading-text">لطفاً صبر کنید، در حال بررسی وضعیت پرداخت شما هستیم.</div>
+    </div>
+
+    <!-- حالت موفق -->
+    <div id="successState" class="hidden">
+      <div class="result-icon">✅</div>
+      <div class="result-title" style="color: #27ae60;">پرداخت با موفقیت انجام شد</div>
+      <div class="result-text" id="successMessage">سفارش شما تأیید شد و در حال آماده‌سازی است.</div>
+      <div style="background: #f5f0eb; border-radius: 10px; padding: 14px; margin-bottom: 20px; text-align: right;">
+        <div style="font-size: 13px; color: #8d6e63; margin-bottom: 4px;">کد پیگیری سفارش:</div>
+        <div id="successOrderId" style="font-size: 16px; font-weight: 700; color: #3e2723;"></div>
+        <div id="successRefId" style="font-size: 12px; color: #999; margin-top: 6px;"></div>
+      </div>
+      <a href="index.html" class="btn btn-primary"><i class="fas fa-home"></i> بازگشت به صفحه اصلی</a>
+    </div>
+
+    <!-- حالت خطا -->
+    <div id="errorState" class="hidden">
+      <div class="result-icon">❌</div>
+      <div class="result-title" style="color: #c62828;">پرداخت ناموفق</div>
+      <div class="result-text" id="errorMessage">متأسفانه پرداخت شما با خطا مواجه شد.</div>
+      <button class="btn btn-primary" onclick="window.history.back()"><i class="fas fa-redo"></i> تلاش دوباره</button>
+      <a href="index.html" class="btn btn-ghost"><i class="fas fa-home"></i> بازگشت</a>
+    </div>
+  </div>
+
+  <script>
+    (async function () {
+      const params = new URLSearchParams(window.location.search);
+      const authority = params.get("Authority");
+      const status = params.get("Status");
+      // هم orderId و هم OrderId را پشتیبانی می‌کنیم (سازگاری با هر دو حالت)
+      const orderId = params.get("orderId") || params.get("OrderId");
+
+      const loadingState = document.getElementById("loadingState");
+      const successState = document.getElementById("successState");
+      const errorState = document.getElementById("errorState");
+
+      if (!authority || !orderId) {
+        loadingState.classList.add("hidden");
+        errorState.classList.remove("hidden");
+        document.getElementById("errorMessage").textContent = "پارامترهای بازگشتی نامعتبر است.";
+        return;
+      }
+
+      if (status !== "OK") {
+        loadingState.classList.add("hidden");
+        errorState.classList.remove("hidden");
+        document.getElementById("errorMessage").textContent = "پرداخت توسط شما لغو شد.";
+        return;
+      }
+
+      try {
+        // اگر orderId در URL نبود (مثل بازگشت واقعی زرین‌پال)، سرور خودش از روی Authority پیدا می‌کند
+        const query = `/api/payment/verify?Authority=${encodeURIComponent(authority)}&Status=${encodeURIComponent(status)}` +
+          (orderId ? `&OrderId=${encodeURIComponent(orderId)}` : "");
+        const res = await fetch(query);
+        const data = await res.json();
+
+        loadingState.classList.add("hidden");
+
+        if (data.success) {
+          successState.classList.remove("hidden");
+          document.getElementById("successOrderId").textContent = data.orderId;
+          document.getElementById("successRefId").textContent = data.refId ? `شماره پیگیری بانکی: ${data.refId}` : "";
+          // ذخیره برای صفحه موفقیت (اختیاری)
+          sessionStorage.setItem("choobsab_order_success", JSON.stringify({
+            orderId: data.orderId,
+            refId: data.refId,
+          }));
+        } else {
+          errorState.classList.remove("hidden");
+          document.getElementById("errorMessage").textContent = data.message || "تأیید پرداخت ناموفق بود.";
+        }
+      } catch (err) {
+        loadingState.classList.add("hidden");
+        errorState.classList.remove("hidden");
+        document.getElementById("errorMessage").textContent = "خطا در ارتباط با سرور.";
+      }
+    })();
+  </script>
+</body>
+</html>

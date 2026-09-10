@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>فروشگاه محصولات چوبی</title>
+    <!-- اضافه کردن فونت و آیکون‌ها -->
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style/cart.css" />
+    <!-- استایل‌های فوتر مشترک (منبع واحد استایل فوتر در کل سایت) -->
+    <link rel="stylesheet" href="style/footer.css" />
+    <!-- استایل‌های ریسپانسیو موبایل (مشترک در تمام صفحات) -->
+    <link rel="stylesheet" href="style/mobile.css" />
+    <!-- استایل‌های حساب کاربری و پروفایل (مودال ورود + بخش پروفایل) -->
+    <link rel="stylesheet" href="style/profile.css" />
+  </head>
+  <body>
+    <main class="cart-page-main">
+      <div class="cart-container">
+        <!-- هدر سبد خرید شامل عنوان و دکمه بازگشت -->
+        <div class="cart-header-actions">
+          <h2 class="cart-title">سبد خرید شما</h2>
+          <a href="index.html" class="btn-back-to-home">
+            <i class="fas fa-arrow-right"></i> بازگشت به فروشگاه
+          </a>
+        </div>
+
+        <!-- ۱. کانتینر اصلی لیست محصولات -->
+        <div id="cartItemsContainer" class="cart-items-list">
+          <!-- کدهای محصولات توسط جاوااسکریپت اینجا رندر می‌شوند -->
+        </div>
+
+        <!-- ۲. خلاصه فاکتور و جمع کل -->
+        <div class="cart-summary">
+          <div class="summary-item">
+            <span>جمع کل سبد خرید:</span>
+            <span id="cartSubtotal">۰ تومان</span>
+          </div>
+          <div class="summary-item total-price">
+            <span>مبلغ قابل پرداخت:</span>
+            <span id="cartTotalPrice">۰ تومان</span>
+          </div>
+
+          <!-- دکمه انتقال به صفحه ثبت اطلاعات و پرداخت -->
+          <a
+            href="checkout.html"
+            id="btnGoToCheckout"
+            class="btn-go-to-checkout"
+          >
+            ثبت سفارش و ادامه جهت پرداخت <i class="fas fa-arrow-left"></i>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- فوتر سایت (مشترک در تمام صفحات — محتوا توسط footer.js تزریق می‌شود) -->
+    <div id="siteFooterContainer"></div>
+
+    <script src="products.js"></script>
+    <script src="cartManager.js"></script>
+    <!-- حساب کاربری (آیکون آدمک + مودال ورود با کد یک‌بارمصرف + مسدودسازی خرید بدون ورود) -->
+    <script src="user-auth.js"></script>
+    <script src="cartscript.js"></script>
+    <script src="script.js"></script>
+    <!-- نوار ناوبری پایینی موبایل (مشترک در تمام صفحات) -->
+    <script src="mobile-nav.js"></script>
+    <!-- فوتر مشترک سایت -->
+    <script src="footer.js"></script>
+  </body>
+</html>

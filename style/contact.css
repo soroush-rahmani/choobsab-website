@@ -1,0 +1,257 @@
+/* ===================================================
+   استایل صفحه تماس با ما (Contact Page)
+   طراحی چوبی — هماهنگ با هویت بصری چوب‌ساب
+=================================================== */
+
+:root {
+  --bg-white: #ffffff;
+  --bg-darker: #f7f4f0;
+  --wood-brown: #af6c54;
+  --wood-brown-light: #a67c52;
+  --wood-brown-dark: #8b5a2b;
+  --wood-darkest: #5c2c16;
+  --text-color: #333333;
+  --text-muted: #777777;
+  --border-color: #e0d2c2;
+}
+
+/* =================== هدر صفحه =================== */
+.contact-header {
+  background: linear-gradient(135deg, var(--wood-darkest) 0%, var(--wood-brown-dark) 100%);
+  color: #ffffff;
+  padding: 18px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.contact-header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.25s ease;
+}
+
+.back-link:hover {
+  color: #ffffff;
+}
+
+.back-link i {
+  transition: transform 0.25s ease;
+}
+
+.back-link:hover i {
+  transform: translateX(4px);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.brand-icon {
+  font-size: 22px;
+  color: #f0d9b5;
+}
+
+/* =================== بدنه اصلی =================== */
+.contact-page-main {
+  flex: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+/* =================== بخش معرفی =================== */
+.contact-hero {
+  background-color: var(--bg-darker);
+  padding: 50px 0 60px 0;
+}
+
+.hero-box {
+  background-color: var(--bg-white);
+  border: 2px solid var(--wood-brown);
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  padding: 45px 30px;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid var(--wood-brown);
+  border-radius: 40px;
+  background-color: #fdf8f3;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wood-brown);
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--wood-brown-dark);
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.hero-desc {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* =================== راه‌های ارتباطی =================== */
+.contact-section {
+  padding-bottom: 75px;
+}
+
+.contact-card {
+  background: var(--bg-white);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+
+.contact-head {
+  background: linear-gradient(135deg, #fdf8f3 0%, #f7f4f0 100%);
+  border-bottom: 2px solid var(--border-color);
+  text-align: center;
+  padding: 32px 30px;
+}
+
+.contact-head-icon {
+  font-size: 34px;
+  color: var(--wood-brown);
+  margin-bottom: 12px;
+}
+
+.contact-head h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--wood-brown-dark);
+  margin: 0 0 8px 0;
+}
+
+.contact-head p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.contact-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 32px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.contact-line {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: #fdfaf7;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-color);
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.contact-line:hover {
+  border-color: var(--wood-brown);
+  background: #fef9f3;
+  transform: translateX(-4px);
+}
+
+.contact-line > i:first-child {
+  color: var(--wood-brown);
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.contact-line > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.contact-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.contact-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+.contact-arrow {
+  color: var(--wood-brown);
+  font-size: 14px;
+  opacity: 0.6;
+  transition: opacity 0.25s ease;
+}
+
+.contact-line:hover .contact-arrow {
+  opacity: 1;
+}
+
+/* =================== ریسپانسیو =================== */
+@media (max-width: 640px) {
+  .contact-header .container {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .contact-hero {
+    padding: 30px 0;
+  }
+
+  .hero-title {
+    font-size: 22px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .contact-lines {
+    padding: 24px 16px;
+  }
+}

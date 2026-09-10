@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>چوب‌ساب | خطا در ثبت سفارش</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="style/footer.css" />
+    <link rel="stylesheet" href="style/mobile.css" />
+    <style>
+      @import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css");
+      * { font-family: "Vazirmatn", sans-serif; box-sizing: border-box; }
+      body { direction: rtl; background: #f7f4f0; margin: 0; min-height: 100vh; color: #333; }
+      .failed-header { background: #fff; border-bottom: 1px solid #e2d8ce; padding: 18px 0; }
+      .failed-header .inner { max-width: 700px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
+      .failed-header a { color: #af6c54; text-decoration: none; font-weight: 700; }
+      .failed-main { max-width: 700px; margin: 50px auto; padding: 0 20px; }
+      .failed-card { background: #fff; border-radius: 16px; padding: 48px 32px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.04); }
+      .error-circle { width: 88px; height: 88px; border-radius: 50%; background: #e74c3c; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; animation: shake 0.5s ease; }
+      .error-circle i { color: #fff; font-size: 40px; }
+      @keyframes shake { 0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-10px); } 40%,80% { transform: translateX(10px); } }
+      .failed-title { font-size: 22px; font-weight: 700; color: #e74c3c; margin: 0 0 8px; }
+      .failed-sub { color: #666; font-size: 14px; margin: 0 0 24px; }
+      .error-box { background: #fef2f2; border: 1px solid #f5c6cb; border-radius: 10px; padding: 16px; margin-bottom: 28px; text-align: right; }
+      .error-box .label { font-size: 12px; color: #c0392b; font-weight: 700; margin-bottom: 6px; }
+      .error-box .msg { font-size: 14px; color: #721c24; line-height: 1.7; }
+      .actions-row { display: flex; gap: 12px; flex-wrap: wrap; }
+      .btn { flex: 1; min-width: 160px; height: 48px; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+      .btn-retry { background: #af6c54; color: #fff; }
+      .btn-home { background: #f2ece6; color: #555; }
+      .help-text { text-align: center; color: #999; font-size: 12px; margin-top: 24px; line-height: 1.8; }
+    </style>
+  </head>
+  <body>
+    <header class="failed-header">
+      <div class="inner">
+        <span>🪵 چوب‌ساب</span>
+        <a href="index.html"><i class="fas fa-home"></i> صفحه اصلی</a>
+      </div>
+    </header>
+    <main class="failed-main">
+      <div class="failed-card">
+        <div class="error-circle"><i class="fas fa-times"></i></div>
+        <h1 class="failed-title">متأسفانه سفارش ثبت نشد</h1>
+        <p class="failed-sub">در پردازش سفارش شما مشکلی پیش آمد. لطفا دوباره تلاش کنید.</p>
+        <div class="error-box">
+          <div class="label"><i class="fas fa-exclamation-triangle"></i> دلیل خطا</div>
+          <div class="msg" id="errorMsg">—</div>
+        </div>
+        <div class="actions-row">
+          <a href="checkout.html" class="btn btn-retry"><i class="fas fa-redo"></i> تلاش دوباره</a>
+          <a href="index.html" class="btn btn-home"><i class="fas fa-home"></i> بازگشت به فروشگاه</a>
+        </div>
+        <p class="help-text">
+          اگر مشکل ادامه داشت، مطمئن شوید سرور روشن است.<br />
+          در صورت نیاز با پشتیبانی تماس بگیرید.
+        </p>
+      </div>
+    </main>
+    <div id="siteFooterContainer"></div>
+    <script src="footer.js"></script>
+    <script src="order-failed.js"></script>
+  </body>
+</html>

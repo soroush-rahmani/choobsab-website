@@ -1,0 +1,31 @@
+# ═══════════════════════════════════════════════
+#  GitIgnore ریشه پروژه — چوب‌ساب
+# ═══════════════════════════════════════════════
+
+# فایل‌های تنظیمات حساس (مرچنت‌کد زرین‌پال) — هرگز کامیت نشوند
+.env
+backend/.env
+
+# دیتابیس SQLite
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# لاگ‌ها
+*.log
+server-err.log
+server-error.txt
+server-log.txt
+
+# وابستگی‌ها
+node_modules/
+
+# فایل‌های آپلودی کاربران
+backend/uploads/
+uploads/
+
+# تنظیمات ویندوز / VS Code
+.vscode/
+Thumbs.db
+Desktop.ini

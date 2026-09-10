@@ -1,0 +1,12 @@
+# داده‌های حساس — هرگز کامیت نشوند
+choobsab.db
+choobsab.db-journal
+choobsab.db-shm
+choobsab.db-wal
+*.log
+
+# وابستگی‌ها
+node_modules/
+
+# فایل‌های آپلودی کاربران
+uploads/

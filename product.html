@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>جزئیات محصول | فروشگاه محصولات چوبی</title>
+    <!-- اضافه کردن فونت و آیکون‌ها -->
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+    <!-- استایل‌های اختصاصی صفحه جزئیات محصول -->
+    <link rel="stylesheet" href="style/product.css" />
+    <!-- استایل‌های فوتر مشترک (منبع واحد استایل فوتر در کل سایت) -->
+    <link rel="stylesheet" href="style/footer.css" />
+    <!-- استایل‌های ریسپانسیو موبایل (مشترک در تمام صفحات) -->
+    <link rel="stylesheet" href="style/mobile.css" />
+    <!-- استایل‌های حساب کاربری و پروفایل (مودال ورود + بخش پروفایل) -->
+    <link rel="stylesheet" href="style/profile.css" />
+  </head>
+  <body>
+    <!-- منوی کناری (سایدبار) دسته‌بندی‌ها -->
+    <aside class="sidebar-fixed" id="sidebar">
+      <div class="sidebar-toggle-btn" id="sidebarToggleBtn">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <ul class="sidebar-menu" id="sidebarMenu"></ul>
+    </aside>
+
+    <!-- هدر اصلی سایت -->
+    <header class="desktop-header" id="site-header">
+      <!-- بخش بالایی هدر -->
+      <div class="header-top">
+        <div class="logo">
+          <a href="index.html">
+            <img
+              loading="lazy"
+              src="./assets/images/choobsab_logo_final.png"
+              alt="چوبساب دکور"
+              class="logo-image"
+            />
+          </a>
+        </div>
+
+        <div class="search-wrapper">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="جستجوی محصولات..." />
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <div id="searchResultsPanel" class="search-results-panel"></div>
+        </div>
+
+        <div class="top-left-actions">
+          <div class="support-info">
+            <i class="fas fa-headset icon-brown"></i>
+            <div class="info-text">
+              <span class="title">تماس با پشتیبانی</span>
+              <span class="number">۰۲۱-۱۲۳۴۵۶۷۸</span>
+            </div>
+          </div>
+
+          <div class="shipping-info">
+            <div class="icon-wrapper">
+              <i class="fas fa-truck icon-brown"></i>
+            </div>
+            <span class="title">ارسال به سراسر کشور</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- بخش پایینی هدر -->
+      <div class="header-bottom">
+        <button class="category-btn" id="categoryBtn">
+          <i class="fas fa-bars"></i> دسته‌بندی محصولات
+        </button>
+
+        <nav class="main-nav">
+          <a href="index.html">صفحه اصلی فروشگاه</a>
+          <a href="custom.html">محصولات سفارشی</a>
+          <a href="about.html">درباره ما</a>
+          <a href="contact.html">تماس با ما</a>
+        </nav>
+
+        <div class="user-actions">
+          <a href="#" class="action-icon cart-icon" id="cartIconLink">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">۰</span>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- =================== بدنه اصلی صفحه محصول =================== -->
+    <main class="product-page-main">
+      <!-- مسیر راهنما (Breadcrumb) -->
+      <nav class="product-breadcrumb" id="productBreadcrumb">
+        <a href="index.html"><i class="fas fa-home"></i> فروشگاه</a>
+        <i class="fas fa-chevron-left separator"></i>
+        <span id="breadcrumbCategory">محصولات</span>
+        <i class="fas fa-chevron-left separator"></i>
+        <span class="current" id="breadcrumbProduct">محصول</span>
+      </nav>
+
+      <!-- بخش گالری و اطلاعات -->
+      <div class="product-layout">
+        <!-- گالری تصاویر: تصویری که روی آن هستیم بزرگ‌تر می‌شود -->
+        <section class="product-gallery" id="productGallery" aria-label="گالری تصاویر محصول">
+          <!-- تصاویر توسط product.js اینجا رندر می‌شوند -->
+        </section>
+
+        <!-- ستون اطلاعات محصول -->
+        <section class="product-info-panel">
+          <h1 class="product-page-title" id="productTitle">در حال بارگذاری...</h1>
+
+          <div class="product-code" id="productCode">
+            <i class="fas fa-barcode"></i> کد محصول: <span id="productCodeValue">—</span>
+          </div>
+
+          <div class="product-price-box">
+            <span class="price-label">قیمت محصول:</span>
+            <span class="price-value" id="productPrice">—</span>
+          </div>
+
+          <!-- دکمه افزودن به سبد خرید -->
+          <button id="addToCartBtn" class="btn-add-cart" type="button">
+            <i class="fas fa-cart-plus"></i>
+            <span>افزودن به سبد خرید</span>
+          </button>
+
+          <!-- دکمه خرید از اینستاگرام -->
+          <a
+            id="instagramBuyBtn"
+            class="btn-buy-instagram"
+            href="https://instagram.com/choobsab"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="fab fa-instagram"></i>
+            <span>خرید از اینستاگرام</span>
+          </a>
+
+          <!-- کادرهای خدمات -->
+          <div class="service-box">
+            <div class="service-icon"><i class="fas fa-truck-fast"></i></div>
+            <div class="service-text">
+              <strong>ارسال سریع و مطمئن</strong>
+              <span>ارسال توسط پست پیشتاز و تیپاکس به سراسر کشور</span>
+            </div>
+          </div>
+
+          <div class="service-box">
+            <div class="service-icon"><i class="fas fa-shield-halved"></i></div>
+            <div class="service-text">
+              <strong>تضمین کیفیت</strong>
+              <span>تضمین کیفیت و پشتیبانی کامل از خرید شما</span>
+            </div>
+          </div>
+
+          <div class="service-box">
+            <div class="service-icon"><i class="fas fa-box-open"></i></div>
+            <div class="service-text">
+              <strong>بسته‌بندی فوری</strong>
+              <span>بسته‌بندی و ارسال محصولات به صورت فوری</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- بخش توضیحات و مشخصات محصول -->
+      <section class="product-description-panel">
+        <h2 class="description-title">
+          <i class="fas fa-circle-info"></i> توضیحات و مشخصات محصول
+        </h2>
+
+        <div class="description-content" id="productDescription">
+          <!-- توضیحات توسط product.js اینجا رندر می‌شوند -->
+        </div>
+
+        <table class="specs-table" id="specsTable">
+          <!-- جدول مشخصات توسط product.js اینجا رندر می‌شود -->
+        </table>
+      </section>
+    </main>
+
+    <button id="scrollToTopBtn" class="scroll-to-top" title="بازگشت به بالا">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- فوتر سایت (مشترک در تمام صفحات — محتوا توسط footer.js تزریق می‌شود) -->
+    <div id="siteFooterContainer"></div>
+
+    <!-- پنل سبد خرید (کشوی سبد) -->
+    <div id="cartDrawer" class="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3>سبد خرید</h3>
+        <button id="closeCartBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div id="cartItemsContainer" class="cart-items-container">
+        <!-- اقلام سبد خرید اینجا لود میشن -->
+      </div>
+
+      <div class="cart-drawer-footer">
+        <div class="cart-total-section">
+          <span>جمع کل:</span>
+          <span id="cartDrawerTotalPrice">۰ تومان</span>
+        </div>
+        <div class="cart-drawer-buttons">
+          <button id="checkoutBtn" class="btn-primary">ثبت سفارش</button>
+          <button type="button" id="viewFullCartBtn" class="btn-secondary">
+            مشاهده کامل
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cartOverlay" class="cart-overlay"></div>
+
+    <script src="products.js"></script>
+    <script src="cartManager.js"></script>
+    <!-- حساب کاربری (آیکون آدمک + مودال ورود با کد یک‌بارمصرف + مسدودسازی خرید بدون ورود) -->
+    <script src="user-auth.js"></script>
+    <script src="script.js"></script>
+    <!-- منطق صفحه جزئیات محصول -->
+    <script src="product.js"></script>
+    <!-- نوار ناوبری پایینی موبایل (مشترک در تمام صفحات) -->
+    <script src="mobile-nav.js"></script>
+    <!-- فوتر مشترک سایت -->
+    <script src="footer.js"></script>
+  </body>
+</html>

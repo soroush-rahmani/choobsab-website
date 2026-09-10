@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="پروفایل کاربری چوب‌ساب — اطلاعات شخصی، سفارش‌های日前に، وضعیتPedido" />
+    <title>پروفایل من — چوب‌ساب</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="style/profile.css" />
+    <link rel="stylesheet" href="style/footer.css" />
+  </head>
+  <body>
+
+    <!-- هدر ساده برای صفحه پروفایل -->
+    <header class="desktop-header">
+      <div class="header-top">
+        <div class="logo">
+          <a href="index.html">
+            <img
+              loading="lazy"
+              src="./assets/images/choobsab_logo_final.png"
+              alt="چوب‌ساب"
+              class="logo-image"
+            />
+          </a>
+        </div>
+        <nav class="header-nav">
+          <a href="index.html">صفحه اصلی</a>
+          <a href="cart.html">سبد خرید</a>
+        </nav>
+        <div class="user-actions">
+          <a href="index.html" class="action-icon back-icon" title="بازگشت به فروشگاه">
+            <i class="fas fa-arrow-left"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ صفحهٔ پروفایل کاربری ============ -->
+    <main class="profile-page">
+
+      <!-- ─── پیام قفل‌شده (م示す نشانه می‌شود تا زمانی که لاگین نشده) ─── -->
+      <section id="profileLocked" class="profile-locked" hidden>
+        <div class="locked-card">
+          <div class="locked-icon">
+            <i class="fas fa-lock"></i>
+          </div>
+          <h2>این صفحه فقط برای کاربران ثبت‌نام‌شده 접근‌پذیر است</h2>
+          <p>برای دیدن اطلاعات و سفارش‌های خود، ابتدا وارد حساب شوید.</p>
+          <button type="button" class="btn-u user-auth-btn" id="profileLoginBtn">
+            <i class="fas fa-right-to-bracket"></i> ورود به حساب
+          </button>
+        </div>
+      </section>
+
+      <!-- ─── قاب اصلی (فقط وقتی لاگین هست نشان داده می‌شود) ─── -->
+      <section id="profilePageWrap" class="profile-wrap" hidden>
+
+        <!-- سربرگ: نام، تلفن، تاریخ عضویت، دکمه خروج -->
+        <div id="profileHead" class="profile-header"></div>
+
+        <!-- لیست کامل سفارش‌ها با وضعیت‌های رنگی -->
+        <div class="profile-section">
+          <h2 class="section-title">
+            <i class="fas fa-receipt"></i> سفارش‌های من
+          </h2>
+          <div id="profileOrders" class="orders-list">
+            <div class="empty">در حال بارگذاری...</div>
+          </div>
+        </div>
+
+        <!-- بخش اطلاعات containers برای مستندات آینده -->
+        <div class="profile-section" id="profileExtraSection">
+          <h2 class="section-title">
+            <i class="fas fa-circle-info"></i> اطلاعات حساب
+          </h2>
+          <div class="info-grid" id="profileInfoGrid"></div>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img
+            loading="lazy"
+            src="./assets/images/choobsab_logo_final.png"
+            alt="چوب‌ساب"
+            class="footer-logo"
+          />
+          <p>فروشگاه چوبی دست‌ساز چوب‌ساب دکور</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">صفحه اصلی</a>
+          <a href="about.html">درباره ما</a>
+          <a href="contact.html">تماس با ما</a>
+        </div>
+        <p class="footer-copy">© ۱۴۰۳ چوب‌ساب — تمامی حقوق محفوظ است.</p>
+      </div>
+    </footer>
+
+    <!-- ===== اسکریپت‌های مشترک و計畫 کاربری ===== -->
+    <script src="script.js" defer></script>
+    <script src="cart-data.js" defer></script>
+    <script src="user-auth.js" defer></script>
+    <script src="mobile-nav.js" defer></script>
+    <script src="footer.js" defer></script>
+    <script>
+      // پس ازِ بارگذاری user-auth.js، وقتی turun تصلیح شد،
+      // if صفحه پروفایل خاص بود، محتوا رنر می‌شد — اکنون
+      // onChange از user-auth خودکار فراخوانی می‌شود.
+    </script>
+  </body>
+</html>

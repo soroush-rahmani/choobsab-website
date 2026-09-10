@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- سئو: توضیح متا -->
+    <meta name="description" content="فروشگاه چوبساب دکور - اکسسوری‌های چوبی دست‌ساز با طراحی مدرن. کاسه، بشقاب، گلدان، مبلمان و ساعت‌های چوبی منحصی." />
+    <meta name="keywords" content="چوبساب دکور، محصولات چوبی، فروشگاه چوبی، اکسسوری چوبی، لوازم خانه، چوب بلوط، چوب راش، چوب گردو، چوب روس" />
+    <title>فروشگاه محصولات چوبی</title>
+    <!-- Preconnect به CDNهای بیرونی برای سرعت بخشیشون -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <!-- Prefetch DNS برای مرورگرهای قدیمی‌تر -->
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+    <!-- Preload لوگو سایت (کریتیکال - در هدر ثابت نمایش داده میشه) -->
+    <link rel="preload" as="image" href="./assets/images/choobsab_logo_final.png" />
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+    <!-- استایل‌های فوتر مشترک (منبع واحد استایل فوتر در کل سایت) -->
+    <link rel="stylesheet" href="style/footer.css" />
+    <!-- استایل‌های ریسپانسیو موبایل (مشترک در تمام صفحات) -->
+    <link rel="stylesheet" href="style/mobile.css" />
+    <!-- استایل‌های حساب کاربری و پروفایل (مودال ورود + بخش پروفایل) -->
+    <link rel="stylesheet" href="style/profile.css" />
+  </head>
+  <body>
+    <!-- منوی کناری (سایدبار) دسته‌بندی‌ها -->
+    <!-- سایدبار ثابت عمودی سمت راست -->
+    <aside class="sidebar-fixed" id="sidebar">
+      <div class="sidebar-toggle-btn" id="sidebarToggleBtn">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <!-- منوی سایدبار که به صورت خودکار توسط جاوااسکریپت پر می‌شود -->
+      <ul class="sidebar-menu" id="sidebarMenu">
+        <!-- محتوا توسط script.js تزریق می‌شود -->
+      </ul>
+    </aside>
+    <!-- هدر سایت -->
+    <header class="desktop-header" id="site-header">
+      <!-- بخش بالایی هدر -->
+      <div class="header-top">
+        <!-- سمت راست: لوگو -->
+        <div class="logo">
+            <img
+             loading="lazy"
+             src="./assets/images/choobsab_logo_final.png"
+             alt=""
+             class="logo-image"
+           />
+        </div>
+
+        <!-- وسط: جستجو -->
+        <div class="search-wrapper">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="جستجوی محصولات..." />
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <div id="searchResultsPanel" class="search-results-panel"></div>
+        </div>
+
+        <!-- سمت چپ: پشتیبانی و ارسال -->
+        <div class="top-left-actions">
+          <div class="support-info">
+            <i class="fas fa-headset icon-brown"></i>
+            <div class="info-text">
+              <span class="title">تماس با پشتیبانی</span>
+              <span class="number">۰۲۱-۱۲۳۴۵۶۷۸</span>
+            </div>
+          </div>
+
+          <div class="shipping-info">
+            <div class="icon-wrapper">
+              <i class="fas fa-truck icon-brown"></i>
+            </div>
+            <span class="title">ارسال به سراسر کشور</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- بخش پایینی هدر -->
+      <div class="header-bottom">
+        <!-- سمت راست: دکمه دسته‌بندی -->
+        <button class="category-btn" id="categoryBtn">
+          <i class="fas fa-bars"></i> دسته‌بندی محصولات
+        </button>
+
+        <!-- وسط: نویگیشن -->
+        <nav class="main-nav">
+          <a href="#">صفحه اصلی فروشگاه</a>
+<a href="custom.html">محصولات سفارشی</a>
+          <a href="about.html">درباره ما</a>
+          <a href="contact.html">تماس با ما</a>
+        </nav>
+
+        <!-- سمت چپ: پروفایل و سبد خرید -->
+        <div class="user-actions">
+          <a href="#" class="action-icon cart-icon" id="cartIconLink">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">۰</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- =================== بدنه اصلی سایت (Main Content) =================== -->
+    <main class="shop-main-container">
+      <!-- ۱. سایدبار فیلترها (سمت راست) -->
+      <aside class="filters-sidebar">
+        <h3 class="filter-title">
+          <i class="fas fa-filter"></i> فیلتر محصولات
+        </h3>
+
+        <div class="filter-group price-filter-group">
+          <label>محدوده قیمت</label>
+          <div class="price-labels">
+            <span>از: <span id="minPriceValue">100,000</span></span>
+            <span>تا: <span id="maxPriceValue">5,000,000</span> تومان</span>
+          </div>
+
+          <div class="dual-range-container">
+            <!-- دو تا input روی هم قرار می‌گیرند ولی ظاهر یک نوار را دارند -->
+            <input
+              type="range"
+              id="minPriceRange"
+              min="100000"
+              max="5000000"
+              step="100000"
+              value="100000"
+            />
+            <input
+              type="range"
+              id="maxPriceRange"
+              min="100000"
+              max="50000000"
+              step="100000"
+              value="5000000"
+            />
+          </div>
+        </div>
+
+        <!-- فیلتر جنس چوب -->
+        <div class="filter-group dropdown-filter">
+          <div class="filter-dropdown-toggle" data-filter="wood">
+            <span>جنس چوب</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <ul class="filter-dropdown-list">
+            <li>
+              <label
+                ><input type="checkbox" class="wood-filter" value="بلوط" /> چوب
+                بلوط</label
+              >
+            </li>
+            <li>
+              <label
+                ><input type="checkbox" class="wood-filter" value="راش" /> چوب
+                راش</label
+              >
+            </li>
+            <li>
+              <label
+                ><input type="checkbox" class="wood-filter" value="گردو" /> چوب
+                گردو</label
+              >
+            </li>
+            <li>
+              <label
+                ><input type="checkbox" class="wood-filter" value="روس" /> چوب
+                روس</label
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- فیلتر نوع پوشش -->
+        <div class="filter-group dropdown-filter">
+          <div class="filter-dropdown-toggle" data-filter="finish">
+            <span>نوع پوشش</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <ul class="filter-dropdown-list">
+            <li>
+              <label
+                ><input type="checkbox" class="finish-filter" value="مات" />
+                مات</label
+              >
+            </li>
+            <li>
+              <label
+                ><input
+                  type="checkbox"
+                  class="finish-filter"
+                  value="نیمه مات"
+                />
+                نیمه مات</label
+              >
+            </li>
+            <li>
+              <label
+                ><input
+                  type="checkbox"
+                  class="finish-filter"
+                  value="سوپر براق"
+                />
+                سوپر براق</label
+              >
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- ۲. محتوای اصلی فروشگاه (سمت چپ فیلترها) -->
+      <section class="shop-content">
+        <!-- نوار مرتب‌سازی -->
+        <div class="sorting-bar">
+          <span>مرتب‌سازی بر اساس:</span>
+          <select id="sortSelect" class="sort-select">
+            <option value="default">پیش‌فرض</option>
+            <option value="popularity">محبوبیت</option>
+            <option value="rating">میانگین رتبه</option>
+            <option value="newest">جدیدترین</option>
+            <option value="price-low">قیمت کم به زیاد</option>
+            <option value="price-high">قیمت زیاد به کم</option>
+          </select>
+        </div>
+
+        <!-- گرید کارت محصولات -->
+        <div class="products-grid" id="productsGrid">
+          <!-- کارت‌های محصولات به صورت داینامیک اینجا رندر می‌شوند -->
+        </div>
+
+        <!-- نشانگر لودینگ (Infinite Scroll / Load More) -->
+        <div class="loading-indicator" id="loadingIndicator">
+          <div class="spinner"></div>
+          <span>در حال بارگذاری محصولات بیشتر...</span>
+        </div>
+      </section>
+    </main>
+    <!-- دکمه بازگشت به بالا -->
+    <button id="scrollToTopBtn" class="scroll-to-top" title="بازگشت به بالا">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- فوتر سایت (مشترک در تمام صفحات — محتوا توسط footer.js تزریق می‌شود) -->
+    <div id="siteFooterContainer"></div>
+    <!-- پنل سبد خرید (قرار بگیرد انتهای فایل HTML قبل از </body>) -->
+    <div id="cartDrawer" class="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3>سبد خرید</h3>
+        <button id="closeCartBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div id="cartItemsContainer" class="cart-items-container">
+        <!-- اقلام سبد خرید اینجا لود میشن -->
+      </div>
+
+      <div class="cart-drawer-footer">
+        <div class="cart-total-section">
+          <span>جمع کل:</span>
+          <span id="cartDrawerTotalPrice">۰ تومان</span>
+        </div>
+        <div class="cart-drawer-buttons">
+          <button id="checkoutBtn" class="btn-primary">ثبت سفارش</button>
+          <button type="button" id="viewFullCartBtn" class="btn-secondary">
+            مشاهده کامل
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cartOverlay" class="cart-overlay"></div>
+    <script src="products.js"></script>
+    <script src="cartManager.js"></script>
+    <!-- حساب کاربری (آیکون آدمک + مودال ورود با کد یک‌بارمصرف + مسدودسازی خرید بدون ورود) -->
+    <script src="user-auth.js"></script>
+    <script src="script.js"></script>
+    <!-- نوار ناوبری پایینی موبایل (مشترک در تمام صفحات) -->
+    <script src="mobile-nav.js"></script>
+    <!-- فوتر مشترک سایت (باید بعد از DOM آماده باشد) -->
+    <script src="footer.js"></script>
+  </body>
+</html>

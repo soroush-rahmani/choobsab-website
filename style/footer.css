@@ -1,0 +1,261 @@
+/* ===================================================
+   استایل‌های فوتر مشترک سایت (Shared Footer Styles)
+   این فایل تنها منبع استایل فوتر است — برای تغییر ظاهر فوتر
+   فقط همین فایل را ویرایش کنید تا در تمام صفحات اعمال شود.
+=================================================== */
+
+/* متغیرهای رنگ (خودکفا تا در صفحاتی که style.css را لود نمی‌کنند هم کار کند) */
+:root {
+  --bg-white: #ffffff;
+  --bg-darker: #f7f4f0;
+  --wood-brown: #af6c54;
+  --wood-brown-light: #a67c52;
+  --text-color: #333333;
+}
+
+/* چسباندن فوتر به پایین صفحه (Sticky Footer Pattern) */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-footer {
+  background-color: var(--bg-darker);
+  padding-top: 30px;
+  margin-top: auto; /* فوتر را به پایین صفحه هل می‌دهد */
+  border-top: 3px solid var(--wood-brown);
+  font-size: 14px;
+  font-family: "Vazirmatn", sans-serif;
+  direction: rtl;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.site-footer * {
+  box-sizing: border-box;
+}
+
+/* --- بخش اول: ویژگی‌های ۵ گانه --- */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto 50px auto;
+  padding: 0 10px;
+}
+
+.feature-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: var(--bg-white);
+  padding: 20px 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 26px;
+  color: var(--wood-brown);
+}
+
+.feature-text {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+/* --- بخش دوم: ستون‌های فوتر --- */
+.footer-middle {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px 40px 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.footer-col {
+  flex: 1;
+}
+
+/* ستون 1: برند */
+.brand-col .footer-logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--wood-brown);
+  margin-bottom: 15px;
+}
+
+/* ⚠️ سایز لوگوی فوتر: این استایل اینجا تعریف می‌شود چون صفحاتی مثل
+   cart.html و checkout.html فایل style.css را لود نمی‌کنند و بدون این
+   قانون، لوگو با سایز طبیعی (بزرگ) تصویر رندر شده و فوتر به‌هم می‌ریزد. */
+.footer-logo .logo-image {
+  width: 250px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: multiply;
+}
+
+.brand-desc {
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.contact-info .contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.contact-item i {
+  color: var(--wood-brown);
+  font-size: 18px;
+}
+
+/* ستون 2 و 3: لینک‌ها */
+.col-title {
+  color: var(--wood-brown);
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.links-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links-col ul li {
+  margin-bottom: 12px;
+}
+
+.links-col ul li a {
+  text-decoration: none;
+  color: #555;
+  transition:
+    color 0.3s,
+    padding-right 0.3s;
+}
+
+.links-col ul li a:hover {
+  color: var(--wood-brown);
+  padding-right: 5px; /* افکت حرکت به راست هنگام هاور */
+}
+
+/* ستون 4: اینستاگرام */
+.insta-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.insta-header i {
+  font-size: 22px;
+  color: #e1306c;
+}
+
+.social-desc {
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.insta-link-text {
+  color: #e1306c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-follow {
+  display: inline-block;
+  background-color: var(--wood-brown);
+  color: white;
+  padding: 10px 25px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-follow:hover {
+  background-color: var(--wood-brown-light);
+}
+
+/* ستون 5: مجوزها */
+.cert-box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cert-item {
+  border: 2px dashed #bbb;
+  background-color: var(--bg-white);
+  padding: 25px 10px;
+  text-align: center;
+  border-radius: 8px;
+  color: #888;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* --- بخش سوم: کپی‌رایت --- */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 25px 30px;
+  color: #666;
+}
+
+.developer-link {
+  color: var(--wood-brown);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.developer-link:hover {
+  text-decoration: underline;
+}
+
+/* --- ریسپونسیو موبایل و تبلت (زیر ۱۰۲۴ پیکسل) --- */
+@media (max-width: 1023px) {
+  .footer-top {
+    flex-direction: column;
+    padding: 0 20px;
+  }
+
+  .footer-middle {
+    flex-direction: column;
+    padding: 0 20px 30px 20px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    padding: 20px;
+  }
+}

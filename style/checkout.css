@@ -1,0 +1,346 @@
+@import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css");
+
+/* اعمال فونت وزیرمتن به کل صفحه checkout */
+* {
+  font-family: "Vazirmatn", sans-serif;
+}
+:root {
+  --bg-white: #ffffff;
+  --bg-darker: #f7f4f0; /* پس زمینه کمی تیره‌تر برای هدر پایین */
+  --wood-brown: #af6c54; /* رنگ قهوه‌ای اصلی */
+  --wood-brown-light: #a67c52;
+  --text-color: #333333;
+}
+
+body {
+  font-family: "Vazirmatn", sans-serif;
+  direction: rtl;
+  text-align: right;
+  background-color: var(--bg-darker);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+
+  /* ویژگی‌های حیاتی برای بهینه‌سازی نمایش فونت و جلوگیری از پرش صفحه */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+button,
+a,
+input,
+.product-title,
+.filter-title {
+  font-family:
+    "Vazirmatn", sans-serif; /* یا 'Lalezar' اگر خواستید تیترها سنتی‌تر باشند */
+  font-weight: 700; /* استفاده از وزن ضخیم‌تر برای تیترها */
+}
+
+@media (min-width: 1024px) {
+  .checkout-logo {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    border: #af6c54;
+    background-color: #af6c54;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  .checkout-logo:hover {
+    background-color: #a74230;
+    transition: 0.8s;
+  }
+  .checkout-header {
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2d8ce;
+    padding: 20px 0;
+    margin-bottom: 40px;
+  }
+
+  .checkout-header .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .checkout-steps {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+    color: #888888;
+  }
+
+  .checkout-steps .step.active {
+    color: #8b5a2b;
+    font-weight: 700;
+  }
+
+  /* کانتینر اصلی دو ستونه بالای ۱۰۲۴ پیکسل */
+  .checkout-page-main {
+    width: 100%;
+    min-height: calc(100vh - 120px);
+    background-color: #faf8f5;
+    padding: 0 0 60px 0;
+  }
+
+  .checkout-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: grid;
+    grid-template-columns: 1fr 400px; /* ستون راست فرم، ستون چپ فاکتور */
+    gap: 35px;
+    align-items: start;
+  }
+
+  /* ستون فرم اطلاعات مشتری */
+  .checkout-form-column {
+    background: #ffffff;
+    border: 1px solid #e8e0d8;
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  }
+
+  .checkout-form-column h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f2ece6;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group.full-width {
+    grid-column: span 2;
+  }
+
+  .form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+  }
+
+  .form-group .required {
+    color: #d9534f;
+  }
+
+  .form-control {
+    width: 100%;
+    height: 46px;
+    padding: 0 15px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    background-color: #fff;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+    outline: none;
+  }
+
+  textarea.form-control {
+    height: auto;
+    padding: 12px 15px;
+    resize: vertical;
+  }
+
+  .form-control:focus {
+    border-color: #8b5a2b;
+    box-shadow: 0 0 0 3px rgba(139, 90, 43, 0.12);
+  }
+
+  /* شیوه پرداخت */
+  .payment-method-box {
+    background-color: #fdfbf8;
+    border: 1px solid #e8e0d8;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+
+  .payment-method-box h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 12px;
+  }
+
+  .payment-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  .payment-text strong {
+    display: block;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .payment-text small {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    margin-top: 2px;
+  }
+
+  /* ستون خلاصه فاکتور سمت چپ */
+  .checkout-summary-column {
+    position: sticky;
+    top: 30px;
+  }
+
+  .summary-card {
+    background: #ffffff;
+    border: 1px solid #e8e0d8;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  }
+
+  .summary-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .checkout-items-preview {
+    max-height: 240px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    padding-left: 5px;
+  }
+
+  .preview-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
+  }
+
+  .summary-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 15px 0;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  .summary-row.total-row {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+    font-size: 18px;
+    font-weight: 700;
+    color: #8b5a2b;
+  }
+
+  /* دکمه ارسال و پرداخت */
+  .btn-submit-order {
+    width: 100%;
+    height: 52px;
+    background-color: #27ae60;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .btn-submit-order:hover {
+    background-color: #219653;
+  }
+
+  .btn-submit-order:active {
+    transform: scale(0.99);
+  }
+
+  .btn-go-to-checkout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    background-color: #27ae60;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    transition:
+      background-color 0.2s ease,
+      transform 0.1s ease;
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+  }
+
+  .btn-go-to-checkout:hover {
+    background-color: #219653;
+    color: #ffffff;
+  }
+
+  .btn-go-to-checkout:active {
+    transform: scale(0.99);
+  }
+
+  /* حالت غیرفعال بودن دکمه موقع خالی بودن سبد */
+  .btn-go-to-checkout.disabled {
+    display: none;
+    background-color: #cccccc;
+    color: #666666;
+    pointer-events: none;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  .step {
+    text-decoration: none;
+    color: #8b5a2b;
+  }
+}

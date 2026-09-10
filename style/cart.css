@@ -1,0 +1,343 @@
+@import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css");
+
+/* اعمال فونت وزیرمتن به کل صفحه checkout */
+* {
+  font-family: "Vazirmatn", sans-serif;
+}
+:root {
+  --bg-white: #ffffff;
+  --bg-darker: #f7f4f0; /* پس زمینه کمی تیره‌تر برای هدر پایین */
+  --wood-brown: #af6c54; /* رنگ قهوه‌ای اصلی */
+  --wood-brown-light: #a67c52;
+  --text-color: #333333;
+}
+
+body {
+  font-family: "Vazirmatn", sans-serif;
+  direction: rtl;
+  text-align: right;
+  background-color: var(--bg-darker);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+
+  /* ویژگی‌های حیاتی برای بهینه‌سازی نمایش فونت و جلوگیری از پرش صفحه */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+button,
+a,
+input,
+.product-title,
+.filter-title {
+  font-family:
+    "Vazirmatn", sans-serif; /* یا 'Lalezar' اگر خواستید تیترها سنتی‌تر باشند */
+  font-weight: 700; /* استفاده از وزن ضخیم‌تر برای تیترها */
+}
+
+.cart-page-main {
+  padding: 40px 20px;
+  background-color: #faf8f5;
+  min-height: 80vh;
+}
+
+.cart-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.cart-container h2 {
+  font-size: 22px;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0e6df;
+}
+
+/* --- ۱. لیست محصولات --- */
+.cart-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.cart-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  gap: 15px;
+}
+
+.cart-item-card:hover {
+  border-color: #8b5a2b;
+  box-shadow: 0 2px 8px rgba(139, 90, 43, 0.08);
+}
+
+.cart-item-img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.cart-item-price {
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+/* کنترل‌های کم و زیاد کردن تعداد */
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fdfdfd;
+}
+
+.qty-btn {
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #8b5a2b;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.qty-btn:hover {
+  background-color: #f0e6df;
+}
+
+.qty-display {
+  width: 32px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cart-item-total-price {
+  font-weight: bold;
+  font-size: 15px;
+  color: #2c3e50;
+  min-width: 110px;
+  text-align: left;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 4px;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+}
+
+.remove-btn:hover {
+  color: #c0392b;
+  background-color: #fbeee8;
+}
+
+/* --- ۲. خلاصه فاکتور --- */
+.cart-summary {
+  background-color: #fdfaf7;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #555;
+}
+
+.summary-item.total-price {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed #dcdcdc;
+  font-size: 18px;
+  font-weight: bold;
+  color: #8b5a2b;
+}
+
+/* --- ۳. حالت سبد خرید خالی --- */
+.empty-cart-msg {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-cart-msg p {
+  font-size: 18px;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+}
+
+.btn-back-shop {
+  display: inline-block;
+  padding: 10px 24px;
+  background-color: #8b5a2b;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-back-shop:hover {
+  background-color: #6d4621;
+}
+
+/* --- ریسپونسیو موبایل --- */
+@media (max-width: 640px) {
+  .cart-item-card {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .cart-item-details {
+    flex: 1 1 calc(100% - 95px);
+  }
+
+  .cart-item-controls {
+    order: 1;
+  }
+
+  .cart-item-total-price {
+    order: 2;
+    text-align: right;
+  }
+
+  .remove-btn {
+    order: 3;
+  }
+}
+/* ===================================================
+   استایل‌های اختصاصی صفحه ثبت سفارش (Checkout Page)
+   طراحی‌شده بر اساس ساختار ۱۰۲۴px به بالا
+=================================================== */
+
+/* ===================================================
+   استایل هدر و دکمه بازگشت در سبد خرید (cart.html)
+=================================================== */
+
+.cart-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e8e0d8;
+}
+
+.cart-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.btn-back-to-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  background-color: #fdf8f3;
+  color: #8b5a2b;
+  border: 1px solid #e0d2c2;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.btn-back-to-home:hover {
+  background-color: #8b5a2b;
+  color: #ffffff;
+  border-color: #8b5a2b;
+  box-shadow: 0 4px 12px rgba(139, 90, 43, 0.15);
+}
+
+.btn-back-to-home i {
+  font-size: 13px;
+  transition: transform 0.2s ease;
+}
+
+.btn-back-to-home:hover i {
+  transform: translateX(3px); /* افکت حرکت جزئی فلش به راست هنگام هوور */
+}
+.btn-go-to-checkout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  background-color: #27ae60;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+}
+
+.btn-go-to-checkout:hover {
+  background-color: #219653;
+  color: #ffffff;
+}
+
+.btn-go-to-checkout:active {
+  transform: scale(0.99);
+}
+
+/* حالت غیرفعال بودن دکمه موقع خالی بودن سبد */
+.btn-go-to-checkout.disabled {
+  display: none;
+  background-color: #cccccc;
+  color: #666666;
+  pointer-events: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}

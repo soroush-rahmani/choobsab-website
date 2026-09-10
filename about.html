@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>چوب‌ساب | درباره ما</title>
+    <meta
+      name="description"
+      content="درباره چوب‌ساب — برند تولید اکسسوری‌های چوبی دست‌ساز؛ داستان ما، ارزش‌ها، آدرس فروشگاه و راه‌های ارتباطی."
+    />
+    <!-- فونت و آیکون‌ها -->
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- استایل اصلی سایت (هدر، سایدبار و سبد خرید) -->
+    <link rel="stylesheet" href="style/style.css" />
+    <!-- استایل صفحه درباره ما و فوتر مشترک -->
+    <link rel="stylesheet" href="style/about.css" />
+    <link rel="stylesheet" href="style/footer.css" />
+    <!-- استایل‌های ریسپانسیو موبایل (مشترک در تمام صفحات) -->
+    <link rel="stylesheet" href="style/mobile.css" />
+    <!-- استایل‌های حساب کاربری و پروفایل (مودال ورود + بخش پروفایل) -->
+    <link rel="stylesheet" href="style/profile.css" />
+  </head>
+  <body>
+    <!-- منوی کناری (سایدبار) دسته‌بندی‌ها -->
+    <aside class="sidebar-fixed" id="sidebar">
+      <div class="sidebar-toggle-btn" id="sidebarToggleBtn">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <ul class="sidebar-menu" id="sidebarMenu"></ul>
+    </aside>
+
+    <!-- هدر اصلی سایت -->
+    <header class="desktop-header" id="site-header">
+      <!-- بخش بالایی هدر -->
+      <div class="header-top">
+        <div class="logo">
+          <img
+            loading="lazy"
+            src="./assets/images/choobsab_logo_final.png"
+            alt=""
+            class="logo-image"
+          />
+        </div>
+
+        <div class="search-wrapper">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="جستجوی محصولات..." />
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <div id="searchResultsPanel" class="search-results-panel"></div>
+        </div>
+
+        <div class="top-left-actions">
+          <div class="support-info">
+            <i class="fas fa-headset icon-brown"></i>
+            <div class="info-text">
+              <span class="title">تماس با پشتیبانی</span>
+              <span class="number">۰۲۱-۱۲۳۴۵۶۷۸</span>
+            </div>
+          </div>
+
+          <div class="shipping-info">
+            <div class="icon-wrapper">
+              <i class="fas fa-truck icon-brown"></i>
+            </div>
+            <span class="title">ارسال به سراسر کشور</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- بخش پایینی هدر -->
+      <div class="header-bottom">
+        <button class="category-btn" id="categoryBtn">
+          <i class="fas fa-bars"></i> دسته‌بندی محصولات
+        </button>
+
+        <nav class="main-nav">
+          <a href="index.html">صفحه اصلی فروشگاه</a>
+          <a href="custom.html">محصولات سفارشی</a>
+          <a href="about.html">درباره ما</a>
+          <a href="contact.html">تماس با ما</a>
+        </nav>
+
+        <div class="user-actions">
+          <a href="#" class="action-icon cart-icon" id="cartIconLink">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">۰</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="about-page-main">
+      <!-- بخش معرفی -->
+      <section class="about-hero">
+        <div class="container">
+          <div class="hero-box">
+            <span class="hero-badge">
+              <i class="fas fa-hands"></i> دست‌ساز ایرانی
+            </span>
+            <h1 class="hero-title">
+              چوب‌ساب؛ برند اکسسوری‌های چوبی دست‌ساز
+            </h1>
+            <p class="hero-desc">
+              طراحی مدرن، مواد اولیه طبیعی و تولید کاملاً دستی در شهرستان جم.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- داستان ما -->
+      <section class="about-section story-section">
+        <div class="container">
+          <div class="about-text">
+            <h2 class="section-title">
+              <i class="fas fa-seedling"></i> داستان ما
+            </h2>
+            <p>
+              چوب‌ساب در شهرستان جم، استان بوشهر فعالیت می‌کند و اکسسوری‌های
+              چوبی دست‌ساز تولید می‌کند. ما برای تولید محصولات، چوب مرغوب بلوط،
+              راش و گردو را انتخاب می‌کنیم و هر قطعه را با دقت می‌تراشیم و
+              صیقل می‌دهیم.
+            </p>
+            <p>
+              محصولات چوب‌ساب شامل کاسه، بشقاب، گلدان، ساعت دیواری و مبلمان
+              چوبی است. هر قطعه دست‌ساز و در تیراژ محدود تولید می‌شود؛ بنابراین
+              شما محصولی منحصربه‌فرد دریافت می‌کنید.
+            </p>
+            <ul class="about-checks">
+              <li>
+                <i class="fas fa-check-circle"></i> تولید با چوب‌های مرغوب بلوط،
+                راش و گردو
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> ساخت کاملاً دستی در تیراژ
+                محدود و منحصربه‌فرد
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> تلفیق طراحی مدرن با هویت
+                اصیل ایرانی
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- چرا چوب‌ساب -->
+      <section class="about-section features-section">
+        <div class="container">
+          <div class="section-head center">
+            <h2 class="section-title">
+              <i class="fas fa-heart"></i> چرا چوب‌ساب؟
+            </h2>
+            <p>چهار ویژگی که محصولات ما را متفاوت می‌کند.</p>
+          </div>
+
+          <div class="features-grid">
+            <div class="feature-card">
+              <i class="fas fa-tree feature-icon"></i>
+              <h3>چوب مرغوب و طبیعی</h3>
+              <p>
+                فقط از چوب‌های درجه‌یک و خشک‌شدهٔ طبیعی استفاده می‌کنیم تا
+                ماندگاری و زیبایی محصول تضمین شود.
+              </p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-hands feature-icon"></i>
+              <h3>دست‌ساز و منحصربه‌فرد</h3>
+              <p>
+                هر محصول با دست هنرمندانِ چوب‌ساب ساخته می‌شود؛ به همین دلیل
+                هیچ دو قطعه‌ای شبیه هم نیستند.
+              </p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-pen-ruler feature-icon"></i>
+              <h3>طراحی مدرن، ریشه سنتی</h3>
+              <p>
+                سادگی و مدرنیتهٔ امروز را با اصالت و گرمای هنر ایرانی تلفیق
+                می‌کنیم.
+              </p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-box-open feature-icon"></i>
+              <h3>بسته‌بندی و ارسال اختصاصی</h3>
+              <p>
+                محصولات با بسته‌بندی ایمن و ویژه به سراسر کشور ارسال می‌شوند تا
+                سالم به دست شما برسند.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- تعهد ما -->
+      <section class="about-section values-section">
+        <div class="container values-grid">
+          <div class="value-card">
+            <i class="fas fa-leaf value-icon"></i>
+            <h3>احترام به طبیعت</h3>
+            <p>
+              از منابع چوبی مسئولانه استفاده می‌کنیم و تا حد امکان ضایعات را به
+              محصولی دوباره تبدیل می‌کنیم.
+            </p>
+          </div>
+          <div class="value-card">
+            <i class="fas fa-users value-icon"></i>
+            <h3>مشتری در اولویت</h3>
+            <p>
+              از ثبت سفارش تا تحویل کالا، کنار شما هستیم و پاسخگوی سوالات شما
+              هستیم.
+            </p>
+          </div>
+          <div class="value-card">
+            <i class="fas fa-gem value-icon"></i>
+            <h3>کیفیت بدون سهل‌انگاری</h3>
+            <p>
+              از انتخاب چوب تا صیقل نهایی و بسته‌بندی، هر مرحله دقیق بررسی
+              می‌شود.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- آدرس و تماس -->
+      <section class="about-section contact-section">
+        <div class="container">
+          <div class="contact-card">
+            <div class="contact-head">
+              <i class="fas fa-store contact-head-icon"></i>
+              <h2>آدرس فروشگاه و اطلاعات تماس</h2>
+              <p>برای خرید، مشاوره یا دریافت سفارش با ما در ارتباط باشید.</p>
+            </div>
+
+            <div class="contact-lines">
+              <div class="contact-line">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <span class="contact-label">آدرس فروشگاه</span>
+                  <span class="contact-value">
+                    استان بوشهر، شهرستان جم، خیابان امام خمینی
+                  </span>
+                </div>
+              </div>
+
+              <div class="contact-line">
+                <i class="fas fa-phone-alt"></i>
+                <div>
+                  <span class="contact-label">ثبت سفارش</span>
+                  <a href="tel:09010461757" class="contact-value" dir="ltr">
+                    ۰۹۰۱۰۴۶۱۷۵۷
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact-line">
+                <i class="fas fa-headset"></i>
+                <div>
+                  <span class="contact-label">پشتیبانی سایت</span>
+                  <a href="tel:09010461758" class="contact-value" dir="ltr">
+                    ۰۹۰۱۰۴۶۱۷۵۸
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact-line">
+                <i class="fas fa-envelope"></i>
+                <div>
+                  <span class="contact-label">ایمیل</span>
+                  <a
+                    href="mailto:info@choobsab.ir"
+                    class="contact-value"
+                    dir="ltr"
+                  >
+                    info@choobsab.ir
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <a href="custom.html" class="btn-contact">
+              <i class="fas fa-pen-ruler"></i> سفارش محصول اختصاصی
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- فوتر سایت (مشترک در تمام صفحات — محتوا توسط footer.js تزریق می‌شود) -->
+    <div id="siteFooterContainer"></div>
+
+    <!-- دکمه بازگشت به بالا -->
+    <button id="scrollToTopBtn" class="scroll-to-top" title="بازگشت به بالا">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- پنل سبد خرید -->
+    <div id="cartDrawer" class="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3>سبد خرید</h3>
+        <button id="closeCartBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div id="cartItemsContainer" class="cart-items-container"></div>
+
+      <div class="cart-drawer-footer">
+        <div class="cart-total-section">
+          <span>جمع کل:</span>
+          <span id="cartDrawerTotalPrice">۰ تومان</span>
+        </div>
+        <div class="cart-drawer-buttons">
+          <button id="checkoutBtn" class="btn-primary">ثبت سفارش</button>
+          <button type="button" id="viewFullCartBtn" class="btn-secondary">
+            مشاهده کامل
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cartOverlay" class="cart-overlay"></div>
+
+    <script src="products.js"></script>
+    <script src="cartManager.js"></script>
+    <!-- حساب کاربری (آیکون آدمک + مودال ورود با کد یک‌بارمصرف + مسدودسازی خرید بدون ورود) -->
+    <script src="user-auth.js"></script>
+    <script src="script.js"></script>
+    <!-- نوار ناوبری پایینی موبایل (مشترک در تمام صفحات) -->
+    <script src="mobile-nav.js"></script>
+    <!-- فوتر مشترک سایت -->
+    <script src="footer.js"></script>
+  </body>
+</html>

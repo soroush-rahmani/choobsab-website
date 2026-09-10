@@ -1,0 +1,447 @@
+/* ===================================================
+   استایل صفحه درباره ما (About Page)
+   طراحی چوبی — هماهنگ با هویت بصری چوب‌ساب
+=================================================== */
+
+:root {
+  --bg-white: #ffffff;
+  --bg-darker: #f7f4f0;
+  --wood-brown: #af6c54;
+  --wood-brown-light: #a67c52;
+  --wood-brown-dark: #8b5a2b;
+  --wood-darkest: #5c2c16;
+  --text-color: #333333;
+  --text-muted: #777777;
+  --border-color: #e0d2c2;
+}
+
+/* =================== هدر صفحه =================== */
+.about-header {
+  background: linear-gradient(135deg, var(--wood-darkest) 0%, var(--wood-brown-dark) 100%);
+  color: #ffffff;
+  padding: 18px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.about-header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.25s ease;
+}
+
+.back-link:hover {
+  color: #ffffff;
+}
+
+.back-link i {
+  transition: transform 0.25s ease;
+}
+
+.back-link:hover i {
+  transform: translateX(4px);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.brand-icon {
+  font-size: 22px;
+  color: #f0d9b5;
+}
+
+/* =================== بدنه اصلی =================== */
+.about-page-main {
+  flex: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+/* =================== بخش معرفی =================== */
+.about-hero {
+  background-color: var(--bg-darker);
+  padding: 50px 0 60px 0;
+}
+
+.hero-box {
+  background-color: var(--bg-white);
+  border: 2px solid var(--wood-brown);
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  padding: 45px 30px;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid var(--wood-brown);
+  border-radius: 40px;
+  background-color: #fdf8f3;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wood-brown);
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--wood-brown-dark);
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.hero-desc {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* =================== بخش‌های عمومی =================== */
+.about-section {
+  padding: 65px 0;
+}
+
+.story-section {
+  background-color: var(--bg-white);
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--wood-brown-dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px 0;
+}
+
+.section-title i {
+  color: var(--wood-brown);
+  font-size: 20px;
+}
+
+.section-head.center {
+  text-align: center;
+  margin-bottom: 42px;
+}
+
+.section-head.center .section-title {
+  justify-content: center;
+}
+
+.section-head p {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.features-section {
+  background-color: var(--bg-darker);
+}
+/* =================== داستان ما =================== */
+.about-tect{
+  padding: 10px;
+}
+.about-text p {
+  line-height: 2;
+  color: #444;
+  margin: 0 0 16px 0;
+  font-size: 15px;
+}
+
+.about-checks {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.about-checks li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.about-checks li i {
+  color: var(--wood-brown);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* =================== چرا چوب‌ساب =================== */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--bg-white);
+  border-radius: 14px;
+  padding: 30px 24px;
+  text-align: center;
+  border-top: 3px solid var(--wood-brown);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  font-size: 34px;
+  color: var(--wood-brown);
+  margin-bottom: 16px;
+}
+
+.feature-card h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-color);
+  margin: 0 0 10px 0;
+}
+
+.feature-card p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--text-muted);
+  margin: 0;
+}
+/* =================== تعهد ما =================== */
+.values-section {
+  background-color: var(--bg-white);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.value-card {
+  background: linear-gradient(135deg, #fdf8f3 0%, #fff 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.value-icon {
+  font-size: 30px;
+  color: var(--wood-brown);
+  margin-bottom: 14px;
+}
+
+.value-card h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--wood-brown-dark);
+  margin: 0 0 8px 0;
+}
+
+.value-card p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* =================== آدرس و تماس =================== */
+.contact-section {
+  background-color: var(--bg-darker);
+  padding-bottom: 75px;
+}
+
+.contact-card {
+  background: var(--bg-white);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+
+.contact-head {
+  background: linear-gradient(135deg, #fdf8f3 0%, #f7f4f0 100%);
+  border-bottom: 2px solid var(--border-color);
+  text-align: center;
+  padding: 32px 30px;
+}
+
+.contact-head-icon {
+  font-size: 34px;
+  color: var(--wood-brown);
+  margin-bottom: 12px;
+}
+
+.contact-head h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--wood-brown-dark);
+  margin: 0 0 8px 0;
+}
+
+.contact-head p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.contact-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 32px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.contact-line {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: #fdfaf7;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.contact-line:hover {
+  border-color: var(--wood-brown);
+  background: #fef9f3;
+}
+
+.contact-line > i {
+  color: var(--wood-brown);
+  font-size: 18px;
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.contact-line > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.contact-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-color);
+  text-decoration: none;
+  line-height: 1.7;
+}
+
+a.contact-value:hover {
+  color: var(--wood-brown);
+}
+
+.btn-contact {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 auto 36px auto;
+  background-color: var(--wood-brown);
+  color: #ffffff;
+  padding: 13px 32px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  transition: background-color 0.25s ease;
+}
+
+.btn-contact:hover {
+  background-color: var(--wood-brown-dark);
+}
+
+/* =================== ریسپانسیو =================== */
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-header .container {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .about-hero {
+    padding: 30px 0;
+  }
+
+  .hero-title {
+    font-size: 22px;
+  }
+
+  .about-section {
+    padding: 45px 0;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-lines {
+    padding: 24px 16px;
+  }
+}

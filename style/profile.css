@@ -1,0 +1,1011 @@
+/* ===================================================
+   استایل حساب کاربری و پروفایل — چوب‌ساب
+   (مودال ورود با کد یک‌بارمصرف + پروفایل و سفارش‌ها)
+   طراحی هماهنگ با رنگ و لعاب سایت: سفید با لهجه قهوه‌ای
+   =================================================== */
+
+:root {
+  --ua-brown: #af6c54;
+  --ua-brown-dark: #96573f;
+  --ua-brown-soft: #f6ede8;
+  --ua-white: #ffffff;
+  --ua-text: #333333;
+  --ua-muted: #8a8a8a;
+  --ua-border: #ece5df;
+  --ua-green: #4e8d5b;
+  --ua-green-bg: #eef7f0;
+  --ua-orange: #b97f2a;
+  --ua-orange-bg: #fbf4e8;
+  --ua-red: #b04a3c;
+  --ua-red-bg: #faece9;
+  --ua-radius: 14px;
+  --ua-shadow: 0 12px 40px rgba(80, 50, 35, 0.18);
+}
+
+/* جلوگیری از اسکرول صفحه پشت مودال */
+body.ua-lock-scroll {
+  overflow: hidden;
+}
+
+/* ------------------- پوشش و کارت مودال ------------------- */
+.ua-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(60, 40, 30, 0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 3000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.ua-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ua-modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  background: var(--ua-white);
+  border-radius: var(--ua-radius);
+  box-shadow: var(--ua-shadow);
+  padding: 34px 30px 28px;
+  text-align: center;
+  font-family: "Vazirmatn", sans-serif;
+  direction: rtl;
+  transform: translateY(14px);
+  transition: transform 0.25s ease;
+}
+
+.ua-overlay.open .ua-modal {
+  transform: translateY(0);
+}
+
+.ua-close {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: #faf7f4;
+  color: #6b6b6b;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ua-close:hover {
+  background: var(--ua-brown-soft);
+  color: var(--ua-brown);
+}
+
+/* آیکون بالای هر مرحله */
+.ua-modal-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: var(--ua-brown-soft);
+  color: var(--ua-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.ua-title {
+  margin: 0 0 6px;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--ua-text);
+}
+
+.ua-subtitle {
+  margin: 0 0 20px;
+  font-size: 13.5px;
+  color: var(--ua-muted);
+  line-height: 1.9;
+}
+
+.ua-phone-inline {
+  font-weight: 700;
+  color: var(--ua-brown);
+}
+
+/* ------------------- فیلدهای فرم ------------------- */
+.ua-field {
+  margin-bottom: 14px;
+  text-align: right;
+}
+
+.ua-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ua-text);
+  margin-bottom: 6px;
+}
+
+.ua-field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ua-text);
+  background: #fdfcfb;
+  border: 1px solid var(--ua-border);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ua-field input::placeholder {
+  color: #c2bcb6;
+}
+
+.ua-field input:focus {
+  border-color: var(--ua-brown);
+  box-shadow: 0 0 0 3px rgba(175, 108, 84, 0.12);
+  background: var(--ua-white);
+}
+
+/* پیام خطا */
+.ua-error {
+  margin: 4px 0 10px;
+  font-size: 12.5px;
+  color: var(--ua-red);
+  background: var(--ua-red-bg);
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-align: right;
+}
+
+/* ------------------- دکمه‌ها ------------------- */
+.ua-btn-primary {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--ua-brown);
+  color: var(--ua-white);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.ua-btn-primary:hover {
+  background: var(--ua-brown-dark);
+}
+
+.ua-btn-primary:active {
+  transform: scale(0.985);
+}
+
+.ua-btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.ua-btn-outline {
+  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid var(--ua-border);
+  border-radius: 10px;
+  background: var(--ua-white);
+  color: var(--ua-red);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ua-btn-outline:hover {
+  border-color: var(--ua-red);
+  background: var(--ua-red-bg);
+}
+
+.ua-otp-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.ua-link-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 12.5px;
+  color: var(--ua-brown);
+  cursor: pointer;
+}
+
+.ua-link-btn:hover {
+  text-decoration: underline;
+}
+
+.ua-link-btn:disabled {
+  color: #b9b3ad;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+/* ورودی کد یک‌بارمصرف */
+.ua-otp-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  text-align: center;
+  letter-spacing: 12px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--ua-text);
+  background: #fdfcfb;
+  border: 1px solid var(--ua-border);
+  border-radius: 10px;
+  outline: none;
+  margin-bottom: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ua-otp-input:focus {
+  border-color: var(--ua-brown);
+  box-shadow: 0 0 0 3px rgba(175, 108, 84, 0.12);
+  background: var(--ua-white);
+}
+
+/* کد تستی (dev-only) — نمایش کد یک‌بارمصرف در محیط توسعه */
+.ua-dev-code {
+  margin: 2px 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ua-brown);
+  background: rgba(175, 108, 84, 0.06);
+  border: 1px dashed rgba(175, 108, 84, 0.25);
+  border-radius: 8px;
+  padding: 7px 10px;
+  text-align: center;
+  letter-spacing: 2px;
+  direction: ltr;
+}
+
+/* مرحله خوش‌آمدگویی */
+.ua-welcome-icon {
+  width: 64px;
+  height: 64px;
+  margin: 6px auto 16px;
+  border-radius: 50%;
+  background: var(--ua-green-bg);
+  color: var(--ua-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  animation: ua-pop 0.35s ease;
+}
+
+@keyframes ua-pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ------------------- نمای پروفایل داخل مودال ------------------- */
+.ua-profile-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: linear-gradient(180deg, #fdfbf9, #ffffff);
+  border: 1px solid var(--ua-border);
+  border-radius: 12px;
+  margin-bottom: 18px;
+  text-align: right;
+}
+
+.ua-avatar {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--ua-brown-soft);
+  color: var(--ua-brown);
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ua-profile-meta {
+  min-width: 0;
+}
+
+.ua-profile-name {
+  margin: 0 0 3px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ua-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ua-profile-phone {
+  font-size: 13px;
+  color: var(--ua-muted);
+}
+
+.ua-orders-title {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ua-text);
+  text-align: right;
+}
+
+.ua-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+  text-align: right;
+}
+
+/* کارت هر سفارش */
+.ua-order-card {
+  border: 1px solid var(--ua-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: var(--ua-white);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ua-order-card:hover {
+  border-color: #ddcfc6;
+  box-shadow: 0 4px 14px rgba(80, 50, 35, 0.07);
+}
+
+.ua-order-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.ua-order-code {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ua-brown);
+}
+
+.ua-order-status {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.ua-order-status.st-paid,
+.ua-order-status.st-delivered {
+  color: var(--ua-green);
+  background: var(--ua-green-bg);
+}
+
+.ua-order-status.st-pending {
+  color: var(--ua-orange);
+  background: var(--ua-orange-bg);
+}
+
+.ua-order-status.st-canceled {
+  color: var(--ua-red);
+  background: var(--ua-red-bg);
+}
+
+.ua-order-status.st-processing,
+.ua-order-status.st-shipped {
+  color: var(--ua-brown);
+  background: var(--ua-brown-soft);
+}
+
+.ua-order-items {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  color: var(--ua-muted);
+  line-height: 1.9;
+}
+
+.ua-order-more {
+  color: var(--ua-brown);
+  font-weight: 500;
+}
+
+.ua-order-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px dashed var(--ua-border);
+}
+
+.ua-order-date {
+  font-size: 12px;
+  color: var(--ua-muted);
+}
+
+.ua-order-date i {
+  margin-left: 5px;
+  color: var(--ua-brown);
+}
+
+.ua-order-total {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ua-text);
+}
+
+/* حالت خالی و لودینگ */
+.ua-empty-msg {
+  text-align: center;
+  color: var(--ua-muted);
+  font-size: 13px;
+  padding: 22px 10px;
+}
+
+.ua-empty-msg i {
+  display: block;
+  font-size: 30px;
+  color: #d9cfc8;
+  margin-bottom: 10px;
+}
+
+.ua-orders-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ua-muted);
+  font-size: 13px;
+  padding: 22px 0;
+}
+
+.ua-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e7ddd6;
+  border-top-color: var(--ua-brown);
+  border-radius: 50%;
+  animation: ua-spin 0.8s linear infinite;
+}
+
+@keyframes ua-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------------------- آیکون آدمک هدر دسکتاپ ------------------- */
+/* از استایل .action-icon سایت پیروی می‌کند؛ فقط رفتار هاور و حالت واردشده */
+.action-icon.profile-icon {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.action-icon.profile-icon:hover {
+  background: var(--ua-brown);
+  color: var(--ua-white);
+  transform: translateY(-2px);
+}
+
+.action-icon.profile-icon.is-logged-in {
+  background: var(--ua-brown);
+  color: var(--ua-white);
+}
+
+/* ------------------- دکمه پروفایل در نوار پایینی موبایل ------------------- */
+.mobile-nav-item.mobile-nav-profile {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ------------------- بخش «پروفایل کاربری» صفحه اصلی ------------------- */
+.user-profile-section {
+  max-width: 1300px;
+  margin: 24px auto 0;
+  padding: 0 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ups-inner {
+  background: var(--ua-white);
+  border: 1px solid var(--ua-border);
+  border-radius: var(--ua-radius);
+  padding: 22px 26px;
+  box-shadow: 0 6px 24px rgba(80, 50, 35, 0.06);
+}
+
+.ups-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--ua-border);
+}
+
+.ups-avatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--ua-brown-soft);
+  color: var(--ua-brown);
+  font-size: 21px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ups-head-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.ups-title {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ua-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ups-title i {
+  color: var(--ua-brown);
+  font-size: 15px;
+}
+
+.ups-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ua-muted);
+}
+
+.ups-logout {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--ua-white);
+  border: 1px solid var(--ua-border);
+  border-radius: 10px;
+  color: var(--ua-red);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ups-logout:hover {
+  border-color: var(--ua-red);
+  background: var(--ua-red-bg);
+}
+
+.ups-orders {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding-top: 16px;
+}
+
+/* در بخش صفحه اصلی، کارت سفارش‌ها فشرده‌تر هستند */
+.ups-orders .ua-orders-loading,
+.ups-orders .ua-empty-msg {
+  grid-column: 1 / -1;
+}
+
+/* ------------------- ریسپانسیو موبایل ------------------- */
+@media (max-width: 1023.98px) {
+  .user-profile-section {
+    margin-top: 14px;
+    padding: 0 14px;
+  }
+
+  .ups-inner {
+    padding: 16px;
+    margin-bottom: 70px; /* جا برای نوار ناوبری پایینی موبایل */
+  }
+
+  .ups-orders {
+    grid-template-columns: 1fr;
+  }
+
+  .ua-modal {
+    padding: 28px 20px 22px;
+    border-radius: 14px;
+  }
+
+  .ups-head {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 400px) {
+  .ups-logout {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+/* ============================================================
+   ?????? ???? ??????? ????? (profile.html)
+   ============================================================ */
+
+/* -------------------------------------------------------
+   ???? ?????? (????? ???? ????)
+   ------------------------------------------------------- */
+.profile-locked {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(180deg, #fdfbf9, #fff);
+}
+
+.locked-card {
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  border: 1px solid var(--ua-border);
+  border-radius: var(--ua-radius);
+  padding: 38px 28px;
+  box-shadow: 0 8px 30px rgba(80, 50, 35, 0.08);
+}
+
+.locked-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: var(--ua-brown-soft);
+  color: var(--ua-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.locked-card h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: var(--ua-text);
+}
+
+.locked-card p {
+  margin: 0 0 24px;
+  font-size: 14px;
+  color: var(--ua-muted);
+  line-height: 1.7;
+}
+
+/* -------------------------------------------------------
+   ??? ???? ???????
+   ------------------------------------------------------- */
+.profile-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+/* ????? ???????: ?????? + ??? + ???? + ???? */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 22px;
+  background: linear-gradient(180deg, #fdfbf9, #ffffff);
+  border: 1px solid var(--ua-border);
+  border-radius: var(--ua-radius);
+  margin-bottom: 28px;
+  box-shadow: 0 4px 16px rgba(80, 50, 35, 0.05);
+  flex-wrap: wrap;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--ua-brown-soft);
+  color: var(--ua-brown);
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-meta {
+  flex: 1;
+  min-width: 200px;
+}
+
+.profile-name {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ua-text);
+}
+
+.profile-phone {
+  display: block;
+  font-size: 14px;
+  color: var(--ua-brown);
+  margin-top: 2px;
+  direction: ltr;
+}
+
+.profile-joined {
+  display: block;
+  font-size: 12px;
+  color: var(--ua-muted);
+  margin-top: 4px;
+}
+
+.profile-logout-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  background: var(--ua-white);
+  border: 1px solid var(--ua-border);
+  border-radius: 10px;
+  color: var(--ua-red);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.profile-logout-btn:hover {
+  border-color: var(--ua-red);
+  background: var(--ua-red-bg);
+}
+
+/* -------------------------------------------------------
+   ?????? ????? ???????
+   ------------------------------------------------------- */
+.profile-section {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ua-text);
+}
+
+.section-title i {
+  color: var(--ua-brown);
+}
+
+/* -------------------------------------------------------
+   ???? ???????
+   ------------------------------------------------------- */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.orders-list .order-card {
+  border: 1px solid var(--ua-border);
+  border-radius: var(--ua-radius);
+  padding: 14px 18px;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.orders-list .order-card:hover {
+  border-color: #ddcfc6;
+  box-shadow: 0 4px 16px rgba(80, 50, 35, 0.07);
+}
+
+.order-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.order-code {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ua-brown);
+  direction: ltr;
+}
+
+.order-status {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 11px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.order-status.st-paid,
+.order-status.st-delivered {
+  color: var(--ua-green);
+  background: var(--ua-green-bg);
+}
+
+.order-status.st-pending,
+.order-status.st-new,
+.order-status.st-cancelled {
+  color: var(--ua-red);
+  background: var(--ua-red-bg);
+}
+
+.order-status.st-processing,
+.order-status.st-in-progress,
+.order-status.st-shipped {
+  color: var(--ua-brown);
+  background: var(--ua-brown-soft);
+}
+
+.order-status.st-done,
+.order-status.st-confirmed {
+  color: var(--ua-green);
+  background: var(--ua-green-bg);
+}
+
+.order-date {
+  font-size: 12px;
+  color: var(--ua-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.order-date i {
+  color: var(--ua-brown);
+}
+
+.order-total {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ua-text);
+}
+
+.empty {
+  text-align: center;
+  color: var(--ua-muted);
+  font-size: 14px;
+  padding: 30px 10px;
+}
+
+.empty i {
+  display: block;
+  font-size: 36px;
+  color: #d9cfc8;
+  margin-bottom: 10px;
+}
+
+/* -------------------------------------------------------
+   Information grid (??????? ?????)
+   ------------------------------------------------------- */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.info-item {
+  background: #fff;
+  border: 1px solid var(--ua-border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.info-item .k {
+  display: block;
+  font-size: 11.5px;
+  color: var(--ua-muted);
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-item .v {
+  font-size: 14px;
+  color: var(--ua-text);
+  font-weight: 600;
+}
+
+.info-item .v.ltr {
+  direction: ltr;
+}
+
+/* -------------------------------------------------------
+   ????? ???? ???? (?? ???? ??????)
+   ------------------------------------------------------- */
+.btn-u.user-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: var(--ua-brown);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-u.user-auth-btn:hover {
+  background: var(--ua-brown-dark);
+  transform: translateY(-1px);
+}
+
+/* -------------------------------------------------------
+   ????????? ??????
+   ------------------------------------------------------- */
+@media (max-width: 767px) {
+  .profile-wrap {
+    padding: 16px 12px 80px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 16px;
+  }
+
+  .profile-logout-btn {
+    align-self: stretch;
+    justify-content: center;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
