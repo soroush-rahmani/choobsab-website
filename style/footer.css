@@ -219,6 +219,15 @@ body {
   font-weight: 500;
 }
 
+.cert-item img {
+  max-width: 80px;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 /* --- بخش سوم: کپی‌رایت --- */
 .footer-bottom {
   display: flex;

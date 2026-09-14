@@ -672,11 +672,18 @@
   }
 
   .loading-indicator {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     padding: 20px 0;
     color: #777;
     font-size: 13px;
+    /* مخفی در حالت عادی اما همچنان در چیدمان صفحه (مثل دسکتاپ)
+       تا IntersectionObserver اسکرول بینهایت در موبایل هم فعال بماند
+       و محصولات بعد از صفحه اول هم لود شوند */
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
   .loading-indicator.loading {
@@ -684,6 +691,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    opacity: 1;
   }
 
   .loading-indicator .spinner {

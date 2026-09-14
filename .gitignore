@@ -29,3 +29,8 @@ uploads/
 .vscode/
 Thumbs.db
 Desktop.ini
+
+# کلیدهای خصوصی SSH — هرگز به گیت‌هاب پوش نشوند
+private-key-file.pem
+id_ed25519_choobsab.txt
+public-key-file.pub

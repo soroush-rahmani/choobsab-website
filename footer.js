@@ -110,10 +110,7 @@
         <div class="footer-col cert-col">
           <div class="cert-box">
             <div class="cert-item">
-              <span>جایگاه نماد اعتماد الکترونیک</span>
-            </div>
-            <div class="cert-item">
-              <span>جایگاه نشان ملی ثبت</span>
+              <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=7725359&Code=MrMCXxTCb31iK88jl2JR5YauxuwA2XUD'><img referrerpolicy='origin' src='./assets/images/enamad-seal.jpg' alt='نماد اعتماد الکترونیک' style='cursor:pointer'></a>
             </div>
           </div>
         </div>

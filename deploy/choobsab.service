@@ -1,0 +1,17 @@
+[Unit]
+Description=Choobsab Web Server (Node.js + Express)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/choobsab/backend
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+Environment=PORT=5000
+StandardOutput=append:/var/log/choobsab.log
+StandardError=append:/var/log/choobsab-err.log
+
+[Install]
+WantedBy=multi-user.target

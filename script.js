@@ -336,6 +336,27 @@ function initInfiniteScroll() {
 
   observer.observe(loadingIndicator);
   window.loadMoreObserver = observer; // ذخیره برای دسترسی در آینده
+
+  // فالبک مطمئن برای موبایل: اگر به هر دلیلی المانِ لودینگ قابل مشاهده
+  // نباشد (مثلاً پنهان‌سازی با display:none)، در نزدیکی انتهای صفحه هم
+  // صفحه بعدی لود شود تا کاربر هرگز جلوی «۸ محصول اول» گیر نکند.
+  if (!window.__loadMoreScrollFallback) {
+    window.__loadMoreScrollFallback = true;
+
+    const checkNearBottom = () => {
+      if (isLoading || !hasMoreProducts) return;
+      const doc = document.documentElement;
+      const gapToBottom = doc.scrollHeight - (window.innerHeight + window.scrollY);
+      if (gapToBottom < 250) {
+        loadMoreProducts();
+      }
+    };
+
+    window.addEventListener("scroll", checkNearBottom, { passive: true });
+    window.addEventListener("resize", checkNearBottom, { passive: true });
+    // بررسی اولیه: اگر صفحه اول کوتاه‌تر از ویوپورت بود، بلافاصله لود بعدی انجام شود
+    checkNearBottom();
+  }
 }
 
 // نمایش پیام پایان لیست محصولات
